@@ -1,0 +1,15 @@
+
+
+
+
+
+python3 lidar_receive.py
+python3 stmspi.py
+
+
+python3 minitesla.py
+
+cd ~/Desktop/rplidar_sdk-master/output/Linux/Release
+
+
+./ultra_simple --channel --serial /dev/ttyUSB0 460800

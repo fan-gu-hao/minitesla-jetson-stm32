@@ -1,0 +1,61 @@
+cd "$HOME/Desktop/jetson orin nano/rplidar_sdk-master/output/Linux/Release"
+./ultra_simple --channel --serial /dev/ttyUSB0 460800
+
+
+cd "$HOME/Desktop/jetson orin nano"
+python3 minitesla.py --pc-host 120.126.10.41
+
+
+
+
+
+cd "$HOME/Desktop/jetson orin nano"
+python3 sensor_status.py
+
+
+cd "$HOME/Desktop/jetson orin nano"
+python3 minitesla_service.py install --pc-host 120.126.10.41
+python3 minitesla_service.py status
+
+
+
+python3 demo_recorder.py export
+
+
+
+
+python3 minitesla_service.py stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

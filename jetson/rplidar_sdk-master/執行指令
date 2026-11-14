@@ -1,0 +1,16 @@
+cd ~/Desktop/rplidar_sdk-master/output/Linux/Release
+
+./ultra_simple --channel --serial /dev/ttyUSB0 460800
+一个极简的命令行的演示程序，实现了连接 RPLIDAR，并不断的输出扫描测
+距数据。用户可以参考该程序快速的将 RPLIDAR SDK 集成到现有系统当中。
+
+
+./simple_grabber --channel --serial /dev/ttyUSB0 460800
+
+
+
+
+一个基于命令行的采集程序，每次执行会采集两圈的雷达数据，并以柱状图
+
+
+的方式呈现。

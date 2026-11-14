@@ -1,0 +1,878 @@
+nohup: 忽略輸入
+Using pip 25.0.1 from /home/fan/.local/lib/python3.8/site-packages/pip (python 3.8)
+Processing /home/fan/vision
+  Preparing metadata (pyproject.toml): started
+  Running command Preparing metadata (pyproject.toml)
+  Building wheel torchvision-0.16.1+fdea156
+  Compiling extensions with following flags:
+    FORCE_CUDA: False
+    FORCE_MPS: False
+    DEBUG: False
+    TORCHVISION_USE_PNG: True
+    TORCHVISION_USE_JPEG: True
+    TORCHVISION_USE_NVJPEG: True
+    TORCHVISION_USE_FFMPEG: True
+    TORCHVISION_USE_VIDEO_CODEC: True
+    NVCC_FLAGS:
+  Compiling with debug mode OFF
+  Building torchvision without PNG image support
+  Running build on conda-build: False
+  Running build on conda: False
+  Building torchvision with JPEG image support
+    libjpeg include path: None
+    libjpeg lib path: None
+  Building torchvision without NVJPEG image support
+  Building torchvision without ffmpeg support
+  Building torchvision without video codec support
+  running dist_info
+  creating /tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info
+  writing /tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/PKG-INFO
+  writing dependency_links to /tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/dependency_links.txt
+  writing requirements to /tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/requires.txt
+  writing top-level names to /tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/top_level.txt
+  writing manifest file '/tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/SOURCES.txt'
+  reading manifest file '/tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/SOURCES.txt'
+  reading manifest template 'MANIFEST.in'
+  warning: no previously-included files matching '__pycache__' found under directory '*'
+  warning: no previously-included files matching '*.py[co]' found under directory '*'
+  writing manifest file '/tmp/pip-modern-metadata-6bq4gyk3/torchvision.egg-info/SOURCES.txt'
+  creating '/tmp/pip-modern-metadata-6bq4gyk3/torchvision.dist-info'
+  adding license file "LICENSE" (matched pattern "LICENSE")
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: torchvision
+  Building wheel for torchvision (pyproject.toml): started
+  Running command Building wheel for torchvision (pyproject.toml)
+  Building wheel torchvision-0.16.1+fdea156
+  Compiling extensions with following flags:
+    FORCE_CUDA: False
+    FORCE_MPS: False
+    DEBUG: False
+    TORCHVISION_USE_PNG: True
+    TORCHVISION_USE_JPEG: True
+    TORCHVISION_USE_NVJPEG: True
+    TORCHVISION_USE_FFMPEG: True
+    TORCHVISION_USE_VIDEO_CODEC: True
+    NVCC_FLAGS:
+  Compiling with debug mode OFF
+  Building torchvision without PNG image support
+  Running build on conda-build: False
+  Running build on conda: False
+  Building torchvision with JPEG image support
+    libjpeg include path: None
+    libjpeg lib path: None
+  Building torchvision without NVJPEG image support
+  Building torchvision without ffmpeg support
+  Building torchvision without video codec support
+  running bdist_wheel
+  running build
+  running build_py
+  creating build
+  creating build/lib.linux-aarch64-3.8
+  creating build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/_internally_replaced_utils.py -> build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/__init__.py -> build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/extension.py -> build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/_utils.py -> build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/version.py -> build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/utils.py -> build/lib.linux-aarch64-3.8/torchvision
+  copying torchvision/_meta_registrations.py -> build/lib.linux-aarch64-3.8/torchvision
+  creating build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/mnist.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/video_utils.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/kinetics.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/cityscapes.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/country211.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/lsun.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/pcam.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/_optical_flow.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/food101.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/caltech.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/hmdb51.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/omniglot.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/flowers102.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/oxford_iiit_pet.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/voc.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/clevr.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/moving_mnist.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/inaturalist.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/fgvc_aircraft.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/stanford_cars.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/usps.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/cifar.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/celeba.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/svhn.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/lfw.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/eurosat.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/sbd.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/phototour.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/widerface.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/sun397.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/dtd.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/rendered_sst2.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/gtsrb.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/sbu.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/utils.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/fakedata.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/ucf101.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/fer2013.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/imagenet.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/places365.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/_stereo_matching.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/flickr.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/vision.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/semeion.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/kitti.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/folder.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/coco.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  copying torchvision/datasets/stl10.py -> build/lib.linux-aarch64-3.8/torchvision/datasets
+  creating build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/_functional_video.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/_transforms_video.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/_presets.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/functional.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/transforms.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/autoaugment.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/_functional_pil.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/functional_pil.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/functional_tensor.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  copying torchvision/transforms/_functional_tensor.py -> build/lib.linux-aarch64-3.8/torchvision/transforms
+  creating build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_tv_tensor.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_torch_function_helpers.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_video.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_mask.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_bounding_boxes.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_dataset_wrapper.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  copying torchvision/tv_tensors/_image.py -> build/lib.linux-aarch64-3.8/torchvision/tv_tensors
+  creating build/lib.linux-aarch64-3.8/torchvision/io
+  copying torchvision/io/_video_opt.py -> build/lib.linux-aarch64-3.8/torchvision/io
+  copying torchvision/io/_load_gpu_decoder.py -> build/lib.linux-aarch64-3.8/torchvision/io
+  copying torchvision/io/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/io
+  copying torchvision/io/video_reader.py -> build/lib.linux-aarch64-3.8/torchvision/io
+  copying torchvision/io/image.py -> build/lib.linux-aarch64-3.8/torchvision/io
+  copying torchvision/io/video.py -> build/lib.linux-aarch64-3.8/torchvision/io
+  creating build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/squeezenet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/vision_transformer.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/efficientnet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/mobilenetv2.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/mnasnet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/googlenet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/resnet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/_meta.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/shufflenetv2.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/feature_extraction.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/mobilenet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/regnet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/densenet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/swin_transformer.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/_api.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/inception.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/maxvit.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/vgg.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/convnext.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/mobilenetv3.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  copying torchvision/models/alexnet.py -> build/lib.linux-aarch64-3.8/torchvision/models
+  creating build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/focal_loss.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/ciou_loss.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/giou_loss.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/roi_align.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/deform_conv.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/_box_convert.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/feature_pyramid_network.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/drop_block.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/roi_pool.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/ps_roi_pool.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/diou_loss.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/_register_onnx_ops.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/poolers.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/ps_roi_align.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/misc.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/boxes.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  copying torchvision/ops/stochastic_depth.py -> build/lib.linux-aarch64-3.8/torchvision/ops
+  creating build/lib.linux-aarch64-3.8/torchvision/datasets/samplers
+  copying torchvision/datasets/samplers/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/datasets/samplers
+  copying torchvision/datasets/samplers/clip_sampler.py -> build/lib.linux-aarch64-3.8/torchvision/datasets/samplers
+  creating build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_auto_augment.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_deprecated.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_misc.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_transform.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_temporal.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_type_conversion.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_meta.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_geometry.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_container.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_color.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  copying torchvision/transforms/v2/_augment.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2
+  creating build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_deprecated.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_misc.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_temporal.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_type_conversion.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_meta.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_geometry.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_color.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  copying torchvision/transforms/v2/functional/_augment.py -> build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional
+  creating build/lib.linux-aarch64-3.8/torchvision/models/video
+  copying torchvision/models/video/s3d.py -> build/lib.linux-aarch64-3.8/torchvision/models/video
+  copying torchvision/models/video/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/models/video
+  copying torchvision/models/video/resnet.py -> build/lib.linux-aarch64-3.8/torchvision/models/video
+  copying torchvision/models/video/mvit.py -> build/lib.linux-aarch64-3.8/torchvision/models/video
+  copying torchvision/models/video/swin_transformer.py -> build/lib.linux-aarch64-3.8/torchvision/models/video
+  creating build/lib.linux-aarch64-3.8/torchvision/models/optical_flow
+  copying torchvision/models/optical_flow/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/models/optical_flow
+  copying torchvision/models/optical_flow/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/models/optical_flow
+  copying torchvision/models/optical_flow/raft.py -> build/lib.linux-aarch64-3.8/torchvision/models/optical_flow
+  creating build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/mobilenetv2.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/googlenet.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/resnet.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/shufflenetv2.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/utils.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/mobilenet.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/inception.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  copying torchvision/models/quantization/mobilenetv3.py -> build/lib.linux-aarch64-3.8/torchvision/models/quantization
+  creating build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/ssdlite.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/retinanet.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/image_list.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/backbone_utils.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/faster_rcnn.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/rpn.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/mask_rcnn.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/ssd.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/generalized_rcnn.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/transform.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/keypoint_rcnn.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/fcos.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/anchor_utils.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  copying torchvision/models/detection/roi_heads.py -> build/lib.linux-aarch64-3.8/torchvision/models/detection
+  creating build/lib.linux-aarch64-3.8/torchvision/models/segmentation
+  copying torchvision/models/segmentation/__init__.py -> build/lib.linux-aarch64-3.8/torchvision/models/segmentation
+  copying torchvision/models/segmentation/deeplabv3.py -> build/lib.linux-aarch64-3.8/torchvision/models/segmentation
+  copying torchvision/models/segmentation/_utils.py -> build/lib.linux-aarch64-3.8/torchvision/models/segmentation
+  copying torchvision/models/segmentation/fcn.py -> build/lib.linux-aarch64-3.8/torchvision/models/segmentation
+  copying torchvision/models/segmentation/lraspp.py -> build/lib.linux-aarch64-3.8/torchvision/models/segmentation
+  running build_ext
+  building 'torchvision._C' extension
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu
+  Emitting ninja build file /home/fan/vision/build/temp.linux-aarch64-3.8/build.ninja...
+  Compiling objects...
+  Using envvar MAX_JOBS (1) as the number of workers...
+  [1/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/deform_conv2d_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autocast/deform_conv2d_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/deform_conv2d_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [2/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [3/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/nms_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autocast/nms_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/nms_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [4/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [5/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_pool_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_pool_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_pool_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [6/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/roi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autocast/roi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/roi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [7/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/roi_pool_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autocast/roi_pool_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/roi_pool_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [8/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/deform_conv2d_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autograd/deform_conv2d_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/deform_conv2d_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [9/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_pool_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_pool_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_pool_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [10/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/roi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autograd/roi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/roi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [11/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/roi_pool_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/autograd/roi_pool_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/roi_pool_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [12/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/deform_conv2d_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cpu/deform_conv2d_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/deform_conv2d_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [13/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/nms_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cpu/nms_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/nms_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [14/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [15/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_pool_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_pool_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_pool_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [16/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/roi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cpu/roi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/roi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [17/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/roi_pool_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cpu/roi_pool_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/roi_pool_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [18/32] /usr/local/cuda/bin/nvcc  -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -gencode=arch=compute_87,code=sm_87 -std=c++17
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(231): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(417): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(659): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(759): warning: variable "guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(921): warning: variable "guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(1053): warning: variable "guard" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(1323): here
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.cu(1323): here
+
+  [19/32] /usr/local/cuda/bin/nvcc  -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cuda/nms_kernel.cu -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/nms_kernel.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -gencode=arch=compute_87,code=sm_87 -std=c++17
+  /home/fan/vision/torchvision/csrc/ops/cuda/nms_kernel.cu(106): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/nms_kernel.cu(169): here
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/nms_kernel.cu(169): here
+
+  [20/32] /usr/local/cuda/bin/nvcc  -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -gencode=arch=compute_87,code=sm_87 -std=c++17
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu(338): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu(416): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu(463): here
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu(21): warning: parameter "index" was declared but never referenced
+            detected during instantiation of "void vision::ops::<unnamed>::ps_roi_align_forward_kernel_impl(int, const T *, T, int, int, int, int, int, int, const T *, int, T *, int *) [with T=c10::impl::ScalarTypeToCPPTypeT<c10::ScalarType::Double>]"
+  (369): here
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu(156): warning: parameter "index" was declared but never referenced
+            detected during instantiation of "void vision::ops::<unnamed>::ps_roi_align_backward_kernel_impl(int, const T *, const int *, T, int, int, int, int, int, int, int, T *, const T *, int) [with T=c10::impl::ScalarTypeToCPPTypeT<c10::ScalarType::Double>]"
+  (439): here
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.cu(463): here
+
+  [21/32] /usr/local/cuda/bin/nvcc  -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.cu -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -gencode=arch=compute_87,code=sm_87 -std=c++17
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.cu(160): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.cu(235): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.cu(283): here
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.cu(85): warning: parameter "num_rois" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.cu(283): here
+
+  [22/32] /usr/local/cuda/bin/nvcc  -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -gencode=arch=compute_87,code=sm_87 -std=c++17
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu(352): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu(417): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu(470): here
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu(21): warning: parameter "index" was declared but never referenced
+            detected during instantiation of "void vision::ops::<unnamed>::roi_align_forward_kernel_impl(int, const T *, T, int, int, int, int, int, int, __nv_bool, const T *, T *) [with T=c10::impl::ScalarTypeToCPPTypeT<c10::ScalarType::Double>]"
+  (376): here
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu(159): warning: parameter "index" was declared but never referenced
+            detected during instantiation of "void vision::ops::<unnamed>::roi_align_backward_kernel_impl(int, const T *, T, int, int, int, int, int, int, __nv_bool, T *, const T *, int, int, int, int, int) [with T=c10::impl::ScalarTypeToCPPTypeT<c10::ScalarType::Double>]"
+  (443): here
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.cu(470): here
+
+  [23/32] /usr/local/cuda/bin/nvcc  -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -gencode=arch=compute_87,code=sm_87 -std=c++17
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu(144): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu(213): warning: variable "device_guard" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu(268): here
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu(85): warning: parameter "num_rois" was declared but never referenced
+
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu(86): warning: parameter "spatial_scale" was declared but never referenced
+
+  /home/fan/.local/lib/python3.8/site-packages/torch/include/c10/util/C++17.h(385): warning: missing return statement at end of non-void function "c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+            detected during instantiation of "decltype(auto) c10::guts::if_constexpr<Condition,ThenCallback,ElseCallback>(ThenCallback &&, ElseCallback &&) [with Condition=true, ThenCallback=lambda []()->void (*)(torch::Library &), ElseCallback=lambda []()->lambda [](torch::Library &)->void]"
+  /home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.cu(268): here
+
+  [24/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/deform_conv2d.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/deform_conv2d.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/deform_conv2d.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [25/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/nms.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/nms.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/nms.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [26/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/ps_roi_align.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/ps_roi_align.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/ps_roi_align.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [27/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/ps_roi_pool.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/ps_roi_pool.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/ps_roi_pool.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [28/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu/qnms_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/quantized/cpu/qnms_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu/qnms_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [29/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu/qroi_align_kernel.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/quantized/cpu/qroi_align_kernel.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu/qroi_align_kernel.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [30/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/roi_align.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/roi_align.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/roi_align.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [31/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/roi_pool.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/ops/roi_pool.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/roi_pool.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [32/32] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/vision.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DWITH_CUDA -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/vision.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/vision.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  In file included from /home/fan/vision/torchvision/csrc/vision.cpp:1:
+  /home/fan/vision/torchvision/csrc/vision.h:10:40: warning: ‘_register_ops’ initialized and declared ‘extern’
+     10 | extern "C" VISION_INLINE_VARIABLE auto _register_ops = &cuda_version;
+        |                                        ^~~~~~~~~~~~~
+  aarch64-linux-gnu-g++ -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -g -fwrapv -O2 -Wl,-Bsymbolic-functions -Wl,-z,relro -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/deform_conv2d_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/nms_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/ps_roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autocast/roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/deform_conv2d_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/ps_roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/autograd/roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/deform_conv2d_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/nms_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/ps_roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cpu/roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/deform_conv2d_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/nms_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/ps_roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/roi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/cuda/roi_pool_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/deform_conv2d.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/nms.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/ps_roi_align.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/ps_roi_pool.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu/qnms_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/quantized/cpu/qroi_align_kernel.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/roi_align.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/ops/roi_pool.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/vision.o -L/home/fan/.local/lib/python3.8/site-packages/torch/lib -L/usr/local/cuda/lib64 -lc10 -ltorch -ltorch_cpu -ltorch_python -lcudart -lc10_cuda -ltorch_cuda -o build/lib.linux-aarch64-3.8/torchvision/_C.so
+  building 'torchvision.image' extension
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu
+  creating /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cuda
+  Emitting ninja build file /home/fan/vision/build/temp.linux-aarch64-3.8/build.ninja...
+  Compiling objects...
+  Using envvar MAX_JOBS (1) as the number of workers...
+  [1/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/image.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/image.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/image.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [2/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_png.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/decode_png.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_png.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [3/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/encode_jpeg.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/encode_jpeg.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/encode_jpeg.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [4/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_image.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/decode_image.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_image.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [5/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/read_write_file.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/read_write_file.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/read_write_file.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [6/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/encode_png.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/encode_png.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/encode_png.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [7/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/common_jpeg.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/common_jpeg.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/common_jpeg.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [8/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_jpeg.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cpu/decode_jpeg.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_jpeg.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  [9/9] c++ -MMD -MF /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cuda/decode_jpeg_cuda.o.d -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC -DPNG_FOUND=0 -DJPEG_FOUND=1 -DNVJPEG_FOUND=0 -I/home/fan/vision/torchvision/csrc -I/home/fan/vision/torchvision/csrc -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/fan/vision/torchvision/csrc/io/image -I/home/fan/.local/lib/python3.8/site-packages/torch/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/torch/csrc/api/include -I/home/fan/.local/lib/python3.8/site-packages/torch/include/TH -I/home/fan/.local/lib/python3.8/site-packages/torch/include/THC -I/usr/local/cuda/include -I/usr/include/python3.8 -c -c /home/fan/vision/torchvision/csrc/io/image/cuda/decode_jpeg_cuda.cpp -o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cuda/decode_jpeg_cuda.o -g0 -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1013"' -DTORCH_EXTENSION_NAME=image -D_GLIBCXX_USE_CXX11_ABI=1 -std=c++17
+  aarch64-linux-gnu-g++ -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -g -fwrapv -O2 -Wl,-Bsymbolic-functions -Wl,-z,relro -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/image.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_png.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_image.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/read_write_file.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/encode_png.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/common_jpeg.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/decode_jpeg.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cpu/encode_jpeg.o /home/fan/vision/build/temp.linux-aarch64-3.8/home/fan/vision/torchvision/csrc/io/image/cuda/decode_jpeg_cuda.o -L/home/fan/.local/lib/python3.8/site-packages/torch/lib -L/usr/local/cuda/lib64 -ljpeg -lc10 -ltorch -ltorch_cpu -ltorch_python -lcudart -lc10_cuda -ltorch_cuda -o build/lib.linux-aarch64-3.8/torchvision/image.so
+  installing to build/bdist.linux-aarch64/wheel
+  running install
+  running install_lib
+  creating build/bdist.linux-aarch64
+  creating build/bdist.linux-aarch64/wheel
+  creating build/bdist.linux-aarch64/wheel/torchvision
+  creating build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/mnist.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/video_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/kinetics.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/cityscapes.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/country211.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/lsun.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/pcam.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/_optical_flow.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/food101.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/caltech.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/hmdb51.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/omniglot.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/flowers102.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/oxford_iiit_pet.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/voc.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/clevr.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/moving_mnist.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/inaturalist.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/fgvc_aircraft.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/stanford_cars.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/usps.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/cifar.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/celeba.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/svhn.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/lfw.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/eurosat.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/sbd.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/phototour.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/widerface.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/sun397.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/dtd.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/rendered_sst2.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/gtsrb.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/sbu.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/utils.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/fakedata.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/ucf101.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/fer2013.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/imagenet.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/places365.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/_stereo_matching.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/flickr.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/vision.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/semeion.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/kitti.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  creating build/bdist.linux-aarch64/wheel/torchvision/datasets/samplers
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/samplers/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets/samplers
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/samplers/clip_sampler.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets/samplers
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/folder.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/coco.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/datasets/stl10.py -> build/bdist.linux-aarch64/wheel/torchvision/datasets
+  copying build/lib.linux-aarch64-3.8/torchvision/_C.so -> build/bdist.linux-aarch64/wheel/torchvision
+  creating build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/_functional_video.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/_transforms_video.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/_presets.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  creating build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_auto_augment.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_deprecated.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_misc.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_transform.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_temporal.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_type_conversion.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_meta.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  creating build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_deprecated.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_misc.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_temporal.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_type_conversion.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_meta.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_geometry.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_color.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/functional/_augment.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2/functional
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_geometry.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_container.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_color.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/v2/_augment.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms/v2
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/functional.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/transforms.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/autoaugment.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/_functional_pil.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/functional_pil.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/functional_tensor.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/transforms/_functional_tensor.py -> build/bdist.linux-aarch64/wheel/torchvision/transforms
+  copying build/lib.linux-aarch64-3.8/torchvision/_internally_replaced_utils.py -> build/bdist.linux-aarch64/wheel/torchvision
+  creating build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_tv_tensor.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_torch_function_helpers.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_video.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_mask.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_bounding_boxes.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_dataset_wrapper.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/tv_tensors/_image.py -> build/bdist.linux-aarch64/wheel/torchvision/tv_tensors
+  copying build/lib.linux-aarch64-3.8/torchvision/image.so -> build/bdist.linux-aarch64/wheel/torchvision
+  copying build/lib.linux-aarch64-3.8/torchvision/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision
+  copying build/lib.linux-aarch64-3.8/torchvision/extension.py -> build/bdist.linux-aarch64/wheel/torchvision
+  copying build/lib.linux-aarch64-3.8/torchvision/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision
+  copying build/lib.linux-aarch64-3.8/torchvision/version.py -> build/bdist.linux-aarch64/wheel/torchvision
+  creating build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/io/_video_opt.py -> build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/io/_load_gpu_decoder.py -> build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/io/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/io/video_reader.py -> build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/io/image.py -> build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/io/video.py -> build/bdist.linux-aarch64/wheel/torchvision/io
+  copying build/lib.linux-aarch64-3.8/torchvision/utils.py -> build/bdist.linux-aarch64/wheel/torchvision
+  creating build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/squeezenet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  creating build/bdist.linux-aarch64/wheel/torchvision/models/video
+  copying build/lib.linux-aarch64-3.8/torchvision/models/video/s3d.py -> build/bdist.linux-aarch64/wheel/torchvision/models/video
+  copying build/lib.linux-aarch64-3.8/torchvision/models/video/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/models/video
+  copying build/lib.linux-aarch64-3.8/torchvision/models/video/resnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models/video
+  copying build/lib.linux-aarch64-3.8/torchvision/models/video/mvit.py -> build/bdist.linux-aarch64/wheel/torchvision/models/video
+  copying build/lib.linux-aarch64-3.8/torchvision/models/video/swin_transformer.py -> build/bdist.linux-aarch64/wheel/torchvision/models/video
+  copying build/lib.linux-aarch64-3.8/torchvision/models/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/vision_transformer.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/efficientnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/mobilenetv2.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/mnasnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/googlenet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/resnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  creating build/bdist.linux-aarch64/wheel/torchvision/models/optical_flow
+  copying build/lib.linux-aarch64-3.8/torchvision/models/optical_flow/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/models/optical_flow
+  copying build/lib.linux-aarch64-3.8/torchvision/models/optical_flow/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models/optical_flow
+  copying build/lib.linux-aarch64-3.8/torchvision/models/optical_flow/raft.py -> build/bdist.linux-aarch64/wheel/torchvision/models/optical_flow
+  copying build/lib.linux-aarch64-3.8/torchvision/models/_meta.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/shufflenetv2.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/feature_extraction.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/mobilenet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  creating build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/mobilenetv2.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/googlenet.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/resnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/shufflenetv2.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/mobilenet.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/inception.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/quantization/mobilenetv3.py -> build/bdist.linux-aarch64/wheel/torchvision/models/quantization
+  copying build/lib.linux-aarch64-3.8/torchvision/models/regnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  creating build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/ssdlite.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/retinanet.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/image_list.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/backbone_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/faster_rcnn.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/rpn.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/mask_rcnn.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/ssd.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/generalized_rcnn.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/transform.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/keypoint_rcnn.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/fcos.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/anchor_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/detection/roi_heads.py -> build/bdist.linux-aarch64/wheel/torchvision/models/detection
+  copying build/lib.linux-aarch64-3.8/torchvision/models/densenet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/swin_transformer.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/_api.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/inception.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/maxvit.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/vgg.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/convnext.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  copying build/lib.linux-aarch64-3.8/torchvision/models/mobilenetv3.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  creating build/bdist.linux-aarch64/wheel/torchvision/models/segmentation
+  copying build/lib.linux-aarch64-3.8/torchvision/models/segmentation/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/models/segmentation
+  copying build/lib.linux-aarch64-3.8/torchvision/models/segmentation/deeplabv3.py -> build/bdist.linux-aarch64/wheel/torchvision/models/segmentation
+  copying build/lib.linux-aarch64-3.8/torchvision/models/segmentation/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/models/segmentation
+  copying build/lib.linux-aarch64-3.8/torchvision/models/segmentation/fcn.py -> build/bdist.linux-aarch64/wheel/torchvision/models/segmentation
+  copying build/lib.linux-aarch64-3.8/torchvision/models/segmentation/lraspp.py -> build/bdist.linux-aarch64/wheel/torchvision/models/segmentation
+  copying build/lib.linux-aarch64-3.8/torchvision/models/alexnet.py -> build/bdist.linux-aarch64/wheel/torchvision/models
+  creating build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/focal_loss.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/ciou_loss.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/giou_loss.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/roi_align.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/deform_conv.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/__init__.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/_box_convert.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/feature_pyramid_network.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/drop_block.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/roi_pool.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/ps_roi_pool.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/_utils.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/diou_loss.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/_register_onnx_ops.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/poolers.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/ps_roi_align.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/misc.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/boxes.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/ops/stochastic_depth.py -> build/bdist.linux-aarch64/wheel/torchvision/ops
+  copying build/lib.linux-aarch64-3.8/torchvision/_meta_registrations.py -> build/bdist.linux-aarch64/wheel/torchvision
+  running install_egg_info
+  running egg_info
+  creating torchvision.egg-info
+  writing torchvision.egg-info/PKG-INFO
+  writing dependency_links to torchvision.egg-info/dependency_links.txt
+  writing requirements to torchvision.egg-info/requires.txt
+  writing top-level names to torchvision.egg-info/top_level.txt
+  writing manifest file 'torchvision.egg-info/SOURCES.txt'
+  reading manifest file 'torchvision.egg-info/SOURCES.txt'
+  reading manifest template 'MANIFEST.in'
+  warning: no previously-included files matching '__pycache__' found under directory '*'
+  warning: no previously-included files matching '*.py[co]' found under directory '*'
+  writing manifest file 'torchvision.egg-info/SOURCES.txt'
+  Copying torchvision.egg-info to build/bdist.linux-aarch64/wheel/torchvision-0.16.1+fdea156.egg-info
+  running install_scripts
+  adding license file "LICENSE" (matched pattern "LICENSE")
+  creating build/bdist.linux-aarch64/wheel/torchvision-0.16.1+fdea156.dist-info/WHEEL
+  creating '/tmp/pip-wheel-u_a1jo21/tmp928a5ers/torchvision-0.16.1+fdea156-cp38-cp38-linux_aarch64.whl' and adding 'build/bdist.linux-aarch64/wheel' to it
+  adding 'torchvision/_C.so'
+  adding 'torchvision/__init__.py'
+  adding 'torchvision/_internally_replaced_utils.py'
+  adding 'torchvision/_meta_registrations.py'
+  adding 'torchvision/_utils.py'
+  adding 'torchvision/extension.py'
+  adding 'torchvision/image.so'
+  adding 'torchvision/utils.py'
+  adding 'torchvision/version.py'
+  adding 'torchvision/datasets/__init__.py'
+  adding 'torchvision/datasets/_optical_flow.py'
+  adding 'torchvision/datasets/_stereo_matching.py'
+  adding 'torchvision/datasets/caltech.py'
+  adding 'torchvision/datasets/celeba.py'
+  adding 'torchvision/datasets/cifar.py'
+  adding 'torchvision/datasets/cityscapes.py'
+  adding 'torchvision/datasets/clevr.py'
+  adding 'torchvision/datasets/coco.py'
+  adding 'torchvision/datasets/country211.py'
+  adding 'torchvision/datasets/dtd.py'
+  adding 'torchvision/datasets/eurosat.py'
+  adding 'torchvision/datasets/fakedata.py'
+  adding 'torchvision/datasets/fer2013.py'
+  adding 'torchvision/datasets/fgvc_aircraft.py'
+  adding 'torchvision/datasets/flickr.py'
+  adding 'torchvision/datasets/flowers102.py'
+  adding 'torchvision/datasets/folder.py'
+  adding 'torchvision/datasets/food101.py'
+  adding 'torchvision/datasets/gtsrb.py'
+  adding 'torchvision/datasets/hmdb51.py'
+  adding 'torchvision/datasets/imagenet.py'
+  adding 'torchvision/datasets/inaturalist.py'
+  adding 'torchvision/datasets/kinetics.py'
+  adding 'torchvision/datasets/kitti.py'
+  adding 'torchvision/datasets/lfw.py'
+  adding 'torchvision/datasets/lsun.py'
+  adding 'torchvision/datasets/mnist.py'
+  adding 'torchvision/datasets/moving_mnist.py'
+  adding 'torchvision/datasets/omniglot.py'
+  adding 'torchvision/datasets/oxford_iiit_pet.py'
+  adding 'torchvision/datasets/pcam.py'
+  adding 'torchvision/datasets/phototour.py'
+  adding 'torchvision/datasets/places365.py'
+  adding 'torchvision/datasets/rendered_sst2.py'
+  adding 'torchvision/datasets/sbd.py'
+  adding 'torchvision/datasets/sbu.py'
+  adding 'torchvision/datasets/semeion.py'
+  adding 'torchvision/datasets/stanford_cars.py'
+  adding 'torchvision/datasets/stl10.py'
+  adding 'torchvision/datasets/sun397.py'
+  adding 'torchvision/datasets/svhn.py'
+  adding 'torchvision/datasets/ucf101.py'
+  adding 'torchvision/datasets/usps.py'
+  adding 'torchvision/datasets/utils.py'
+  adding 'torchvision/datasets/video_utils.py'
+  adding 'torchvision/datasets/vision.py'
+  adding 'torchvision/datasets/voc.py'
+  adding 'torchvision/datasets/widerface.py'
+  adding 'torchvision/datasets/samplers/__init__.py'
+  adding 'torchvision/datasets/samplers/clip_sampler.py'
+  adding 'torchvision/io/__init__.py'
+  adding 'torchvision/io/_load_gpu_decoder.py'
+  adding 'torchvision/io/_video_opt.py'
+  adding 'torchvision/io/image.py'
+  adding 'torchvision/io/video.py'
+  adding 'torchvision/io/video_reader.py'
+  adding 'torchvision/models/__init__.py'
+  adding 'torchvision/models/_api.py'
+  adding 'torchvision/models/_meta.py'
+  adding 'torchvision/models/_utils.py'
+  adding 'torchvision/models/alexnet.py'
+  adding 'torchvision/models/convnext.py'
+  adding 'torchvision/models/densenet.py'
+  adding 'torchvision/models/efficientnet.py'
+  adding 'torchvision/models/feature_extraction.py'
+  adding 'torchvision/models/googlenet.py'
+  adding 'torchvision/models/inception.py'
+  adding 'torchvision/models/maxvit.py'
+  adding 'torchvision/models/mnasnet.py'
+  adding 'torchvision/models/mobilenet.py'
+  adding 'torchvision/models/mobilenetv2.py'
+  adding 'torchvision/models/mobilenetv3.py'
+  adding 'torchvision/models/regnet.py'
+  adding 'torchvision/models/resnet.py'
+  adding 'torchvision/models/shufflenetv2.py'
+  adding 'torchvision/models/squeezenet.py'
+  adding 'torchvision/models/swin_transformer.py'
+  adding 'torchvision/models/vgg.py'
+  adding 'torchvision/models/vision_transformer.py'
+  adding 'torchvision/models/detection/__init__.py'
+  adding 'torchvision/models/detection/_utils.py'
+  adding 'torchvision/models/detection/anchor_utils.py'
+  adding 'torchvision/models/detection/backbone_utils.py'
+  adding 'torchvision/models/detection/faster_rcnn.py'
+  adding 'torchvision/models/detection/fcos.py'
+  adding 'torchvision/models/detection/generalized_rcnn.py'
+  adding 'torchvision/models/detection/image_list.py'
+  adding 'torchvision/models/detection/keypoint_rcnn.py'
+  adding 'torchvision/models/detection/mask_rcnn.py'
+  adding 'torchvision/models/detection/retinanet.py'
+  adding 'torchvision/models/detection/roi_heads.py'
+  adding 'torchvision/models/detection/rpn.py'
+  adding 'torchvision/models/detection/ssd.py'
+  adding 'torchvision/models/detection/ssdlite.py'
+  adding 'torchvision/models/detection/transform.py'
+  adding 'torchvision/models/optical_flow/__init__.py'
+  adding 'torchvision/models/optical_flow/_utils.py'
+  adding 'torchvision/models/optical_flow/raft.py'
+  adding 'torchvision/models/quantization/__init__.py'
+  adding 'torchvision/models/quantization/googlenet.py'
+  adding 'torchvision/models/quantization/inception.py'
+  adding 'torchvision/models/quantization/mobilenet.py'
+  adding 'torchvision/models/quantization/mobilenetv2.py'
+  adding 'torchvision/models/quantization/mobilenetv3.py'
+  adding 'torchvision/models/quantization/resnet.py'
+  adding 'torchvision/models/quantization/shufflenetv2.py'
+  adding 'torchvision/models/quantization/utils.py'
+  adding 'torchvision/models/segmentation/__init__.py'
+  adding 'torchvision/models/segmentation/_utils.py'
+  adding 'torchvision/models/segmentation/deeplabv3.py'
+  adding 'torchvision/models/segmentation/fcn.py'
+  adding 'torchvision/models/segmentation/lraspp.py'
+  adding 'torchvision/models/video/__init__.py'
+  adding 'torchvision/models/video/mvit.py'
+  adding 'torchvision/models/video/resnet.py'
+  adding 'torchvision/models/video/s3d.py'
+  adding 'torchvision/models/video/swin_transformer.py'
+  adding 'torchvision/ops/__init__.py'
+  adding 'torchvision/ops/_box_convert.py'
+  adding 'torchvision/ops/_register_onnx_ops.py'
+  adding 'torchvision/ops/_utils.py'
+  adding 'torchvision/ops/boxes.py'
+  adding 'torchvision/ops/ciou_loss.py'
+  adding 'torchvision/ops/deform_conv.py'
+  adding 'torchvision/ops/diou_loss.py'
+  adding 'torchvision/ops/drop_block.py'
+  adding 'torchvision/ops/feature_pyramid_network.py'
+  adding 'torchvision/ops/focal_loss.py'
+  adding 'torchvision/ops/giou_loss.py'
+  adding 'torchvision/ops/misc.py'
+  adding 'torchvision/ops/poolers.py'
+  adding 'torchvision/ops/ps_roi_align.py'
+  adding 'torchvision/ops/ps_roi_pool.py'
+  adding 'torchvision/ops/roi_align.py'
+  adding 'torchvision/ops/roi_pool.py'
+  adding 'torchvision/ops/stochastic_depth.py'
+  adding 'torchvision/transforms/__init__.py'
+  adding 'torchvision/transforms/_functional_pil.py'
+  adding 'torchvision/transforms/_functional_tensor.py'
+  adding 'torchvision/transforms/_functional_video.py'
+  adding 'torchvision/transforms/_presets.py'
+  adding 'torchvision/transforms/_transforms_video.py'
+  adding 'torchvision/transforms/autoaugment.py'
+  adding 'torchvision/transforms/functional.py'
+  adding 'torchvision/transforms/functional_pil.py'
+  adding 'torchvision/transforms/functional_tensor.py'
+  adding 'torchvision/transforms/transforms.py'
+  adding 'torchvision/transforms/v2/__init__.py'
+  adding 'torchvision/transforms/v2/_augment.py'
+  adding 'torchvision/transforms/v2/_auto_augment.py'
+  adding 'torchvision/transforms/v2/_color.py'
+  adding 'torchvision/transforms/v2/_container.py'
+  adding 'torchvision/transforms/v2/_deprecated.py'
+  adding 'torchvision/transforms/v2/_geometry.py'
+  adding 'torchvision/transforms/v2/_meta.py'
+  adding 'torchvision/transforms/v2/_misc.py'
+  adding 'torchvision/transforms/v2/_temporal.py'
+  adding 'torchvision/transforms/v2/_transform.py'
+  adding 'torchvision/transforms/v2/_type_conversion.py'
+  adding 'torchvision/transforms/v2/_utils.py'
+  adding 'torchvision/transforms/v2/functional/__init__.py'
+  adding 'torchvision/transforms/v2/functional/_augment.py'
+  adding 'torchvision/transforms/v2/functional/_color.py'
+  adding 'torchvision/transforms/v2/functional/_deprecated.py'
+  adding 'torchvision/transforms/v2/functional/_geometry.py'
+  adding 'torchvision/transforms/v2/functional/_meta.py'
+  adding 'torchvision/transforms/v2/functional/_misc.py'
+  adding 'torchvision/transforms/v2/functional/_temporal.py'
+  adding 'torchvision/transforms/v2/functional/_type_conversion.py'
+  adding 'torchvision/transforms/v2/functional/_utils.py'
+  adding 'torchvision/tv_tensors/__init__.py'
+  adding 'torchvision/tv_tensors/_bounding_boxes.py'
+  adding 'torchvision/tv_tensors/_dataset_wrapper.py'
+  adding 'torchvision/tv_tensors/_image.py'
+  adding 'torchvision/tv_tensors/_mask.py'
+  adding 'torchvision/tv_tensors/_torch_function_helpers.py'
+  adding 'torchvision/tv_tensors/_tv_tensor.py'
+  adding 'torchvision/tv_tensors/_video.py'
+  adding 'torchvision-0.16.1+fdea156.dist-info/LICENSE'
+  adding 'torchvision-0.16.1+fdea156.dist-info/METADATA'
+  adding 'torchvision-0.16.1+fdea156.dist-info/WHEEL'
+  adding 'torchvision-0.16.1+fdea156.dist-info/top_level.txt'
+  adding 'torchvision-0.16.1+fdea156.dist-info/RECORD'
+  removing build/bdist.linux-aarch64/wheel
+  Building wheel for torchvision (pyproject.toml): finished with status 'done'
+  Created wheel for torchvision: filename=torchvision-0.16.1+fdea156-cp38-cp38-linux_aarch64.whl size=1322578 sha256=eb7732362fec080ecd59d5f2152c6c7e1c0815d86e724449e94de69ea1386769
+  Stored in directory: /tmp/pip-ephem-wheel-cache-6iqvpang/wheels/a7/87/31/9044a832feb2de7a486916114831d5ffe8d00148f19fa45675
+Successfully built torchvision
+Installing collected packages: torchvision
+Successfully installed torchvision-0.16.1+fdea156
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/e0/f0/8a2806114cd36e282823fd4d8e88e3b94dc943c2569c350d0c826a49db38/pip-25.1-py3-none-any.whl (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/79/67/c06f625e2968c417052b3a4a0eef40656d5d4d44033e57b40ec474af1d28/pip-25.1.tar.gz (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/29/a2/d40fb2460e883eca5199c62cfc2463fd261f760556ae6290f88488c362c0/pip-25.1.1-py3-none-any.whl (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/59/de/241caa0ca606f2ec5fe0c1f4261b0465df78d786a38da693864a116c37f4/pip-25.1.1.tar.gz (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/b7/3f/945ef7ab14dc4f9d7f40288d2df998d1837ee0888ec3659c813487572faa/pip-25.2-py3-none-any.whl (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/20/16/650289cd3f43d5a2fadfd98c68bd1e1e7f2550a1a5326768cddfbcedb2c5/pip-25.2.tar.gz (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/44/3c/d717024885424591d5376220b5e836c2d5293ce2011523c9de23ff7bf068/pip-25.3-py3-none-any.whl (from https://pypi.org/simple/pip/) (requires-python:>=3.9)
+  Link requires a different Python (3.8.10 not in: '>=3.9'): https://files.pythonhosted.org/packages/fe/6e/74a3f0179a4a73a53d66ce57fdb4de0080a8baa1de0063de206d6167acc2/pip-25.3.tar.gz (from https://pypi.org/simple/pip/) (requires-python:>=3.9)

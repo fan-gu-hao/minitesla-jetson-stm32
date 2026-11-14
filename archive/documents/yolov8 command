@@ -1,0 +1,3 @@
+yolo task=segment mode=predict model=best.pt source=0 device=0 show=true tracker=bytetrack.yaml save=false save_txt=false
+
+yolo task=segment mode=predict model=yolov8x-seg.pt source=0 show=True

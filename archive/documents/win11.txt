@@ -1,0 +1,274 @@
+# -*- coding: utf-8 -*-
+from ultralytics import YOLO
+import cv2
+import numpy as np
+import spidev
+import time
+import Jetson.GPIO as GPIO  # 用於 Jetson Orin Nano 控制 GPIO
+import socket
+
+def video_send_stream(video_sq):
+	CLASS_NAMES = [  # 原始類別名照舊
+	    "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck",
+	    "boat", "traffic light", "fire hydrant", "stop sign", "parking meter", "bench",
+	    "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe",
+	    "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee", "skis", "snowboard",
+	    "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
+	    "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl",
+	    "banana", "apple", "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza",
+	    "donut", "cake", "chair", "couch", "potted plant", "bed", "dining table", "toilet",
+	    "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "microwave", "oven",
+	    "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
+	    "hair drier", "toothbrush", "vacant"
+	]
+
+	model = YOLO("best.pt")
+	cap = cv2.VideoCapture(0)
+
+	def get_color(idx):
+	    """根據 ID 生成獨特 RGB 顏色"""
+	    np.random.seed(idx)
+	    return tuple(int(x) for x in np.random.randint(0, 255, 3))
+
+	while cap.isOpened():
+	    success, frame = cap.read()
+	    if not success:
+		break
+
+	    # YOLOv8 tracking + segmentation 推理
+	    results = model.track(
+		source=frame,
+		tracker="bytetrack.yaml",
+		persist=True,
+		stream=True,
+		conf=0.25,  # YOLOv8 預設
+		iou=0.7     # YOLOv8 預設
+	    )
+
+	    for r in results:
+		boxes = r.boxes
+		ids = r.boxes.id if r.boxes.id is not None else []
+
+		# ➤ segmentation 遮罩繪製（每個用不同顏色）
+		if hasattr(r, "masks") and r.masks is not None:
+		    for i, seg in enumerate(r.masks.xy):
+		        color = get_color(int(ids[i]) if len(ids) > i else i)
+		        pts = seg.reshape(-1, 1, 2).astype(int)
+		        cv2.polylines(frame, [pts], isClosed=True, color=color, thickness=2)
+
+		for i, box in enumerate(boxes):
+		    xyxy = box.xyxy[0].cpu().numpy()
+		    conf = box.conf[0].item()
+		    cls = int(box.cls[0])
+		    class_name = CLASS_NAMES[cls] if cls < len(CLASS_NAMES) else f"class_{cls}"
+		    track_id = int(ids[i]) if len(ids) > i else -1
+		    color = get_color(track_id if track_id != -1 else cls)
+
+		    # ➤ 終端輸出
+		    print(f"[ID {track_id}] 類別={class_name} | 信心={conf:.2f} | 框={xyxy.astype(int)}")
+
+		    # ➤ 畫框與標籤
+		    cv2.rectangle(frame,
+		                  (int(xyxy[0]), int(xyxy[1])),
+		                  (int(xyxy[2]), int(xyxy[3])),
+		                  color, 2)
+		    cv2.putText(frame,
+		                f"ID {track_id} {class_name} {conf:.2f}",
+		                (int(xyxy[0]), int(xyxy[1]) - 10),
+		                cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+		                color, 1)
+
+	    cv2.imshow("YOLOv8 Seg+Track", frame)
+	    if cv2.waitKey(1) & 0xFF == ord('q'):
+		break
+
+	cap.release()
+	cv2.destroyAllWindows()
+
+
+def spitransfer():
+	# 設定 Jetson Orin Nano 的 NSS（CS）對應的 GPIO 腳位
+	NSS1_PIN = 17  # SPI0 的 NSS（對應 STM32 的 SPI1）
+	NSS2_PIN = 27  # SPI2 的 NSS（對應 STM32 的 SPI2）
+
+	# 初始化 GPIO
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setup(NSS1_PIN, GPIO.OUT, initial=GPIO.HIGH)  # 預設拉高
+	GPIO.setup(NSS2_PIN, GPIO.OUT, initial=GPIO.HIGH)  # 預設拉高
+
+	# 開啟 SPI0（對應 STM32 SPI1）
+	spi0 = spidev.SpiDev()
+	spi0.open(0, 0)  # (bus 0, CS 0)
+	spi0.max_speed_hz = 1000000
+	spi0.mode = 0b00
+
+	# 開啟 SPI2（對應 STM32 SPI2）
+	spi1 = spidev.SpiDev()
+	spi1.open(2, 0)  # (bus 2, CS 0)
+	spi1.max_speed_hz = 1000000
+	spi1.mode = 0b00
+
+	# 定義傳輸數據
+	spi1_tx_buffer = bytearray([1,3,5,7,9])
+	spi2_tx_buffer = bytearray([2,4,6,8,10])
+	spi1_rx_buffer = [0] * 5
+	spi2_rx_buffer = [0] * 5
+
+	# 手動控制 NSS 進行 SPI 傳輸
+	def send_receive(spi, tx_data, rx_buffer, nss_pin):
+	    GPIO.output(nss_pin, GPIO.LOW)  # 拉低 NSS（通知 STM32 開始接收）
+	    time.sleep(0.001)  # 確保 NSS 低電位穩定（視情況調整）
+
+	    response = spi.xfer2(tx_data)  # 傳輸數據並接收回應
+	    time.sleep(0.001)  # 確保數據傳輸完整（視情況調整）
+
+
+	    
+	    # 儲存接收數據
+	    for i in range(len(rx_buffer)):
+		rx_buffer[i] = response[i]
+	    return rx_buffer
+
+	try:
+	    while True:
+		# SPI1 傳輸數據
+		received_spi1 = send_receive(spi0, spi1_tx_buffer, spi1_rx_buffer, NSS1_PIN)
+		print(f"SPI1 Sent: {spi1_tx_buffer}")
+
+		# SPI2 傳輸數據
+		received_spi2 = send_receive(spi1, spi2_tx_buffer, spi2_rx_buffer, NSS2_PIN)
+		print(f"SPI2 Sent: {spi2_tx_buffer}")
+
+		print("-" * 50)
+		time.sleep(1)  # 每秒執行一次
+
+	except KeyboardInterrupt:
+	    print("Terminating...")
+	finally:
+	    GPIO.cleanup()  # 釋放 GPIO 資源
+	    spi0.close()
+	    spi1.close()
+
+
+def tcp_trans():
+	client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	client_socket.connect(("120.126.10.41", 5055))  # 請改成你的 server IP
+
+	# 接收 server 的首次訊息
+	msg = client_socket.recv(1024)
+	print("Server:", msg.decode())
+
+	try:
+	    while True:
+		# Client 輸入訊息並傳給 Server
+		message = input("You (client): ")
+		client_socket.sendall(message.encode())
+
+		if message.lower() == "exit":
+		    print("Closing connection.")
+		    break
+
+		# 接收 Server 回覆
+		data = client_socket.recv(1024)
+		if not data:
+		    break
+		print("Server:", data.decode())
+
+		if data.decode().lower() == "exit":
+		    print("Server closed the connection.")
+		    break
+
+	except Exception as e:
+	    print("Error:", e)
+
+	client_socket.close()
+
+
+
+
+
+def lidar_receive():
+	UDP_IP = "127.0.0.1"
+	UDP_PORT = 6000
+
+	# 建立 UDP socket 並綁定 port
+	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	sock.bind((UDP_IP, UDP_PORT))
+
+	print(f"✅ Listening on {UDP_IP}:{UDP_PORT} ...")
+
+	while True:
+	    data, addr = sock.recvfrom(1024)  # 接收資料（最多1024位元組）
+	    try:
+		# 解碼字串，例如： '123.45,567.89,47'
+		decoded = data.decode().strip()
+		angle, distance, quality = decoded.split(',')
+		angle = float(angle)
+		distance = float(distance)
+		quality = int(quality)
+
+		print(f"📡 Received → Angle: {angle:.2f}°  Distance: {distance:.2f} mm  Quality: {quality}")
+
+		# 你可以在這裡把資料存進清單、畫 OpenCV 圖、做邏輯判斷等
+	    except Exception as e:
+		print(f"⚠️ Error decoding data: {data} — {e}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+
+    dataright_q=mpqueue()
+    dataleft_q=mpqueue()
+    video_dispq=mpqueue()
+    video_sq=mpqueue()
+    video_rq=mpqueue()
+    audio_sq=mpqueue()
+    audio_rq=mpqueue()
+    unity_video_rq=mpqueue()  
+
+
+
+
+    
+
+
+
+
+    ################################################### 啟動視訊和音訊執行緒
+    hand_send_thread=threading.Thread(target=hand_send_tcp,args=(dataright_q,dataleft_q,))
+    video_send_thread = threading.Thread(target=video_send_tcp,args=(video_sq,))
+
+    display_signal_thread = Process(target=display_signal,args=(ipadd,12345,))
+    video_send_stream_process = Process(target=video_send_stream, args=(video_sq,video_dispq,dataright_q,dataleft_q))
+    display_process = Process(target=video_display, args=(video_dispq,))
+    unityreceiver_process = Process(target=unity_receive_tcp, args=(unity_video_rq, ipadd, 8052))
+    unitydisplay_process = Process(target=unity_stream_video, args=(unity_video_rq,))  
+    video_receive_stream_process=Process(target=video_receive_stream, args=(ipadd,))  
+   ########################################################################### # 在這裡可以繼續加入其他執行緒或程式碼
+   
+   
+    unityreceiver_process.start()
+    unitydisplay_process.start()
+    hand_send_thread.start()
+    video_send_thread.start()
+    video_send_stream_process.start()
+    display_process.start()
+
+    display_signal_thread.start()
+    video_receive_stream_process.start()

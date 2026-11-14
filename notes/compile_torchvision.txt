@@ -1,0 +1,18 @@
+# 1️下載官方原始碼
+cd ~
+wget https://github.com/pytorch/vision/archive/refs/tags/v0.15.1.tar.gz -O vision-0.15.1.tar.gz
+
+# 2️解壓並進入目錄
+tar xf vision-0.15.1.tar.gz
+cd vision-0.15.1
+ls setup.py     # 應該看到 setup.py 檔案
+
+# 3️設定編譯環境（Orin Nano 架構 8.7）
+export MAX_JOBS=1
+export TORCH_CUDA_ARCH_LIST="8.7"
+export FORCE_CUDA=1
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+# 4️即時顯示進度、安裝到 Python
+python3 -m pip install --user --no-cache-dir --no-build-isolation --no-deps . -v

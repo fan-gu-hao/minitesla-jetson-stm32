@@ -1,0 +1,52 @@
+{
+  "network": {
+    "pc_host": "120.126.10.41",
+    "control_port": 5000,
+    "hello_interval_s": 2.0,
+    "video_port": 7000,
+    "lidar_local_host": "127.0.0.1",
+    "lidar_local_port": 6000,
+    "lidar_remote_port": 6000
+  },
+  "uart": {
+    "device": "/dev/ttyTHS0",
+    "baud": 115200,
+    "poll_interval_s": 0.005
+  },
+  "tof": {
+    "stale_ms": 120,
+    "telemetry_stale_ms": 250,
+    "transport_allowance_ms": 10
+  },
+  "lidar": {
+    "stale_ms": 500,
+    "bin_deg": 1,
+    "min_quality": 1,
+    "yaw_deg": null,
+    "clockwise": true,
+    "position_mm": {
+      "x": 300,
+      "y": 181,
+      "z": 315
+    }
+  },
+  "camera": {
+    "index": 0,
+    "model": "best.pt",
+    "display": true,
+    "jpeg_quality": 99,
+    "confidence": 0.25,
+    "iou": 0.7,
+    "stale_ms": 1000,
+    "max_detections": 100,
+    "position_mm": {
+      "x": 395,
+      "y": 175,
+      "z": 190
+    }
+  },
+  "snapshot": {
+    "path": "sensor_snapshot.json",
+    "period_s": 0.1
+  }
+}

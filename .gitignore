@@ -1,0 +1,15 @@
+# Runtime-generated files only. Original build logs are intentionally tracked.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+jetson/sensor_snapshot.json
+jetson/parking_preview.svg
+jetson/demo_records/
+firmware/stm32f4/MDK-ARM/wheelcontrol/
+firmware/stm32f4/MDK-ARM/*.o
+firmware/stm32f4/MDK-ARM/*.axf
+firmware/stm32f4/MDK-ARM/*.hex
+# Archived build products and logs remain tracked under archive/ and logs/.

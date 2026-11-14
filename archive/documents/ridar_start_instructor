@@ -1,0 +1,2 @@
+cd ~/Desktop/rplidar_sdk-master/output/Linux/Release
+./ultra_simple --channel --serial /dev/ttyUSB0 460800

@@ -1,0 +1,2 @@
+# Preserve recovered source and log bytes, including original line endings.
+* -text
