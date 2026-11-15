@@ -1,6 +1,6 @@
-# 智慧車 (Smart Car) | Building a Smart RC Car from Power Wiring to Onboard AI and Real-Time Control
+# Smart Car | Jetson Orin Nano × STM32 Embedded AI Patrol and Obstacle Avoidance System: Edge Inference, Heterogeneous Computing, and Real-Time Control
 
-**An independently built personal project — I completed the hardware planning, power distribution and wiring, firmware and software development, vehicle testing, and system integration.**
+**An independently built personal project — I completed hardware assembly and power wiring, multisensor integration, model training and deployment, parallel processing with multiple processes, and 5G remote operation.**
 
 ## [▶ Watch the Smart Car Vehicle Demo](https://youtu.be/pAVebk_odPo)
 
