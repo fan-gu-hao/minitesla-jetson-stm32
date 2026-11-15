@@ -80,7 +80,7 @@ class SingleInstance:
             os.close(held)
             if exc.errno in (errno.EAGAIN, errno.EACCES):
                 raise SingleInstanceError(
-                    "另一份 MiniTesla 車端主程式仍在執行；請先正常關閉該程式。"
+                    "另一份智慧車車端主程式仍在執行；請先正常關閉該程式。"
                 ) from exc
             raise
         except BaseException:

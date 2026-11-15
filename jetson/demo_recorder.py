@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""MiniTesla 展示紀錄：唯讀取樣快照，與控制、UART、推論程序完全分離。"""
+"""智慧車展示紀錄：唯讀取樣快照，與控制、UART、推論程序完全分離。"""
 import argparse
 import csv
 import datetime
@@ -291,7 +291,7 @@ def validate_owned(stream, path):
     except (ValueError, UnicodeError):
         raise ValueError("紀錄名稱已被其他檔案使用：{}".format(path))
     if not isinstance(header, dict) or header.get("producer") != PRODUCER or header.get("kind") != "file_header":
-        raise ValueError("拒絕覆蓋非 MiniTesla 紀錄：{}".format(path))
+        raise ValueError("拒絕覆蓋非智慧車紀錄：{}".format(path))
 
 
 class BoundedWriter:
@@ -439,7 +439,7 @@ def csv_sample(record):
     return row
 
 
-EXPORT_README = """MiniTesla 展示紀錄\n\n這是預設每 0.2 秒讀取快照的取樣紀錄，不是每個控制封包或全部狀態轉換的完整追蹤。\nrecords.jsonl 保留匯出時仍在輪替範圍內的完整 JSON 行；samples.csv 是感測與控制取樣，events.csv 是觀察到的變化。\n舊紀錄會依容量輪替刪除：預設每檔 10 MiB，含目前檔共 5 檔，最多 50 MiB。\nvalid_at_snapshot 是車端快照當下狀態；valid/age_ms 另加紀錄程序讀取延遲。紀錄程序不會影響車端控制判定。\n過期、不同開機識別或無法讀取的快照只寫狀態事件，不沿用先前健康值。\nperson_event_count 是每次車端程序內人物連續出現的警示次數，不是不同人物人數；重啟會重新計數，請連同 run_id 判讀。\n人物距離沒有由影像猜測。停車完成依車端判定，不代表已量得零車速。\n第十階段新增任務狀態、通知編號、倒數秒數及停車位姿摘要；位姿長度為公尺、朝向為弧度，原點在車位後壁中央。\n倒數與位姿為取樣當下值，不是離線匯出時的即時狀態。未保存完整規劃路徑，舊紀錄的新欄位留空。\n匯出不含影像、模型、完整偵測框或雷達點雲；不代表新增功能已經實車驗證。\n匯出時間點以鎖定後開啟的各檔案長度為準；後續新增行不在此次匯出內，尾端不完整行會略過。\n"""
+EXPORT_README = """智慧車展示紀錄\n\n這是預設每 0.2 秒讀取快照的取樣紀錄，不是每個控制封包或全部狀態轉換的完整追蹤。\nrecords.jsonl 保留匯出時仍在輪替範圍內的完整 JSON 行；samples.csv 是感測與控制取樣，events.csv 是觀察到的變化。\n舊紀錄會依容量輪替刪除：預設每檔 10 MiB，含目前檔共 5 檔，最多 50 MiB。\nvalid_at_snapshot 是車端快照當下狀態；valid/age_ms 另加紀錄程序讀取延遲。紀錄程序不會影響車端控制判定。\n過期、不同開機識別或無法讀取的快照只寫狀態事件，不沿用先前健康值。\nperson_event_count 是每次車端程序內人物連續出現的警示次數，不是不同人物人數；重啟會重新計數，請連同 run_id 判讀。\n人物距離沒有由影像猜測。停車完成依車端判定，不代表已量得零車速。\n第十階段新增任務狀態、通知編號、倒數秒數及停車位姿摘要；位姿長度為公尺、朝向為弧度，原點在車位後壁中央。\n倒數與位姿為取樣當下值，不是離線匯出時的即時狀態。未保存完整規劃路徑，舊紀錄的新欄位留空。\n匯出不含影像、模型、完整偵測框或雷達點雲；不代表新增功能已經實車驗證。\n匯出時間點以鎖定後開啟的各檔案長度為準；後續新增行不在此次匯出內，尾端不完整行會略過。\n"""
 
 
 def export_records(directory, destination=None):
@@ -474,7 +474,7 @@ def export_records(directory, destination=None):
         fcntl.flock(rotation_lock, fcntl.LOCK_UN)
         os.close(rotation_lock)
     if not handles:
-        raise ValueError("尚無 MiniTesla 展示紀錄可以匯出")
+        raise ValueError("尚無智慧車展示紀錄可以匯出")
     try:
         if destination is None:
             stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
@@ -563,7 +563,7 @@ def record(args):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="MiniTesla 展示紀錄：獨立唯讀取樣與匯出")
+    parser = argparse.ArgumentParser(description="智慧車展示紀錄：獨立唯讀取樣與匯出")
     subparsers = parser.add_subparsers(dest="command", required=True)
     capture = subparsers.add_parser("record", help="持續取樣；由開機服務啟動")
     capture.add_argument("--snapshot", default=str(ROOT / "sensor_snapshot.json"))

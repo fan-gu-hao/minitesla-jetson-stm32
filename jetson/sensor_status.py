@@ -281,7 +281,7 @@ def render(snapshot):
     # 重開機的單調時鐘會歸零；不能把負年齡截成零而顯示為最新資料。
     file_age = max(mono_age, wall_age, 0.0) if (mono_age is not None and wall_age is not None
                                                and mono_age >= -0.1 and wall_age >= -1.0) else None
-    lines = ["MiniTesla 感測狀態（僅讀取檔案）",
+    lines = ["智慧車感測狀態（僅讀取檔案）",
              "快照：{}".format("未提供時間" if file_age is None else "{:.2f} 秒前".format(file_age))]
     if file_age is None or file_age > 1.0:
         lines.append("注意：快照未持續更新，以下為歷史資料，不能視為目前狀態。")

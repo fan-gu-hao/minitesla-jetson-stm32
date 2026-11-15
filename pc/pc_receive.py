@@ -53,7 +53,7 @@ def video_receive_stream(bind, port, stop_event):
     import cv2
     import numpy as np
 
-    title = "MiniTesla Video"
+    title = "Smart Car | Video"
 
     def show_frame(jpeg):
         frame = cv2.imdecode(np.frombuffer(jpeg, dtype=np.uint8), cv2.IMREAD_COLOR)
@@ -111,7 +111,7 @@ def lidar_receive(bind, port, stop_event):
     points = []
     next_draw = 0.0
     last_data = None
-    title = "MiniTesla LiDAR"
+    title = "Smart Car | LiDAR"
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.bind((bind, port))
@@ -159,7 +159,7 @@ def lidar_receive(bind, port, stop_event):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="MiniTesla 第四階段影像及雷達接收器")
+    parser = argparse.ArgumentParser(description="智慧車第四階段影像及雷達接收器")
     parser.add_argument('--bind', default='0.0.0.0')
     parser.add_argument('--video-port', type=int, default=7000)
     parser.add_argument('--lidar-port', type=int, default=6000)

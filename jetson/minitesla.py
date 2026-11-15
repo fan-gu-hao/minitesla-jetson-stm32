@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""MiniTesla 第十階段：巡邏找位與隔離自動停車運算，保留唯一 UART 控制寫入者。"""
+"""智慧車第十階段：巡邏找位與隔離自動停車運算，保留唯一 UART 控制寫入者。"""
 import argparse
 import json
 import math
@@ -319,7 +319,7 @@ def parking_input(store, authority):
 
 
 def load_config(default_pc_host=None, argv=None):
-    parser = argparse.ArgumentParser(description="MiniTesla 感測整合與控制權管理")
+    parser = argparse.ArgumentParser(description="智慧車感測整合與控制權管理")
     parser.add_argument("--config", default=str(ROOT / "sensor_config.json"))
     parser.add_argument("--pc-host", default=os.environ.get("MINITESLA_PC_HOST"))
     parser.add_argument("--uart", help="覆寫 UART 裝置路徑")

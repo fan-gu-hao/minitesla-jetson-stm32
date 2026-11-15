@@ -1,14 +1,14 @@
-# MiniTesla｜從供電配線到車載人工智慧與即時控制的完整實作
+# 智慧車｜從供電配線到車載人工智慧與即時控制的完整實作
 
 **個人獨立製作專案｜從硬體規劃、供電配線到軟韌體開發、整車測試與整合，皆由我完成。**
 
 ## [▶ 點此觀看智慧車實機展示影片](https://youtu.be/pAVebk_odPo)
 
-[![MiniTesla 智慧車實機展示影片：點擊封面前往 YouTube 播放](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
+[![智慧車實機展示影片：點擊封面前往 YouTube 播放](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
 
 [English](README.en.md) · [硬體與接線](docs/hardware.md) · [系統架構](docs/architecture.md) · [部署操作](docs/operation.md) · [原始建置紀錄](logs/README.md)
 
-**MiniTesla 是我從零開始獨立製作的智慧車專案。從車體與電子元件選配、電源電路安排、模組安裝與實際接線，到 Jetson 環境建置、模型訓練與部署、STM32 韌體、電腦操作介面及 5G 遠端連線，皆由我完成，並整合影像辨識、雷達與四向測距，逐步完成整車測試與部署。**
+**「智慧車」是我從零開始獨立製作的專案。從車體與電子元件選配、電源電路安排、模組安裝與實際接線，到 Jetson 環境建置、模型訓練與部署、STM32 韌體、電腦操作介面及 5G 遠端連線，皆由我完成，並整合影像辨識、雷達與四向測距，逐步完成整車測試與部署。**
 
 這個專案的工作橫跨硬體、Linux 車載運算、微控制器韌體與電腦操作介面：Jetson Orin Nano 執行視覺推論、網路傳輸及上層決策；STM32F412 執行 PWM、UART 封包解析與獨立距離保護。開發從各裝置的單項驗證逐步推進到整車整合，儲存庫同時保留早期程式、編譯紀錄與歷次修改說明，能追溯成品如何形成。
 

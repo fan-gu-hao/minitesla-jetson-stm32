@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""MiniTesla 統一操作視窗。沿用 pc_control.py 的唯一控制傳送路徑。
+"""智慧車統一操作視窗。沿用 pc_control.py 的唯一控制傳送路徑。
 
 影像／雷達接收與解碼在 pc_media.py 的子程序執行；Tk 主執行緒負責顯示，
 完成可見影格的顯示後才回覆確認。Python 3.8 以上，無新增第三方套件。
@@ -55,12 +55,12 @@ class DashboardWindow(ControlWindow):
         self._was_visible = True
         self._fatal_message = ""
 
-        root.title("MiniTesla｜統一操作台")
+        root.title("智慧車｜統一操作台")
         root.geometry("1280x850")
         root.minsize(1120, 800)
         outer = ttk.Frame(root, padding=12)
         outer.pack(fill="both", expand=True)
-        ttk.Label(outer, text="MiniTesla 室內智慧車", font=("Microsoft JhengHei", 17, "bold")).pack(anchor="w")
+        ttk.Label(outer, text="智慧車", font=("Microsoft JhengHei", 17, "bold")).pack(anchor="w")
         ttk.Label(outer, text="影像、雷達與控制共用此視窗；切換到其他程式會要求停止待命。").pack(anchor="w", pady=(3, 8))
         # 邀請固定在頂部，不會因捲動右側狀態欄而消失，也不彈出搶焦點視窗。
         mission_group = ttk.LabelFrame(outer, text="巡邏找位與停車決定", padding=6)
@@ -410,7 +410,7 @@ def finish_media(process, stop, queues):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="MiniTesla 統一影像、雷達與車輛控制操作台")
+    parser = argparse.ArgumentParser(description="智慧車統一影像、雷達與車輛控制操作台")
     parser.add_argument("--bind", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=5000, help="控制 UDP 連接埠")
     parser.add_argument("--video-port", type=int, default=7000, help="影像 TCP 連接埠")
@@ -451,7 +451,7 @@ def main(argv=None):
         process.start()
         window = DashboardWindow(root, sock, args.bind, args.port, args.video_port, args.lidar_port,
                                  *channels, stop, process)
-        print("MiniTesla 統一操作台：M 手動、P 巡邏、K 入庫、G 巡邏找位、Y 同意、N 略過、空白鍵停止；關閉視窗即結束全部接收程序。", flush=True)
+        print("智慧車統一操作台：M 手動、P 巡邏、K 入庫、G 巡邏找位、Y 同意、N 略過、空白鍵停止；關閉視窗即結束全部接收程序。", flush=True)
         root.mainloop()
         return 1 if window._fatal_message else 0
     except KeyboardInterrupt:

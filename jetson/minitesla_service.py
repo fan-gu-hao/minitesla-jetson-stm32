@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""安裝及管理 MiniTesla 的 systemd 服務；以原本的 Python 環境執行。"""
+"""安裝及管理智慧車的 systemd 服務；以原本的 Python 環境執行。"""
 import argparse
 import importlib.util
 import os
@@ -93,7 +93,7 @@ def render_units(project, python, account, config_path, config, lidar_binary,
                       "--output-dir", str(project / "demo_records")],
     }
     result = {
-        TARGET: "\n".join([marker, "[Unit]", "Description=MiniTesla vehicle stack",
+        TARGET: "\n".join([marker, "[Unit]", "Description=智慧車服務",
                             "Wants=" + " ".join(SERVICES),
                             "After=network-online.target",
                             "Wants=network-online.target", "[Install]",
@@ -138,10 +138,10 @@ def inspect_ownership(uid, require_installed=False, unit_dir=UNIT_DIR,
                 raise RuntimeError("服務路徑不是一般檔案：{}".format(installed))
             first_line = installed.read_text(encoding="utf-8").splitlines()[:1]
             if first_line != [expected]:
-                raise RuntimeError("不是這個使用者安裝的 MiniTesla 服務，未修改：{}".format(installed))
+                raise RuntimeError("不是這個使用者安裝的智慧車服務，未修改：{}".format(installed))
             existing.append(name)
     if require_installed and set(existing) != set(UNITS):
-        raise RuntimeError("MiniTesla 服務尚未完整安裝；請先執行 install。")
+        raise RuntimeError("智慧車服務尚未完整安裝；請先執行 install。")
     return existing
 
 

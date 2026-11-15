@@ -1,14 +1,14 @@
-# MiniTesla | Building a Smart RC Car from Power Wiring to Onboard AI and Real-Time Control
+# 智慧車 (Smart Car) | Building a Smart RC Car from Power Wiring to Onboard AI and Real-Time Control
 
 **An independently built personal project — I completed the hardware planning, power distribution and wiring, firmware and software development, vehicle testing, and system integration.**
 
-## [▶ Watch the MiniTesla Vehicle Demo](https://youtu.be/pAVebk_odPo)
+## [▶ Watch the Smart Car Vehicle Demo](https://youtu.be/pAVebk_odPo)
 
-[![MiniTesla vehicle demo: click the thumbnail to watch on YouTube](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
+[![Smart Car vehicle demo: click the thumbnail to watch on YouTube](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
 
 [繁體中文](README.md) · [Hardware and wiring](docs/hardware.md) · [System architecture](docs/architecture.md) · [Deployment](docs/operation.md) · [Original build logs](logs/README.md)
 
-**MiniTesla is a smart RC car project I built independently from the ground up. I selected the chassis and electronic components, planned the power circuits, mounted and wired the modules, set up the Jetson environment, trained and deployed the model, developed the STM32 firmware and desktop interface, and configured 5G remote access. I then integrated vision, lidar, and four-direction ranging and carried out vehicle testing and deployment.**
+**Smart Car is a smart RC car project I built independently from the ground up. I selected the chassis and electronic components, planned the power circuits, mounted and wired the modules, set up the Jetson environment, trained and deployed the model, developed the STM32 firmware and desktop interface, and configured 5G remote access. I then integrated vision, lidar, and four-direction ranging and carried out vehicle testing and deployment.**
 
 The work spans hardware, Linux-based onboard computing, microcontroller firmware, and a desktop operator interface. The Jetson Orin Nano handles vision inference, network transport, and higher-level decisions; the STM32F412 handles PWM, UART frame parsing, and independent distance-based protection. Development progressed from individual device checks to complete vehicle integration. Early source code, build logs, and staged change notes are retained alongside the current implementation so readers can trace how the system took shape.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""MiniTesla 電腦端控制視窗（第 10 階段）。只使用 Python 標準函式庫。
+"""智慧車電腦端控制視窗（第 10 階段）。只使用 Python 標準函式庫。
 
 取代舊的 sever(1).py；請搭配本階段的 pc_receive.py 影像／雷達接收視窗。
 Jetson 主動送出狀態，電腦回覆同一個 UDP 來源位址，沿用原 NAT 路徑。
@@ -529,7 +529,7 @@ class ControlWindow:
         self._notified_offers = deque(maxlen=32)
         self.last_render = 0.0
         self.network_error = ""
-        root.title("MiniTesla｜第 10 階段控制台")
+        root.title("智慧車｜第 10 階段控制台")
         root.geometry("860x950")
         root.minsize(800, 880)
         frame = ttk.Frame(root, padding=18)
@@ -759,7 +759,7 @@ class ControlWindow:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="MiniTesla 電腦端手動、巡邏與自動找位入庫控制；取代 sever(1).py")
+    parser = argparse.ArgumentParser(description="智慧車電腦端手動、巡邏與自動找位入庫控制；取代 sever(1).py")
     parser.add_argument("--bind", default="0.0.0.0", help="監聽位址，預設所有本機介面")
     parser.add_argument("--port", type=int, default=5000, help="控制 UDP 連接埠，預設 5000")
     args = parser.parse_args()
@@ -776,7 +776,7 @@ def main():
     except OSError as exc:
         sock.close()
         raise SystemExit("無法監聽 UDP {}：{}。請先關閉舊的 sever(1).py。".format(args.port, exc))
-    print("MiniTesla 控制台等待 Jetson 主動連入 {}:{}；M 手動、P 巡邏、K 入庫、G 巡邏找位、Y 同意、N 略過、空白鍵停止。".format(args.bind, args.port))
+    print("智慧車控制台等待 Jetson 主動連入 {}:{}；M 手動、P 巡邏、K 入庫、G 巡邏找位、Y 同意、N 略過、空白鍵停止。".format(args.bind, args.port))
     try:
         root = tk.Tk()
         window = ControlWindow(root, sock, args.bind, args.port)
