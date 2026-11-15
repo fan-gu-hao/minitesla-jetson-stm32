@@ -1,8 +1,14 @@
 # MiniTesla | Building a Smart RC Car from Power Wiring to Onboard AI and Real-Time Control
 
+**An independently built personal project — I completed the hardware planning, power distribution and wiring, firmware and software development, vehicle testing, and system integration.**
+
+## [▶ Watch the MiniTesla Vehicle Demo](https://youtu.be/pAVebk_odPo)
+
+[![MiniTesla vehicle demo: click the thumbnail to watch on YouTube](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
+
 [繁體中文](README.md) · [Hardware and wiring](docs/hardware.md) · [System architecture](docs/architecture.md) · [Deployment](docs/operation.md) · [Original build logs](logs/README.md)
 
-**I built this project from the integration of the vehicle chassis and electronic components: planning power distribution, mounting and wiring modules, setting up the Jetson software environment, implementing STM32 motor and steering control, and bringing vision, lidar, four-direction ranging, and 5G remote operation together in one smart RC car.**
+**MiniTesla is a smart RC car project I built independently from the ground up. I selected the chassis and electronic components, planned the power circuits, mounted and wired the modules, set up the Jetson environment, trained and deployed the model, developed the STM32 firmware and desktop interface, and configured 5G remote access. I then integrated vision, lidar, and four-direction ranging and carried out vehicle testing and deployment.**
 
 The work spans hardware, Linux-based onboard computing, microcontroller firmware, and a desktop operator interface. The Jetson Orin Nano handles vision inference, network transport, and higher-level decisions; the STM32F412 handles PWM, UART frame parsing, and independent distance-based protection. Development progressed from individual device checks to complete vehicle integration. Early source code, build logs, and staged change notes are retained alongside the current implementation so readers can trace how the system took shape.
 
@@ -10,9 +16,9 @@ The work spans hardware, Linux-based onboard computing, microcontroller firmware
 
 *The assembled vehicle: battery, chassis, and multiple electronics platforms mounted on standoffs. [More original hardware photographs](archive/photos/)*
 
-## My Engineering Responsibilities
+## Complete Vehicle Engineering — Independently Completed
 
-| Area | Work I carried out | Contribution to the system |
+| Engineering area | Work I completed independently | System outcome |
 | --- | --- | --- |
 | Hardware and power integration | Selected computing and control boards, sensors, and actuators; arranged battery branches, regulated supplies, USB peripheral power, BEC-powered steering, board mounting, and signal wiring | Connected the propulsion, computing, and control loads into a working vehicle system |
 | Jetson platform setup | Established the Python/GPU inference environment, addressed PyTorch/torchvision compatibility, and built torchvision's ARM and CUDA extensions from source | Connected camera input and the trained model to the actual onboard runtime |
@@ -22,7 +28,7 @@ The work spans hardware, Linux-based onboard computing, microcontroller firmware
 | Concurrency and control ownership | Separated inference/transmission processes and UART/lidar threads; added queues, locks, exclusive access, freshness checks, and mode handoffs | Prevented vision work from blocking control and multiple tasks from competing for the motor UART |
 | Deployment and operator tools | Consolidated the desktop dashboard, service installation and management, boot startup, status monitoring, and recording export | Turned separately launched development programs into a deployable, operable, and diagnosable system |
 
-The hardware uses an off-the-shelf chassis, development boards, and power/sensor modules. My implementation covers their system design, power distribution and wiring, firmware, and application integration. Vendor HAL, CMSIS, sensor APIs, and lidar SDK sources are retained and documented in [Third-party sources and licensing](THIRD_PARTY_NOTICES.md).
+I selected the off-the-shelf chassis, development boards, and power/sensor modules, then independently completed the system design, power distribution, installation and wiring, firmware and application development, and whole-vehicle integration testing. The vendor HAL, CMSIS, sensor APIs, and lidar SDK used in the project are documented in [Third-party sources and licensing](THIRD_PARTY_NOTICES.md).
 
 ## Development: From Individual Components to a Complete Vehicle
 
