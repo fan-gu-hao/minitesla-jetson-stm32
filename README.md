@@ -2,19 +2,15 @@
 
 **個人獨立製作專案｜硬體組裝與供電配線、多感測整合、模型訓練與部署、多行程並行處理，以及 5G 遠端操作。**
 
-## [▶ 點此觀看智慧車實機展示影片](https://youtu.be/pAVebk_odPo)
+[![智慧車整車封面：點擊觀看實機展示影片](docs/images/smart-car-cover.jpg)](https://youtu.be/pAVebk_odPo)
 
-[![智慧車實機展示影片：點擊封面前往 YouTube 播放](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
+## [▶ 點此觀看智慧車實機展示影片](https://youtu.be/pAVebk_odPo)
 
 [English](README.en.md) · [硬體與接線](docs/hardware.md) · [系統架構](docs/architecture.md) · [部署操作](docs/operation.md) · [原始建置紀錄](logs/README.md)
 
 **「智慧車」是我從零開始獨立製作的專案。從車體與電子元件選配、電源電路安排、模組安裝與實際接線，到 Jetson 環境建置、模型訓練與部署、STM32 韌體、電腦操作介面及 5G 遠端連線，皆由我完成，並整合影像辨識、雷達與四向測距，逐步完成整車測試與部署。**
 
 這個專案的工作橫跨硬體、Linux 車載運算、微控制器韌體與電腦操作介面：Jetson Orin Nano 執行視覺推論、網路傳輸及上層決策；STM32F412 執行 PWM、UART 封包解析與獨立距離保護。開發從各裝置的單項驗證逐步推進到整車整合，儲存庫同時保留早期程式、編譯紀錄與歷次修改說明，能追溯成品如何形成。
-
-![實車底盤、電池與多層車載電子平台](archive/photos/104652_0.jpg)
-
-*實機組裝照片：電池、車體底盤與以隔離柱固定的多層車載電子平台。[其他原始硬體照片](archive/photos/)*
 
 ## 獨立完成的整車工程
 
@@ -46,6 +42,10 @@
 | 8．收斂成整車操作與部署 | 整合人物警示、反應式避障巡邏、電腦操作台、開機服務與狀態紀錄工具 | [操作台](pc/pc_dashboard.py)、[自主控制](jetson/minitesla_sensors/autonomy.py)、[服務管理](jetson/minitesla_service.py)、[紀錄器](jetson/demo_recorder.py) |
 
 ## 硬體實作：電源電路安排、模組安裝與接線
+
+![實車底盤、電池與多層車載電子平台](archive/photos/104652_0.jpg)
+
+*實機組裝照片：電池、車體底盤與以隔離柱固定的多層車載電子平台。[其他原始硬體照片](archive/photos/)*
 
 ### 實車元件與配置
 
@@ -195,6 +195,10 @@ flowchart TD
 | 開機服務與紀錄匯出 | Linux 部署、自動啟動、程序管理與問題追查 |
 
 人物辨識提供警示，障礙處理由距離感測支援；目前沒有影像人物與雷達距離的物件級配對。巡邏依即時距離反應，不包含 SLAM 地圖導航。原始資料中的 TensorRT、量化或自訂 CUDA 等規劃不列為本專案完成成果。
+
+### 實機展示影片
+
+[![智慧車實機展示影片：點擊封面前往 YouTube 播放](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
 
 ## 如何檢查這些實作
 

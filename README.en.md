@@ -2,19 +2,15 @@
 
 **An independently built personal project — I completed hardware assembly and power wiring, multisensor integration, model training and deployment, parallel processing with multiple processes, and 5G remote operation.**
 
-## [▶ Watch the Smart Car Vehicle Demo](https://youtu.be/pAVebk_odPo)
+[![Smart Car cover photograph: click to watch the vehicle demo](docs/images/smart-car-cover.jpg)](https://youtu.be/pAVebk_odPo)
 
-[![Smart Car vehicle demo: click the thumbnail to watch on YouTube](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
+## [▶ Watch the Smart Car Vehicle Demo](https://youtu.be/pAVebk_odPo)
 
 [繁體中文](README.md) · [Hardware and wiring](docs/hardware.md) · [System architecture](docs/architecture.md) · [Deployment](docs/operation.md) · [Original build logs](logs/README.md)
 
 **Smart Car is a smart RC car project I built independently from the ground up. I selected the chassis and electronic components, planned the power circuits, mounted and wired the modules, set up the Jetson environment, trained and deployed the model, developed the STM32 firmware and desktop interface, and configured 5G remote access. I then integrated vision, lidar, and four-direction ranging and carried out vehicle testing and deployment.**
 
 The work spans hardware, Linux-based onboard computing, microcontroller firmware, and a desktop operator interface. The Jetson Orin Nano handles vision inference, network transport, and higher-level decisions; the STM32F412 handles PWM, UART frame parsing, and independent distance-based protection. Development progressed from individual device checks to complete vehicle integration. Early source code, build logs, and staged change notes are retained alongside the current implementation so readers can trace how the system took shape.
-
-![Vehicle chassis, battery, and stacked onboard electronics](archive/photos/104652_0.jpg)
-
-*The assembled vehicle: battery, chassis, and multiple electronics platforms mounted on standoffs. [More original hardware photographs](archive/photos/)*
 
 ## Complete Vehicle Engineering — Independently Completed
 
@@ -46,6 +42,10 @@ The stages below follow engineering dependencies. Early and current versions are
 | 8. Consolidate operation and deployment | Integrate person alerts, reactive obstacle-avoidance patrol, the desktop dashboard, startup services, and status-recording tools | [Dashboard](pc/pc_dashboard.py), [Reactive autonomy](jetson/minitesla_sensors/autonomy.py), [Service management](jetson/minitesla_service.py), [Recorder](jetson/demo_recorder.py) |
 
 ## Hardware Engineering: Power, Installation, and Wiring
+
+![Vehicle chassis, battery, and stacked onboard electronics](archive/photos/104652_0.jpg)
+
+*The assembled vehicle: battery, chassis, and multiple electronics platforms mounted on standoffs. [More original hardware photographs](archive/photos/)*
 
 ### Components and Their Integration
 
@@ -195,6 +195,10 @@ The desktop entry point, [`pc_dashboard.py`](pc/pc_dashboard.py), combines drivi
 | Startup services and recording export | Linux deployment, automatic startup, process management, and diagnostics |
 
 Person detection provides alerts, while distance sensors support obstacle handling. The current implementation does not associate individual image detections with lidar ranges. Patrol reacts to current ranges and does not include SLAM-based navigation. TensorRT, quantization, and custom CUDA work mentioned in historical planning material are not presented as completed project achievements.
+
+### Vehicle Demonstration Video
+
+[![Smart Car vehicle demo: click the thumbnail to watch on YouTube](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
 
 ## Inspecting the Implementation
 
