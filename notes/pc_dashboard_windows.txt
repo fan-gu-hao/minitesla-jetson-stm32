@@ -1,0 +1,3 @@
+cd C:\Users\BES\Desktop\MINITESLA
+
+python pc_dashboard.py

@@ -4,6 +4,12 @@
 
 Prepared on 2026-11-15, Taiwan time. This page distinguishes source checks performed during recovery/publication from historical test reports.
 
+## 2026-11-16 補傳檔案核對／Additional source comparison
+
+已逐一核對 18 份補傳檔案，詳見[逐檔結果與雜湊紀錄](file-reconciliation-20261116.md)。本次同步正式位置的 `sensor_config.json`，補入電腦端原始啟動筆記；名稱更新及固定車體參數保留。下方 2026-11-15 的初次發布紀錄保留為歷史說明。
+
+Compared 18 additionally supplied files with the current repository. The active sensor configuration now matches the supplied original; the missing Windows launch note was added. Display naming and the fixed-parameter parking interface are retained. See the linked file-by-file report.
+
 ## 來源／Sources
 
 - 原始 M4 完整工程、雷達 SDK、`best.pt` 與第一、二階段至第十階段的更新包。
