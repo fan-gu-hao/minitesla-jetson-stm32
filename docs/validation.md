@@ -4,6 +4,12 @@
 
 Prepared on 2026-11-15, Taiwan time. This page distinguishes source checks performed during recovery/publication from historical test reports.
 
+## 2026-11-16 最後版本壓縮檔核對／Final-archive reconciliation
+
+其後補傳的 `minitesla_sensors.zip` 與 `wheelcontrol(main).zip` 共 1,579 份檔案，依使用者指定作為最後版本。3 份內容差異按原檔還原，102 份 M4 檔案補回工程原位置；詳見[完整核對結果](source-audit-20261116.md)及[逐檔雜湊清單](source-audit-20261116.csv)。
+
+The two final local archives supersede earlier source organization for their respective directories: 1,579 files compared, three original payloads restored, and 102 M4 files restored to their original project paths. The earlier records below describe their respective publication stages.
+
 ## 2026-11-16 補傳檔案核對／Additional source comparison
 
 已逐一核對 18 份補傳檔案，詳見[逐檔結果與雜湊紀錄](file-reconciliation-20261116.md)。本次同步正式位置的 `sensor_config.json`，補入電腦端原始啟動筆記；名稱更新及固定車體參數保留。下方 2026-11-15 的初次發布紀錄保留為歷史說明。

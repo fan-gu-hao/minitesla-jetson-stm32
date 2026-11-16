@@ -1,5 +1,5 @@
 /*
- * 智慧車 M4 - 第 1、2 階段：四向測距與保護狀態回傳（2026-10-09）
+ * MiniTesla M4 - 第 1、2 階段：四向測距與保護狀態回傳（2026-10-09）
  *
  * 本次僅擴充遙測，沿用使用者確認的四向 ToF 控制基準。
  * 本次擴充已做主機端序列化／協定檢查；尚未執行原 Keil 專案建置及實車驗證。
@@ -852,7 +852,7 @@ static int mt_bus_read(uint8_t addr8, uint8_t reg,
 #undef LOG_FUNCTION_END_FMT
 
 /* ===== Embedded source: vl53l0x_platform.h ===== */
-/* Smart Car STM32F4 HAL platform for ST VL53L0X API.
+/* MiniTesla STM32F4 HAL platform for ST VL53L0X API.
  * Each sensor owns a VL53L0X_Dev_t; all calls run in foreground only.
  * Keep sensor I2C/API calls out of control and UART interrupt handlers.
  */

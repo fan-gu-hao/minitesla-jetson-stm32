@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp
+"wheelcontrol\startup_stm32f412zx.o"
+"wheelcontrol\main.o"
+"wheelcontrol\gpio.o"
+"wheelcontrol\tim.o"
+"wheelcontrol\stm32f4xx_it.o"
+"wheelcontrol\stm32f4xx_hal_msp.o"
+"wheelcontrol\spi.o"
+"wheelcontrol\stm32f4xx_hal_tim.o"
+"wheelcontrol\stm32f4xx_hal_tim_ex.o"
+"wheelcontrol\stm32f4xx_hal_rcc.o"
+"wheelcontrol\stm32f4xx_hal_rcc_ex.o"
+"wheelcontrol\stm32f4xx_hal_flash.o"
+"wheelcontrol\stm32f4xx_hal_flash_ex.o"
+"wheelcontrol\stm32f4xx_hal_flash_ramfunc.o"
+"wheelcontrol\stm32f4xx_hal_gpio.o"
+"wheelcontrol\stm32f4xx_hal_dma_ex.o"
+"wheelcontrol\stm32f4xx_hal_dma.o"
+"wheelcontrol\stm32f4xx_hal_pwr.o"
+"wheelcontrol\stm32f4xx_hal_pwr_ex.o"
+"wheelcontrol\stm32f4xx_hal_cortex.o"
+"wheelcontrol\stm32f4xx_hal.o"
+"wheelcontrol\stm32f4xx_hal_exti.o"
+"wheelcontrol\system_stm32f4xx.o"
+--strict --scatter "wheelcontrol\wheelcontrol.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "wheelcontrol.map" -o wheelcontrol\wheelcontrol.axf

@@ -71,6 +71,10 @@ The project defaults are desktop `120.126.10.41`, M4 `/dev/ttyTHS0` at 115200, a
 
 Open `firmware/stm32f4/MDK-ARM/wheelcontrol.uvprojx`. The current `main.c` embeds ToF drivers and protection; retain the existing interrupt source and HAL/CMSIS. Build with the established toolchain before flashing. Archived `.hex`/`.axf` files are not fresh builds of the current source.
 
+2026-11-16 已依最後版本壓縮檔還原完整工程目錄，包括獨立 ToF 來源及原建置產物。請沿用上述 `.uvprojx` 的來源清單；`main.c` 已內嵌相關實作，不需再把 `Core/Src/tof4.c`、`policy.c`、`vl53l0x_platform.c` 或 `Core/Vendor/VL53L0X/` 的來源重複加入編譯。現存 `.hex`／`.axf` 等是使用者提供的原檔，本次未重新建置。
+
+The final uploaded archive restores the complete project layout, including standalone ToF sources and saved build outputs. Keep the supplied `.uvprojx` source list: `main.c` already embeds the relevant implementations, so do not add the standalone copies again. Existing binaries are the supplied originals, not new builds from this reconciliation.
+
 ## 監看與紀錄／Monitoring and records
 
 ```bash
