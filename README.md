@@ -64,8 +64,6 @@
 
 ### 實際電源分路
 
-![控制板、D-SUN 電源小板與實際供電配線](archive/photos/104658.jpg)
-
 ```mermaid
 flowchart TD
     BAT["4S 主電池"] --> ESC["ESC"]

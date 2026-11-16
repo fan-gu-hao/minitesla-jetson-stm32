@@ -64,8 +64,6 @@ The stages below follow engineering dependencies. Early and current versions are
 
 ### Actual Power Distribution
 
-![Controller board, D-SUN power module, and actual power wiring](archive/photos/104658.jpg)
-
 ```mermaid
 flowchart TD
     BAT["4S main battery"] --> ESC["ESC"]
