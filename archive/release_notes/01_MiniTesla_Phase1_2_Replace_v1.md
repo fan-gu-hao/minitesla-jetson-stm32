@@ -34,7 +34,7 @@ python3 minitesla.py
 預設電腦位址沿用原 `minitesla(2).py` 的 `192.168.225.46`。若你原本使用 `minitesla(1).py` 的跨網路位址，使用**同一個程式**：
 
 ```bash
-python3 minitesla.py --pc-host 120.126.10.41
+python3 minitesla.py --pc-host 192.0.2.10
 ```
 
 也可將實際位址寫入 `sensor_config.json` 的 `network.pc_host`；命令列 `--pc-host` 可覆寫設定。沒有本地桌面時加 `--no-display`，模型在其他位置時加 `--model /實際路徑/best.pt`。

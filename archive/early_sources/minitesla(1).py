@@ -22,7 +22,7 @@ from datetime import datetime
 
 
 
-def start_jetson_udp_client_uart(pc_host: str = '120.126.10.41',
+def start_jetson_udp_client_uart(pc_host: str = '192.0.2.10',
                                  pc_port: int = 5000,
                                  serdev: str = '/dev/ttyTHS0',
                                  baud: int = 115200,
@@ -137,7 +137,7 @@ def lidar_forwarding_loop():
     LOCAL_PORT = 6000
 
 
-    REMOTE_IP = "120.126.10.41"
+    REMOTE_IP = "192.0.2.10"
     REMOTE_PORT = 6000 
 
 
@@ -283,7 +283,7 @@ def video_display(video_dispq):
 
 
 def video_send_tcp(video_sq):
-    ip='120.126.10.41'
+    ip='192.0.2.10'
     port=7000
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((ip, port))
@@ -306,7 +306,7 @@ def video_send_tcp(video_sq):
 if __name__ == "__main__":
     # 先啟動「UDP(PC)->UART(STM32)」背景執行緒
     stop_evt, motor_thread = start_jetson_udp_client_uart(
-        pc_host='120.126.10.41',  # ← PC 的 IP
+        pc_host='192.0.2.10',  # ← PC 的 IP
         pc_port=5000,
         serdev='/dev/ttyTHS0',
         baud=115200,

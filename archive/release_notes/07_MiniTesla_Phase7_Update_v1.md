@@ -27,7 +27,7 @@
 
 ```bash
 cd "$HOME/Desktop/jetson orin nano"
-python3 minitesla_service.py install --pc-host 120.126.10.41
+python3 minitesla_service.py install --pc-host 192.0.2.10
 ```
 
 請以平常操作 Jetson 的一般帳號執行，不要改成 `sudo python3`。工具會記住這個 `python3` 的完整路徑，並保留必要的 `PATH`、`LD_LIBRARY_PATH`、`PYTHONPATH`。只有寫入服務設定與操作服務時會呼叫 `sudo`，可能要求輸入 Jetson 密碼。
@@ -38,7 +38,7 @@ python3 minitesla_service.py install --pc-host 120.126.10.41
 
 | 項目 | 設定 |
 | --- | --- |
-| 電腦 IP | `120.126.10.41` |
+| 電腦 IP | `192.0.2.10` |
 | 車端設定檔 | 專案根目錄的 `sensor_config.json` |
 | M4 | 設定檔中的 `/dev/ttyTHS0`，115200 |
 | 雷達裝置 | `/dev/ttyUSB0`，460800 |
@@ -49,7 +49,7 @@ python3 minitesla_service.py install --pc-host 120.126.10.41
 若雷達裝置不同，只在安裝指令追加實際路徑：
 
 ```bash
-python3 minitesla_service.py install --pc-host 120.126.10.41 --lidar-device /dev/ttyUSB1
+python3 minitesla_service.py install --pc-host 192.0.2.10 --lidar-device /dev/ttyUSB1
 ```
 
 `--config` 與 `--lidar-binary` 也可指定其他位置。換 IP、Python 環境或專案位置後，先 `stop`，再從新位置／新環境執行 `install`，重新產生設定。若只要先看將產生的設定，可在安裝指令加上 `--dry-run`；這不會安裝、啟動或檢查硬體。

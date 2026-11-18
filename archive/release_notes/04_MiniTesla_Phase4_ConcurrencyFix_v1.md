@@ -66,13 +66,13 @@ cd "$HOME/Desktop/jetson orin nano/rplidar_sdk-master/output/Linux/Release"
 
 ```bash
 cd "$HOME/Desktop/jetson orin nano"
-python3 minitesla.py --pc-host 120.126.10.41
+python3 minitesla.py --pc-host 192.0.2.10
 ```
 
 沒有 Jetson 本地桌面時，改用：
 
 ```bash
-python3 minitesla.py --pc-host 120.126.10.41 --no-display
+python3 minitesla.py --pc-host 192.0.2.10 --no-display
 ```
 
 需要查看四向 ToF 與模式狀態時，可另外開第三個終端機：
@@ -84,7 +84,7 @@ python3 sensor_status.py
 
 `sensor_status.py` 只讀取快照，可與主程式同時使用。不要另外啟動 `jetson_motor_uart_verbose.py` 等會開啟 M4 串口的舊程式；舊 `lidar_receive.py`、`detect.py` 也不要與整合主程式一起執行。
 
-所有範例電腦端 IP 固定為 `120.126.10.41`，日後只要修改 `--pc-host` 的值。命令列參數會覆寫原設定檔中的目標 IP。
+所有範例電腦端 IP 固定為 `192.0.2.10`，日後只要修改 `--pc-host` 的值。命令列參數會覆寫原設定檔中的目標 IP。
 
 ## 四、接管與停止
 

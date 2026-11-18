@@ -190,7 +190,7 @@ jetson orin nano/rplidar_sdk-master/workspaces/vc14/simple_grabber/simple_grabbe
 jetson orin nano/rplidar_sdk-master/workspaces/vc14/ultra_simple/ultra_simple.vcxproj,rplidar_sdk-master.rar,rplidar_sdk-master/workspaces/vc14/ultra_simple/ultra_simple.vcxproj,9724,8c56f0cfef1799ac32eee8be02d56c265b846c1752e7cbba83855336a0ecd3cb,
 jetson orin nano/rplidar_sdk-master/workspaces/vc14/ultra_simple/ultra_simple.vcxproj.filters,rplidar_sdk-master.rar,rplidar_sdk-master/workspaces/vc14/ultra_simple/ultra_simple.vcxproj.filters,958,685cc2d7eea506054525a86d76647a1d8d9c4617b26a38265aa77fc4c00f950f,
 jetson orin nano/rplidar_sdk-master/執行指令,rplidar_sdk-master.rar,rplidar_sdk-master/執行指令,482,9882074f9b8e71c6ce26946833638156d1cf9bfe9ee88bb902ad0eabc9611cc2,
-jetson orin nano/sensor_config.json,MiniTesla_Phase1_2_Replace_v1.zip,MiniTesla_Phase1_2_Replace_v1/Jetson/sensor_config.json,969,b7b1cc155ec6c9716fa2c7a1900e7ccc7790c4e8b64988c5b430a64b37ed617f,network.pc_host: None -> 120.126.10.41 (previously chosen address)
+jetson orin nano/sensor_config.json,MiniTesla_Phase1_2_Replace_v1.zip,MiniTesla_Phase1_2_Replace_v1/Jetson/sensor_config.json,969,b7b1cc155ec6c9716fa2c7a1900e7ccc7790c4e8b64988c5b430a64b37ed617f,network.pc_host: None -> 192.0.2.10 (previously chosen address)
 jetson orin nano/sensor_status.py,MiniTesla_Phase10_Mission_Update_v1.zip,Jetson/sensor_status.py,22816,013c4592b6fbbcaacf16a752d90a71eb39e2597dbf51b7b1df7e527ec9ad6a5c,
 pc_control.py,MiniTesla_Phase10_Mission_Update_v1.zip,PC/pc_control.py,44207,17dcc3d9e2619ed35cf2206833bb9692911ef88c0ca677f434abb60208ed4dbf,
 pc_dashboard.py,MiniTesla_Phase10_Mission_Update_v1.zip,PC/pc_dashboard.py,24227,773ad1d9fd0c26bfa07e07eaf2d0881be4883144eccf560e8750579c9735225c,

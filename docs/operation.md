@@ -12,6 +12,20 @@
 
 This repository preserves source, the model, and records, not a full Jetson OS image or Python environment. Reuse the established environment. Historical notes document different attempts and are not one script to execute wholesale.
 
+## 公開版連線位址／Public example address
+
+公開程式與操作範例統一使用 `192.0.2.10`。它屬於 RFC 5737 的文件範例網段 `192.0.2.0/24`（TEST-NET-1），不是實際部署的接收端。執行下列命令前，請把 `--pc-host 192.0.2.10` 改成 Jetson 能連到的電腦接收端位址；這裡填的是接收端，不是車子的位址。
+
+Public source and commands use `192.0.2.10`, from the RFC 5737 documentation range `192.0.2.0/24` (TEST-NET-1). It is not a deployment endpoint. Before running these commands, replace it with the desktop receiver address reachable from the Jetson, not the vehicle address.
+
+手動啟動主程式時，可用 `--pc-host`、環境變數 `MINITESLA_PC_HOST` 或 `sensor_config.json` 的 `network.pc_host` 指定接收端。命令列優先於環境變數與設定檔。開機服務請用 `minitesla_service.py install --pc-host 實際接收端位址` 明確設定；服務已安裝後若要更改接收端，須重新執行安裝指令來更新服務中的啟動參數，單純重新啟動不會改寫該參數。
+
+For manual launches, set `--pc-host`, `MINITESLA_PC_HOST`, or `network.pc_host` in `sensor_config.json`; the command-line argument takes precedence over the environment and config file. For boot services, explicitly pass the receiver to `minitesla_service.py install --pc-host`. Re-run that installer to change an installed service's receiver address; restarting alone does not rewrite its stored launch arguments.
+
+`0.0.0.0` 是電腦程式的監聽位址；`127.0.0.1:6000` 是 Jetson 內部的雷達資料通道，兩者用途不同，不需隨遠端接收端位址一起更改。
+
+`0.0.0.0` is the desktop listen address; `127.0.0.1:6000` is the Jetson-local lidar channel. Neither should be replaced with the remote receiver address.
+
 ## 電腦端／Desktop
 
 在原 Python 環境執行：／In the existing Python environment:
@@ -42,7 +56,7 @@ After deployment, activate the existing Python environment and run as the normal
 ```bash
 cd "$HOME/Desktop/jetson orin nano"
 chmod +x rplidar_sdk-master/output/Linux/Release/ultra_simple
-python3 minitesla_service.py install --pc-host 120.126.10.41
+python3 minitesla_service.py install --pc-host 192.0.2.10
 python3 minitesla_service.py status
 ```
 
@@ -61,9 +75,9 @@ python3 minitesla_service.py logs
 
 These are individual management commands, not a required sequence. Services manage the vehicle application, lidar reader, and recorder. Avoid launching duplicate manual instances.
 
-既定電腦位址為 `120.126.10.41`，M4 為 `/dev/ttyTHS0`、115200，雷達為 `/dev/ttyUSB0`、460800。這些是專案預設值，可依部署環境修改；本儲存庫未新增網路穿透服務的帳號或登入憑證。
+公開範例電腦位址為 `192.0.2.10`，部署時必須替換。M4 預設為 `/dev/ttyTHS0`、115200，雷達預設為 `/dev/ttyUSB0`、460800，可依實際裝置修改；本儲存庫未新增網路穿透服務的帳號或登入憑證。
 
-The project defaults are desktop `120.126.10.41`, M4 `/dev/ttyTHS0` at 115200, and lidar `/dev/ttyUSB0` at 460800. Adjust them for deployment. No NAT-traversal service account or login credential is included.
+Replace the documentation-only desktop address `192.0.2.10` for deployment. Device defaults are M4 `/dev/ttyTHS0` at 115200 and lidar `/dev/ttyUSB0` at 460800. Adjust device paths as needed. No NAT-traversal service account or login credential is included.
 
 ## M4 工程／Firmware project
 

@@ -1,5 +1,9 @@
 # 版本與驗證範圍／Version and validation scope
 
+> 2026-11-18 公開位址整理：本儲存庫目前檔案中的實際接收端位址已改為文件範例 `192.0.2.10`，包括舊版程式、操作筆記及歷史文字紀錄。歷史雜湊與核對結果描述當時匯入版本；經此次位址替換的文字檔不再與原始上傳逐位元組相同。模型、M4 韌體及原建置產物未因此重新建置或修改。
+>
+> 2026-11-18 publication update: actual receiver addresses in the current repository files were replaced with the documentation placeholder `192.0.2.10`, including legacy source, command notes, and historical text records. Historical hashes and comparison results describe their original import stage; redacted text files are no longer byte-identical to the uploads. The model, M4 firmware, and saved build outputs were not rebuilt or modified by this address update.
+
 整理日期：2026-11-15（臺灣時間）。本頁只描述已完成的來源核對與檢查，不以舊文件中的測試數字取代本次結果。
 
 Prepared on 2026-11-15, Taiwan time. This page distinguishes source checks performed during recovery/publication from historical test reports.
@@ -46,7 +50,7 @@ Sources include the original complete M4 project, lidar SDK, trained model, stag
 
 - 整理成 `pc/`、`jetson/`、`firmware/stm32f4/`、`logs/`、`notes/` 與 `archive/`。
 - 採用既有固定參數版 `parking_setup.py`，修正舊版 `load_settings(path)` 與新版零參數介面的不相容。
-- `sensor_config.json` 電腦位址明列為先前約定的 `120.126.10.41`；上傳原版另存歷史資料。
+- `sensor_config.json` 電腦位址明列為先前約定的 `192.0.2.10`；上傳原版另存歷史資料。
 - 雷達執行檔補上執行權限；其內容未重新編譯或修改。
 - 新增中英文說明；停車相關僅列實驗性保留。
 

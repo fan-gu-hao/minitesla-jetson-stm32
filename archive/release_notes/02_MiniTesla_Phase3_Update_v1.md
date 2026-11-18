@@ -64,7 +64,7 @@ python3 minitesla.py
 主程式保留原 `sensor_config.json` 的 `network.pc_host`。若該值為 `null`，預設為 `192.168.225.46`。若你目前走原先的跨網路位址，改用下面這一條，不要同時啟動兩份主程式：
 
 ```bash
-python3 minitesla.py --pc-host 120.126.10.41
+python3 minitesla.py --pc-host 192.0.2.10
 ```
 
 位址以你目前已通的那一個為準。沒有 Jetson 本地桌面時加 `--no-display`；模型不在程式旁時加 `--model /實際路徑/best.pt`。不要另開舊 UART 橋接程式或 `lidar_receive.py`，避免占用相同裝置／連接埠。

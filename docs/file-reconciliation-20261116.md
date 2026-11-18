@@ -1,5 +1,9 @@
 # 智慧車：18 份補傳檔案核對紀錄
 
+> 2026-11-18 公開位址整理：本儲存庫目前檔案中的實際接收端位址已改為文件範例 `192.0.2.10`，包括舊版程式、操作筆記及歷史文字紀錄。歷史雜湊與核對結果描述當時匯入版本；經此次位址替換的文字檔不再與原始上傳逐位元組相同。模型、M4 韌體及原建置產物未因此重新建置或修改。
+>
+> 2026-11-18 publication update: actual receiver addresses in the current repository files were replaced with the documentation placeholder `192.0.2.10`, including legacy source, command notes, and historical text records. Historical hashes and comparison results describe their original import stage; redacted text files are no longer byte-identical to the uploads. The model, M4 firmware, and saved build outputs were not rebuilt or modified by this address update.
+
 核對日期：2026-11-16。核對對象為 `fan-gu-hao/smart-car`，儲存庫識別碼 `1458034118`，分支 `main`。
 
 本次以使用者補傳的 18 份原檔逐一核對，讀取的 GitHub 基準提交為 `a9fbdc789f81185735e2f76bf9f89be7f0c498e9`。檔名括號中的編號不能證明新舊，模型、文件及紀錄均以檔案內容雜湊確認。
@@ -8,7 +12,7 @@
 
 - **7 份**模型、文件、紀錄與其他程式，已在對應正式或文件目錄中逐位元組一致。
 - **7 份**Python 程式只有先前依使用者要求將「MiniTesla」改成「智慧車／Smart Car」的顯示文字差異。保留目前命名，控制流程、函式介面與通訊識別均不回退。
-- **1 份** `sensor_config.json` 同步為這次提供的原文，包含 `network.pc_host: null` 與原排版。未指定電腦位址時，主程式仍使用既定的 `120.126.10.41`；`--pc-host` 仍可指定其他位址。
+- **1 份** `sensor_config.json` 同步為這次提供的原文，包含 `network.pc_host: null` 與原排版。未指定電腦位址時，主程式仍使用既定的 `192.0.2.10`；`--pc-host` 仍可指定其他位址。
 - **2 份**停車原檔已完整保存在歷史目錄。它們屬於讀寫 JSON 的設定方式，與現行固定參數介面不同；本次保留已確認的車體參數與現行工具。
 - **1 份** `指令.txt` 先前未收錄，補入 `notes/pc_dashboard_windows.txt`，原文完整保留。
 
@@ -57,7 +61,7 @@ TypeError: load_settings() takes 0 positional arguments but 1 was given
 - 檢查 22 份現行 Python 程式的 Python 3.8 語法。
 - 對上述 7 份名稱差異程式比較抽象語法樹（AST），確認僅有 24 個顯示／說明字串不同，沒有敘述結構或控制邏輯差異。
 - 現行停車工具的唯讀 `status` 執行成功；補傳工具與現行設定介面的不相容已重現。
-- 隔離執行主程式的設定載入函式，確認同步後預設電腦位址為 `120.126.10.41`，命令列位址覆寫仍生效。
+- 隔離執行主程式的設定載入函式，確認同步後預設電腦位址為 `192.0.2.10`，命令列位址覆寫仍生效。
 - 未啟動車輛控制主程式、串列通訊、網路傳送或模型推論；上述結果為檔案及相依核對，並非新的實車測試。
 
 首頁、封面、展示影片、M4 韌體、雷達來源及其他 GitHub 專案不屬於本次修改範圍。既有 `source_manifest.csv` 是初次發布時的來源快照，本次補檔與處理結果記於此頁。

@@ -152,7 +152,7 @@ def spitransfer():
 
 def tcp_trans():
 	client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	client_socket.connect(("120.126.10.41", 5055))  # 請改成你的 server IP
+	client_socket.connect(("192.0.2.10", 5055))  # 請改成你的 server IP
 
 	# 接收 server 的首次訊息
 	msg = client_socket.recv(1024)

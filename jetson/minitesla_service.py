@@ -274,7 +274,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("install", "start", "stop", "restart", "status",
                                            "logs", "disable", "uninstall"))
-    parser.add_argument("--pc-host", default="120.126.10.41")
+    parser.add_argument("--pc-host", default="192.0.2.10",
+                        help="電腦接收端位址；192.0.2.10 僅為文件範例，部署時請指定實際位址")
     parser.add_argument("--config", default=str(ROOT / "sensor_config.json"))
     parser.add_argument("--lidar-device", default="/dev/ttyUSB0")
     parser.add_argument("--lidar-binary", default=str(ROOT / "rplidar_sdk-master" /

@@ -1,5 +1,9 @@
 # 歷史資料／Historical archive
 
+> 2026-11-18 公開位址整理：本儲存庫目前檔案中的實際接收端位址已改為文件範例 `192.0.2.10`，包括舊版程式、操作筆記及歷史文字紀錄。歷史雜湊與核對結果描述當時匯入版本；經此次位址替換的文字檔不再與原始上傳逐位元組相同。模型、M4 韌體及原建置產物未因此重新建置或修改。
+>
+> 2026-11-18 publication update: actual receiver addresses in the current repository files were replaced with the documentation placeholder `192.0.2.10`, including legacy source, command notes, and historical text records. Historical hashes and comparison results describe their original import stage; redacted text files are no longer byte-identical to the uploads. The model, M4 firmware, and saved build outputs were not rebuilt or modified by this address update.
+
 此處保存原始文件、照片、早期程式、舊建置產物與歷次交付說明，便於追溯專案形成過程。這些資料沒有全部改寫成最新版文件。
 
 This archive retains original documents, photos, early source, old build products, and staged release notes. It preserves project history rather than rewriting every historical document into the current presentation.

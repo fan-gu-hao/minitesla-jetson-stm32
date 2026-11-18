@@ -5,7 +5,7 @@ LOCAL_IP = "127.0.0.1"
 LOCAL_PORT = 6000
 
 # 遠端伺服器設定（目標）
-REMOTE_IP = "120.126.10.41"
+REMOTE_IP = "192.0.2.10"
 REMOTE_PORT = 6000  # 可根據伺服器設定修改
 
 # 建立 UDP socket（接收用）

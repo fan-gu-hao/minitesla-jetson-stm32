@@ -1,9 +1,12 @@
+# 下列 192.0.2.10 是文件範例，請改成實際電腦接收端位址。
+# 192.0.2.10 is a documentation placeholder; replace it with the desktop receiver address.
+
 cd "$HOME/Desktop/jetson orin nano/rplidar_sdk-master/output/Linux/Release"
 ./ultra_simple --channel --serial /dev/ttyUSB0 460800
 
 
 cd "$HOME/Desktop/jetson orin nano"
-python3 minitesla.py --pc-host 120.126.10.41
+python3 minitesla.py --pc-host 192.0.2.10
 
 
 
@@ -14,7 +17,7 @@ python3 sensor_status.py
 
 
 cd "$HOME/Desktop/jetson orin nano"
-python3 minitesla_service.py install --pc-host 120.126.10.41
+python3 minitesla_service.py install --pc-host 192.0.2.10
 python3 minitesla_service.py status
 
 

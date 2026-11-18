@@ -33,7 +33,7 @@ python pc_dashboard.py
 
 這四個電腦端檔案都有使用關係，請一起保留。早期的 `from_jetson_orin_nano` 接收程式已放在歷史資料中，不是目前統一操作介面的入口。
 
-既定電腦位址仍為 `120.126.10.41`，網路連線與穿透方式沿用原設定。這份復原包不包含你電腦上已安裝的 Python 環境；若只是專案資料夾遺失，直接使用原本環境即可。
+既定電腦位址仍為 `192.0.2.10`，網路連線與穿透方式沿用原設定。這份復原包不包含你電腦上已安裝的 Python 環境；若只是專案資料夾遺失，直接使用原本環境即可。
 
 ## 3. Jetson 是否需要重新放檔案
 
@@ -64,7 +64,7 @@ python3 minitesla_service.py status
 若服務尚未安裝，或專案位置／Python 環境已改變，改用：
 
 ```bash
-python3 minitesla_service.py install --pc-host 120.126.10.41
+python3 minitesla_service.py install --pc-host 192.0.2.10
 python3 minitesla_service.py status
 ```
 
@@ -107,7 +107,7 @@ wheelcontrol(main)/MDK-ARM/wheelcontrol.uvprojx
 - 找回 72 份原先保存的上傳資料與更新包，以原始 M4 工程、雷達套件、模型為基底，依序合併 12 份更新壓縮包。
 - 正式執行目錄保留最新版程式；不同內容的早期上傳程式與過時編譯產物移到歷史資料，不與現行程式混放。
 - 相同內容的重複上傳不重複收錄。兩份同內容技術文件保留 `技術文件(1).docx`；原始照片保留其上傳檔名。
-- 程式碼保持各自最後更新包的內容。唯一設定補入是 `sensor_config.json` 的 `network.pc_host`：從原包的 `null` 改為先前約定的 `120.126.10.41`，另有 JSON 排版整理。
+- 程式碼保持各自最後更新包的內容。唯一設定補入是 `sensor_config.json` 的 `network.pc_host`：從原包的 `null` 改為先前約定的 `192.0.2.10`，另有 JSON 排版整理。
 - 補回雷達 `ultra_simple` 執行權限。
 - 新增本說明、檔案來源清單及完整性校驗清單，方便之後追查。
 

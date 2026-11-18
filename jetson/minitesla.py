@@ -321,7 +321,8 @@ def parking_input(store, authority):
 def load_config(default_pc_host=None, argv=None):
     parser = argparse.ArgumentParser(description="智慧車感測整合與控制權管理")
     parser.add_argument("--config", default=str(ROOT / "sensor_config.json"))
-    parser.add_argument("--pc-host", default=os.environ.get("MINITESLA_PC_HOST"))
+    parser.add_argument("--pc-host", default=os.environ.get("MINITESLA_PC_HOST"),
+                        help="電腦接收端位址；192.0.2.10 僅為文件範例，部署時請指定實際位址")
     parser.add_argument("--uart", help="覆寫 UART 裝置路徑")
     parser.add_argument("--model", help="覆寫模型路徑")
     parser.add_argument("--camera-index", type=int)
@@ -331,7 +332,7 @@ def load_config(default_pc_host=None, argv=None):
     with config_path.open(encoding="utf-8") as stream:
         config = json.load(stream)
     network = config["network"]
-    network["pc_host"] = args.pc_host or network.get("pc_host") or default_pc_host or "120.126.10.41"
+    network["pc_host"] = args.pc_host or network.get("pc_host") or default_pc_host or "192.0.2.10"
     if args.uart:
         config["uart"]["device"] = args.uart
     if args.camera_index is not None:

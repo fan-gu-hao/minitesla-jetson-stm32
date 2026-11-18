@@ -6,7 +6,7 @@ from itertools import count
 from datetime import datetime
 import time
 
-PC_HOST, PC_PORT = '120.126.10.41', 5000   # ← PC 的位址與 Server 監聽的埠
+PC_HOST, PC_PORT = '192.0.2.10', 5000   # ← PC 的位址與 Server 監聽的埠
 SERDEV = '/dev/ttyTHS0'
 BAUD   = 115200
 LOG_EVERY = 1

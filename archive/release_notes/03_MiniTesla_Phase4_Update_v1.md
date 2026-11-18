@@ -10,7 +10,7 @@
 - 即使控制通訊仍正常，影像失聯也會停止。
 - 影像傳送會自動重連，電腦接收器也會重新等待連線；重連不會自動恢復油門。
 - 電腦控制視窗及 Jetson 狀態監看，新增影像是否就緒、影格年齡與失聯原因。
-- 電腦端目標 IP 統一使用 `120.126.10.41`。
+- 電腦端目標 IP 統一使用 `192.0.2.10`。
 
 本階段是手動遙控的失聯處理。巡邏、人物警示、自動避障決策與停車仍待後續加入；目前沒有失聯後自動巡邏或自主續駛。
 
@@ -65,7 +65,7 @@ cd "$HOME/Desktop/jetson orin nano/rplidar_sdk-master/output/Linux/Release"
 
 ```bash
 cd "$HOME/Desktop/jetson orin nano"
-python3 minitesla.py --pc-host 120.126.10.41
+python3 minitesla.py --pc-host 192.0.2.10
 ```
 
 第三個終端機為選用的狀態監看：
@@ -77,7 +77,7 @@ python3 sensor_status.py
 
 沒有 Jetson 本地桌面時，主程式指令加 `--no-display`。模型仍使用既有 `best.pt`。
 
-主程式內建預設目標 IP 已改為 `120.126.10.41`。保留的設定檔若原本有填其他 IP，仍會尊重該設定；上面統一使用 `--pc-host 120.126.10.41`，可直接覆寫設定檔。日後你只要改這個參數，或修改 `sensor_config.json` 的 `network.pc_host`。
+主程式內建預設目標 IP 已改為 `192.0.2.10`。保留的設定檔若原本有填其他 IP，仍會尊重該設定；上面統一使用 `--pc-host 192.0.2.10`，可直接覆寫設定檔。日後你只要改這個參數，或修改 `sensor_config.json` 的 `network.pc_host`。
 
 ## 四、正常操作與斷線恢復
 
