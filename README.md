@@ -2,13 +2,13 @@
 
 > **本專案由我一人在一年內，從零開始獨立完成。**
 >
-> 我先進行**整車硬體規劃與元件選型**，接著完成**電源分路、穩壓供電配置與實際配線**，最後進行 **STM32 控制韌體與 Jetson 車端軟體開發**，整合多感測器、人工智慧推論、遠端操作與整車控制。
+> 我先進行**整車硬體規劃與元件選型**，接著完成**電源分路、穩壓供電配置與實際配線**，最後進行 **STM32 控制韌體與 Jetson 車端軟體開發**；並自行**加入空車位影像重新訓練模型，產出 best.pt 後部署至 Jetson**，整合多感測器、人工智慧推論、遠端操作與整車控制。
 
 [![智慧車整車封面：點擊觀看實機展示影片](docs/images/smart-car-cover.jpg)](https://youtu.be/pAVebk_odPo)
 
 ## [▶ 點此觀看智慧車實機展示影片](https://youtu.be/pAVebk_odPo)
 
-[English](README.en.md) · [硬體與接線](docs/hardware.md) · [系統架構](docs/architecture.md) · [部署操作](docs/operation.md) · [原始建置紀錄](logs/README.md)
+[English](README.en.md) · [硬體與接線](docs/hardware.md) · [系統架構](docs/architecture.md) · [模型訓練](docs/model-training.md) · [部署操作](docs/operation.md) · [原始建置紀錄](logs/README.md)
 
 **「智慧車」是我從零開始獨立製作的專案。從車體與電子元件選配、電源電路安排、模組安裝與實際接線，到 Jetson 環境建置、模型訓練與部署、STM32 韌體、電腦操作介面及 5G 遠端連線，皆由我完成，並整合影像辨識、雷達與四向測距，逐步完成整車測試與部署。**
 
@@ -21,6 +21,7 @@
 | 硬體與供電整合 | 選配運算板、控制板、感測器與致動器；安排電池分接、穩壓供電、USB 周邊供電、BEC 舵機供電，以及板卡安裝與訊號接線 | 將車用動力、運算與控制負載接成可共同運作的整車系統 |
 | Jetson 平台建置 | 建立 Python／GPU 推論環境、處理 PyTorch／torchvision 相容性、自行編譯 torchvision 的 ARM 與 CUDA 擴充 | 讓相機影像與訓練模型能接上實際車端執行環境 |
 | STM32 即時控制 | 以 C 實作韌體，配置時脈、GPIO、硬體計時器與 PWM；實作 UART 解析、CRC8、四向 ToF 管理、保護狀態機與看門狗 | 將網路操作命令轉成實際油門／轉向訊號，保留獨立於 Jetson 的控制保護 |
+| 自訂資料與模型重新訓練 | 將空車位圖片加入訓練資料，重新訓練含自訂 `vacant` 類別的 YOLOv8 分割模型，產出並部署 `best.pt` | 保存 81 類模型權重，接入車端推論、分割顯示與遠端回傳；[訓練與部署步驟](docs/model-training.md) |
 | 感知與資料傳輸 | 整合 USB 相機、`best.pt` 分割模型、ByteTrack、RPLIDAR C1、四顆 VL53L0X；傳送影像、掃描、距離與狀態 | 操作者能同時看見車前影像、辨識結果與周邊距離 |
 | 網路與遠端操作 | 使用專用 5G 網路 SIM、車載 MiFi 與既有 NAT 穿透配置；分開處理影像、控制與雷達資料通道 | 把車端裝置接到遠端電腦操作台，處理配對、失聯與恢復接管 |
 | 多工與控制權整合 | 分離推論／傳輸程序、UART／雷達執行緒，加入佇列、鎖、排他開啟、資料時效與模式交接 | 避免影像運算阻塞控制，或多個工作同時爭用馬達串口 |
@@ -37,11 +38,12 @@
 | 1．車體與電子系統規劃 | 決定 Jetson／M4 分工，安裝電池、ESC、舵機、相機、雷達與板卡；安排各路供電、共地與訊號線 | [硬體照片](archive/photos/)、[供電及接線整理](docs/hardware.md) |
 | 2．Jetson 到貨後的環境建置 | 建立板端執行環境，檢查 GPU 套件與 Python 相容性，準備 CUDA 編譯環境並自行建置 torchvision | [編譯指令筆記](notes/compile_torchvision.txt)、[完整建置輸出](logs/torchvision_build.log) |
 | 3．先讓馬達與轉向受控 | 在 STM32 建立 PWM 輸出與 UART 命令通道，對接 Jetson 串口，確認中立值與控制範圍 | [早期 UART 橋接](archive/early_sources/jetson_motor_uart_verbose.py)、[早期 M4 程式](archive/early_sources/main(1).c)、[目前完整工程](firmware/stm32f4/) |
-| 4．逐項接通感知與遠端資料 | 分別處理影像推論、電腦鍵盤控制、UART 轉送及雷達接收，再整合資料流 | [早期獨立程式](archive/early_sources/)、[雷達 SDK](jetson/rplidar_sdk-master/) |
-| 5．把獨立程式整合成並行系統 | 將相機／推論、影像傳送與感測接收拆成適合的程序或執行緒，整合到車端主程式 | [早期整合版本](archive/early_sources/minitesla(2).py)、[目前車端主程式](jetson/minitesla.py) |
-| 6．加入四向測距與控制保護 | 增加四顆 ToF 的獨立 XSHUT、位址分配、有效性檢查與距離回傳，將油門保護放進 M4 | [四向測距整合紀錄](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md)、[M4 韌體](firmware/stm32f4/Core/Src/main.c) |
-| 7．處理整合後的失聯與競態 | 補上影像顯示確認、命令期限、控制權交接、單一 UART 寫入者及程序／串口排他 | [多工同步修正紀錄](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)、[控制管理](jetson/minitesla_sensors/control.py) |
-| 8．收斂成整車操作與部署 | 整合人物警示、反應式避障巡邏、電腦操作台、開機服務與狀態紀錄工具 | [操作台](pc/pc_dashboard.py)、[自主控制](jetson/minitesla_sensors/autonomy.py)、[服務管理](jetson/minitesla_service.py)、[紀錄器](jetson/demo_recorder.py) |
+| 4．加入空車位資料並重新訓練模型 | 納入空車位圖片，重新訓練自訂類別分割模型並產出 `best.pt`，準備車端部署 | [模型權重](jetson/best.pt)、[訓練步驟與模型類別](docs/model-training.md) |
+| 5．逐項接通感知與遠端資料 | 分別處理影像推論、電腦鍵盤控制、UART 轉送及雷達接收，再整合資料流 | [早期獨立程式](archive/early_sources/)、[雷達 SDK](jetson/rplidar_sdk-master/) |
+| 6．把獨立程式整合成並行系統 | 將相機／推論、影像傳送與感測接收拆成適合的程序或執行緒，整合到車端主程式 | [早期整合版本](archive/early_sources/minitesla(2).py)、[目前車端主程式](jetson/minitesla.py) |
+| 7．加入四向測距與控制保護 | 增加四顆 ToF 的獨立 XSHUT、位址分配、有效性檢查與距離回傳，將油門保護放進 M4 | [四向測距整合紀錄](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md)、[M4 韌體](firmware/stm32f4/Core/Src/main.c) |
+| 8．處理整合後的失聯與競態 | 補上影像顯示確認、命令期限、控制權交接、單一 UART 寫入者及程序／串口排他 | [多工同步修正紀錄](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)、[控制管理](jetson/minitesla_sensors/control.py) |
+| 9．收斂成整車操作與部署 | 整合人物警示、反應式避障巡邏、電腦操作台、開機服務與狀態紀錄工具 | [操作台](pc/pc_dashboard.py)、[自主控制](jetson/minitesla_sensors/autonomy.py)、[服務管理](jetson/minitesla_service.py)、[紀錄器](jetson/demo_recorder.py) |
 
 ## 硬體實作：電源電路安排、模組安裝與接線
 
@@ -95,6 +97,16 @@ flowchart TD
 | 前／後／左／右 I²C 位址 | `0x30`／`0x31`／`0x32`／`0x33` | 解決四顆同預設位址裝置共用匯流排的衝突 |
 
 接線對應可在 [`main.c`](firmware/stm32f4/Core/Src/main.c) 的 `pwm_init`、`uart_init` 與 ToF 初始化中核對。已保存的車體設定包括車長 **47.4 cm**、車寬 **32.8 cm**、軸距 **27.5 cm**；雷達原始 0° 朝前、橫向置中、角度順時針，見 [車體設定](jetson/minitesla_sensors/vehicle_config.py)。
+
+## 模型重新訓練：加入空車位影像並產出 best.pt
+
+我針對智慧車的空車位辨識需求，**將空車位圖片納入訓練資料，重新訓練 YOLOv8 實例分割模型，產出 `best.pt`，再部署至 Jetson Orin Nano**。這項工作包括自訂辨識類別的模型訓練，以及將訓練結果接入車端相機、推論、分割結果顯示與遠端回傳流程。
+
+目前保存的模型共有 **81 個類別**：類別表保留原有 80 個 COCO 類別名稱，新增空車位類別 **`vacant`（類別編號 80）**。模型內保存的訓練設定指向 `yolov8s-seg.pt` 與 `fanuse.yaml`；實際部署權重為 [`jetson/best.pt`](jetson/best.pt)。
+
+開發步驟為：**加入空車位訓練影像 → 重新訓練自訂類別模型 → 產出 best.pt → 部署到 Jetson → 接入影像辨識與顯示流程**。訓練與模型部署已完成；受後續開發時程限制，停車相關功能僅完成測試版，保留作為後續擴充。現有停車規劃主要使用雷達與 ToF，尚未將 `vacant` 視覺結果直接接入自動停車決策。
+
+詳見[模型訓練步驟與部署證據](docs/model-training.md)及[停車測試版範圍](docs/experimental.md)。
 
 ## Jetson：從套件環境到車載影像推論
 
@@ -216,4 +228,4 @@ flowchart TD
 
 ### 實驗性保留
 
-專案另保留車位搜尋、自動對位與倒車入庫的實驗性程式。相關功能仍待完善，僅作為後續擴充與研究參考，未納入本次主要展示成果。
+空車位圖片已納入模型重新訓練並產出 `best.pt`；受後續開發時程限制，車位搜尋、自動對位與倒車入庫僅完成測試版，保留為後續擴充，未納入主要展示成果。目前模型推論與停車規劃各自保留，視覺 `vacant` 結果尚未直接接入停車控制；詳見[實驗性擴充](docs/experimental.md)。

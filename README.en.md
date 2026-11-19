@@ -2,13 +2,13 @@
 
 > **I independently completed this project from the ground up within one year.**
 >
-> I began with **vehicle hardware planning and component selection**, followed by **power distribution, regulated supply configuration, and physical wiring**. I then developed the **STM32 control firmware and Jetson onboard software**, integrating multiple sensors, AI inference, remote operation, and vehicle control.
+> I began with **vehicle hardware planning and component selection**, followed by **power distribution, regulated supply configuration, and physical wiring**. I then developed the **STM32 control firmware and Jetson onboard software**. I also **retrained the model with added vacant-space images, produced best.pt, and deployed it on Jetson**, integrating multiple sensors, AI inference, remote operation, and vehicle control.
 
 [![Smart Car cover photograph: click to watch the vehicle demo](docs/images/smart-car-cover.jpg)](https://youtu.be/pAVebk_odPo)
 
 ## [▶ Watch the Smart Car Vehicle Demo](https://youtu.be/pAVebk_odPo)
 
-[繁體中文](README.md) · [Hardware and wiring](docs/hardware.md) · [System architecture](docs/architecture.md) · [Deployment](docs/operation.md) · [Original build logs](logs/README.md)
+[繁體中文](README.md) · [Hardware and wiring](docs/hardware.md) · [System architecture](docs/architecture.md) · [Model training](docs/model-training.md) · [Deployment](docs/operation.md) · [Original build logs](logs/README.md)
 
 **Smart Car is a smart RC car project I built independently from the ground up. I selected the chassis and electronic components, planned the power circuits, mounted and wired the modules, set up the Jetson environment, trained and deployed the model, developed the STM32 firmware and desktop interface, and configured 5G remote access. I then integrated vision, lidar, and four-direction ranging and carried out vehicle testing and deployment.**
 
@@ -21,6 +21,7 @@ The work spans hardware, Linux-based onboard computing, microcontroller firmware
 | Hardware and power integration | Selected computing and control boards, sensors, and actuators; arranged battery branches, regulated supplies, USB peripheral power, BEC-powered steering, board mounting, and signal wiring | Connected the propulsion, computing, and control loads into a working vehicle system |
 | Jetson platform setup | Established the Python/GPU inference environment, addressed PyTorch/torchvision compatibility, and built torchvision's ARM and CUDA extensions from source | Connected camera input and the trained model to the actual onboard runtime |
 | STM32 real-time control | Wrote firmware in C; configured clocks, GPIO, hardware timers, and PWM; implemented UART parsing, CRC8, four-ToF management, a protective state machine, and watchdog supervision | Converted network commands into throttle and steering signals while retaining protection independent of the Jetson |
+| Custom data and model retraining | Added vacant-space images to the training data, retrained a YOLOv8 segmentation model with the custom `vacant` class, and produced and deployed `best.pt` | Retained 81-class weights and integrated onboard inference, segmentation visualization, and remote video return; [Training and deployment steps](docs/model-training.md) |
 | Perception and data transport | Integrated a USB camera, the `best.pt` segmentation model, ByteTrack, RPLIDAR C1, and four VL53L0X sensors; transported images, scans, ranges, and status | Gave the operator a combined view of the camera image, recognition results, and surrounding distances |
 | Networking and remote operation | Used a dedicated 5G network SIM, an onboard MiFi, and the deployment's NAT-traversal configuration; separated video, control, and lidar channels | Connected the vehicle to a remote desktop console and handled pairing, disconnection, and control recovery |
 | Concurrency and control ownership | Separated inference/transmission processes and UART/lidar threads; added queues, locks, exclusive access, freshness checks, and mode handoffs | Prevented vision work from blocking control and multiple tasks from competing for the motor UART |
@@ -37,11 +38,12 @@ The stages below follow engineering dependencies. Early and current versions are
 | 1. Plan the vehicle electronics | Define the Jetson/M4 division of work; install the battery, ESC, servo, camera, lidar, and boards; arrange power branches, common ground, and signal connections | [Hardware photographs](archive/photos/), [Power and wiring notes](docs/hardware.md) |
 | 2. Bring up the Jetson environment | Establish the board's runtime environment, check GPU-package/Python compatibility, prepare CUDA build settings, and compile torchvision | [Build command notes](notes/compile_torchvision.txt), [Full build output](logs/torchvision_build.log) |
 | 3. Establish motor and steering control | Implement STM32 PWM outputs and a UART command channel, connect the Jetson serial port, and establish neutral values and command ranges | [Early UART bridge](archive/early_sources/jetson_motor_uart_verbose.py), [Early M4 source](archive/early_sources/main(1).c), [Current complete firmware project](firmware/stm32f4/) |
-| 4. Connect perception and remote data paths individually | Develop image inference, desktop keyboard control, UART forwarding, and lidar reception separately before integrating their data flows | [Early standalone programs](archive/early_sources/), [Lidar SDK](jetson/rplidar_sdk-master/) |
-| 5. Integrate the programs into a concurrent system | Assign camera/inference, video transport, and sensor reception to appropriate processes or threads within the vehicle application | [Early integrated version](archive/early_sources/minitesla(2).py), [Current vehicle application](jetson/minitesla.py) |
-| 6. Add four-direction ranging and protection | Add independent XSHUT control, address assignment, validity checks, and telemetry for four ToF sensors; place throttle protection on the M4 | [Four-ToF integration notes](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md), [M4 firmware](firmware/stm32f4/Core/Src/main.c) |
-| 7. Address disconnection and concurrency problems | Add displayed-frame acknowledgements, command deadlines, control handoffs, a single UART writer, and process/serial exclusivity | [Concurrency correction notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md), [Control authority](jetson/minitesla_sensors/control.py) |
-| 8. Consolidate operation and deployment | Integrate person alerts, reactive obstacle-avoidance patrol, the desktop dashboard, startup services, and status-recording tools | [Dashboard](pc/pc_dashboard.py), [Reactive autonomy](jetson/minitesla_sensors/autonomy.py), [Service management](jetson/minitesla_service.py), [Recorder](jetson/demo_recorder.py) |
+| 4. Add vacant-space data and retrain the model | Include vacant-space images, retrain the custom-class segmentation model, and produce `best.pt` for onboard deployment | [Model weights](jetson/best.pt), [Training steps and classes](docs/model-training.md) |
+| 5. Connect perception and remote data paths individually | Develop image inference, desktop keyboard control, UART forwarding, and lidar reception separately before integrating their data flows | [Early standalone programs](archive/early_sources/), [Lidar SDK](jetson/rplidar_sdk-master/) |
+| 6. Integrate the programs into a concurrent system | Assign camera/inference, video transport, and sensor reception to appropriate processes or threads within the vehicle application | [Early integrated version](archive/early_sources/minitesla(2).py), [Current vehicle application](jetson/minitesla.py) |
+| 7. Add four-direction ranging and protection | Add independent XSHUT control, address assignment, validity checks, and telemetry for four ToF sensors; place throttle protection on the M4 | [Four-ToF integration notes](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md), [M4 firmware](firmware/stm32f4/Core/Src/main.c) |
+| 8. Address disconnection and concurrency problems | Add displayed-frame acknowledgements, command deadlines, control handoffs, a single UART writer, and process/serial exclusivity | [Concurrency correction notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md), [Control authority](jetson/minitesla_sensors/control.py) |
+| 9. Consolidate operation and deployment | Integrate person alerts, reactive obstacle-avoidance patrol, the desktop dashboard, startup services, and status-recording tools | [Dashboard](pc/pc_dashboard.py), [Reactive autonomy](jetson/minitesla_sensors/autonomy.py), [Service management](jetson/minitesla_service.py), [Recorder](jetson/demo_recorder.py) |
 
 ## Hardware Engineering: Power, Installation, and Wiring
 
@@ -95,6 +97,16 @@ This diagram records the power topology confirmed for the vehicle. Output settin
 | Front / rear / left / right I²C addresses | `0x30` / `0x31` / `0x32` / `0x33` | Resolves the shared-default-address conflict on the common bus |
 
 The connections can be traced to `pwm_init`, `uart_init`, and the ToF initialization in [`main.c`](firmware/stm32f4/Core/Src/main.c). The retained vehicle configuration specifies a **47.4 cm length, 32.8 cm width, and 27.5 cm wheelbase**. The lidar's raw 0° faces forward, it is centered laterally, and its angle increases clockwise; see the [vehicle configuration](jetson/minitesla_sensors/vehicle_config.py).
+
+## Model Retraining: Vacant-Space Images to best.pt
+
+For the vehicle's vacant-parking-space recognition task, **I added vacant-space images to the training data, retrained a YOLOv8 instance-segmentation model, produced `best.pt`, and deployed it on the Jetson Orin Nano**. This work covers custom-class model training and integrating the resulting weights into camera inference, segmentation visualization, and remote video return.
+
+The retained model contains **81 classes**: its class map retains the original 80 COCO class names and adds **`vacant` (class ID 80)**. Its saved training configuration references `yolov8s-seg.pt` and `fanuse.yaml`; the deployed weights are [`jetson/best.pt`](jetson/best.pt).
+
+The development sequence was **include vacant-space training images → retrain the custom-class model → produce best.pt → deploy to Jetson → integrate inference and visualization**. Training and model deployment were completed. With limited time for further development, parking-related functions reached a prototype stage and remain extensions. The retained parking planner primarily uses lidar and ToF; it does not yet feed `vacant` vision results directly into automatic-parking decisions.
+
+See [training steps and deployment evidence](docs/model-training.md) and [parking prototype scope](docs/experimental.md).
 
 ## Jetson: From Package Setup to Onboard Vision
 
@@ -216,4 +228,4 @@ Publication checks covered Python syntax, relative project paths, documentation 
 
 ### Experimental Code Retained
 
-The project also retains experimental code for parking-space search, automatic alignment, and reverse parking. These functions still need refinement and are retained for future development and research; they are not part of the main demonstration claims.
+Vacant-space images were included in model retraining to produce `best.pt`. With limited time for further development, parking-space search, alignment, and reverse parking reached a prototype stage and remain extensions outside the main demonstration claims. Model inference and parking planning are retained separately; `vacant` vision results are not yet fed directly into parking control. See [Experimental extension](docs/experimental.md).

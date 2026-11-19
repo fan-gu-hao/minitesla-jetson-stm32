@@ -12,6 +12,12 @@
 
 This repository preserves source, the model, and records, not a full Jetson OS image or Python environment. Reuse the established environment. Historical notes document different attempts and are not one script to execute wholesale.
 
+## 模型準備／Model preparation
+
+本專案的 `jetson/best.pt` 是加入空車位圖片重新訓練後保存的模型，並包含自訂 `vacant` 類別。部署時保留它與 `sensor_config.json` 的相對位置即可，`camera.model` 預設為 `best.pt`；使用這份已訓練權重啟動車子，不需要再執行訓練。開發階段的資料加入、重新訓練與模型部署步驟見[模型訓練說明](model-training.md)。停車相關功能仍為測試版。
+
+The supplied `jetson/best.pt` was retained after retraining with added vacant-space images and includes the custom `vacant` class. Keep its location relative to `sensor_config.json`; `camera.model` defaults to `best.pt`. Running the vehicle with these trained weights does not require another training run. See [model training](model-training.md) for the development steps. Parking-related functions remain prototypes.
+
 ## 公開版連線位址／Public example address
 
 公開程式與操作範例統一使用 `192.0.2.10`。它屬於 RFC 5737 的文件範例網段 `192.0.2.0/24`（TEST-NET-1），不是實際部署的接收端。執行下列命令前，請把 `--pc-host 192.0.2.10` 改成 Jetson 能連到的電腦接收端位址；這裡填的是接收端，不是車子的位址。
