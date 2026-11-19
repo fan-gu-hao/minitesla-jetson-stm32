@@ -1,47 +1,143 @@
-# 硬體與接線／Hardware and wiring
+# 硬體、電源與接線／Hardware, power, and wiring
 
-本頁整理已確認的裝置與程式接線，原始照片保存在 [`archive/photos/`](../archive/photos/)。未確認的模組額定電流不由照片外觀或程式反推。
+智慧車的硬體整合包含元件選配、三路電源分接、穩壓模組、板卡固定、感測器安裝與訊號配線。主電池供應動力、Jetson 與 M4 三個支路；周邊使用所連接板卡或 ESC 的穩壓電源。
 
-This page records confirmed devices and code-level wiring. Original photos are retained in [`archive/photos/`](../archive/photos/). Unconfirmed module current ratings are not inferred from appearance or software.
+The vehicle uses three battery branches for propulsion, Jetson computing, and M4 control. Hardware integration covers component selection, power conversion, load allocation, mounting, sensor placement, and signal wiring.
 
-| 項目／Device | 角色／Role |
+## 電源分路與電壓／Power distribution and voltages
+
+主電池與控制支路：
+
+```mermaid
+flowchart TD
+    BAT["GNB 4S LiHV｜標稱 15.2 V"]
+    BAT -->|"4S 電池母線"| ESC["電子變速器 ESC"]
+    ESC -->|"三相換相輸出"| MOTOR["無刷馬達"]
+    ESC -->|"內建 BEC"| SERVO["Hyper GO 舵機｜銘牌 6.0 V"]
+    BAT --> REGJ["LTC3780 升降壓模組"]
+    REGJ -->|"19 V（設計值）"| J["Jetson Orin Nano"]
+    BAT --> REGM["D-SUN｜標示 5 V／3 A"]
+    REGM -->|"5 V，ST-LINK USB 入口"| M["STM32F412 控制板｜3.3 V 邏輯"]
+    M -->|"板端感測供電"| TOF["VL53L0X × 4｜晶片 2.6–3.5 V"]
+```
+
+Jetson 周邊支路：
+
+```mermaid
+flowchart TD
+    J["Jetson｜19 V 設計輸入"] -->|"板內轉換"| USB["USB 5 V｜每組雙層接頭 3 A"]
+    USB --> CAM["BL-1080p-S10 相機"]
+    USB --> AD["原廠雷達轉接板"]
+    AD -->|"5 V"| LIDAR["RPLIDAR C1｜運轉 230 mA／啟動 800 mA 典型"]
+    J -->|"風扇接頭 5 V"| FAN["Jetson 原廠散熱風扇"]
+```
+
+**19 V** 是原始專案文件的 Jetson 設計電源軌；**5 V／3 A** 是 D-SUN 包裝標示；**6.0 V** 是舵機銘牌值。電池的 **15.2 V** 是標稱電壓，**17.4 V** 是四顆電芯各 4.35 V 的充電上限合計。
+
+The Jetson's **19 V** is the original project design rail, **5 V / 3 A** comes from the D-SUN packaging, and **6.0 V** is the servo's label value. **15.2 V** is the battery's nominal voltage; **17.4 V** is the sum of four 4.35 V cell charge limits.
+
+## 元件電氣規格／Electrical specifications
+
+| 元件 | 供電與電壓 | 電流、容量或輸出規格 | 來源 |
+| --- | --- | --- | --- |
+| GNB／GAONENG 4S LiHV 電池 | 標稱 15.2 V；單節充電上限 4.35 V，四串合計 17.4 V | 6000 mAh、130C 銘牌標示；標稱能量 91.2 Wh（15.2 V × 6 Ah） | [電池照片](../archive/photos/104652_0.jpg)、[GNB 規格](#規格來源references) |
+| 藍色 LTC3780 升降壓模組 | 4S 電池輸入；Jetson 設計輸出 19 V | 實裝模組額定電流未登錄 | [模組照片](../archive/photos/104654_0.jpg)、原始專案設計文件 |
+| NVIDIA Jetson Orin Nano 開發套件 | 設計電源軌 19 V，經直流電源插座輸入；原廠載板規格 v1.2 的插座範圍為 9–20 V | 主機、USB 周邊及散熱風扇共用此支路；主機工作電流隨運算負載變化 | NVIDIA 載板規格 |
+| Jetson USB Type-A 電源 | 5 V，供應相機及雷達轉接板 | 每組雙層接頭共用 3 A 輸出限流 | NVIDIA 硬體配置指南 |
+| D-SUN 降壓模組 | 4S 電池輸入；包裝標示 MP1584EN、輸出 5 V | 包裝標示輸出 3 A；MP1584 晶片資料表輸入範圍 4.5–28 V | [包裝照片](../archive/photos/104661_0.jpg)、MPS MP1584 |
+| STM32F412ZGT6 控制板 | D-SUN 的 5 V 接到 ST-LINK USB 供電入口；板上 MCU／UART 邏輯 3.3 V | 板卡整體工作電流、入口限流值未登錄 | [實車入口照片](../archive/photos/104658.jpg)、[韌體工程](../firmware/stm32f4/) |
+| 電子變速器（ESC） | 直接接 4S 主電池母線 | 實裝型號與額定電流未登錄 | 原車電子組件與實車配線 |
+| 無刷馬達（BLDC） | ESC 三相換相輸出 | 實裝型號與額定電流未登錄；運轉由 ESC 控制 | 原車動力組件 |
+| ESC 內建穩壓輸出（BEC） | 供應轉向舵機；輸出設定未登錄 | 額定輸出電流未登錄 | 實車配線 |
+| Hyper GO 轉向舵機 | 銘牌 6.0 V；供電來自 ESC BEC | 銘牌扭矩 35 kg·cm、速度 0.13 秒／60°；工作／堵轉電流及完整允許電壓範圍未登錄 | [舵機照片](../archive/photos/104651_0.jpg) |
+| USB 相機 BL-1080p-S10 | Jetson USB 5 V | 此板號的工作／最大電流未登錄 | [相機板照片](../archive/photos/104650_0.jpg) |
+| 雷達原廠 USB 轉接板 | Jetson USB 5 V；向雷達輸出 5 V | 轉接板本體電流未單列 | [轉接板照片](../archive/photos/104653_0.jpg)、SLAMTEC 開發套件手冊 |
+| SLAMTEC RPLIDAR C1 | 5 V；允許範圍 4.8–5.2 V | 5 V、10 Hz 時：運轉典型 230 mA、最大 260 mA；啟動典型 800 mA | SLAMTEC C1 資料表，圖表 2-7 |
+| VL53L0X 感測器晶片 × 4 | 晶片供電 2.6–3.5 V；原廠電流測試條件為 2.8 V | 單顆量測典型 19 mA、峰值可達 40 mA；四顆算術合計典型 76 mA、峰值 160 mA | ST VL53L0X 資料表 |
+| VL53L0X 感測器載板 | 使用 M4 板端電源；載板型號、VIN 接腳電壓未登錄 | 載板穩壓器、指示燈等額外負載未單列 | 四向 ToF 整合配置 |
+| Jetson 原廠散熱器與風扇 | J13 風扇接頭 5 V；散熱器本體為被動元件 | 原裝風扇額定電流未登錄 | NVIDIA 載板規格，風扇接頭表 |
+| ESC／馬達原廠散熱組件 | 沿用原廠線組；風扇電壓未登錄 | 風扇型號與額定電流未登錄 | 原車散熱配置 |
+| 車載行動熱點（MiFi） | 電源來源、輸入電壓與機型未登錄 | 額定電流未登錄 | 5G 網路部署配置 |
+
+`未登錄` 表示本專案規格表尚無該項數值；各欄的「設計值」「銘牌」「典型」「最大」分別標示數值用途。
+
+### 各路負載歸屬
+
+- **動力支路：**主電池直接供應 ESC；ESC 向無刷馬達輸出三相驅動，內建 BEC 供應舵機。M4 的兩路 PWM 僅傳送控制訊號。
+- **Jetson 支路：**LTC3780 供應 Jetson，Jetson 再供應 USB 相機、雷達轉接板、C1 及板載風扇。USB 接頭的電流限制以每組雙層接頭合計計算。
+- **M4 支路：**電池分接至 D-SUN，再以 5 V 經 ST-LINK USB 入口供應控制板；四向 ToF 使用控制板電源。這一路不占 Jetson USB 供電預算。
+- **共地與訊號：**Jetson、M4、ESC 控制端與感測器共用訊號參考地。UART、PWM、I²C 與 XSHUT 分開接到對應訊號腳。
+
+### 電流規格在設計中的用途
+
+C1 的運轉典型功率約 **1.15 W**（5 V × 0.23 A），啟動典型功率約 **4 W**（5 V × 0.8 A）；USB 負載配置同時涵蓋啟動與穩態。這些值為原廠規格換算，不含 USB 轉接板。
+
+四顆 VL53L0X 的 **76 mA** 為單顆典型量測電流的算術合計；原廠條件為 2.8 V、23°C、33 ms 量測時間預算。**160 mA** 是四顆各 40 mA 的峰值相加，用於感測電源估算，不含載板其他負載。
+
+D-SUN 標示的 **3 A** 對應上游降壓模組輸出能力。控制板入口、板內穩壓器及周邊各有自己的電流限制，規格表分別列示。
+
+## M4 接線／M4 pin assignments
+
+| 介面／Interface | 接線／Connection | 電氣用途／Purpose |
+| --- | --- | --- |
+| M4 板卡供電／Board power | D-SUN 5 V → ST-LINK USB 供電入口 | 5 V 供電／power |
+| Jetson → M4 UART | Jetson TX → PA3／USART2 RX | 115200、8N1；3.3 V 邏輯／logic |
+| M4 → Jetson UART | PA2／USART2 TX → Jetson RX | 四向距離與控制狀態／ranging and status |
+| 舵機控制／Servo control | PA8／TIM1 CH1 → 舵機訊號線 | PWM；舵機電源接 BEC／servo power from BEC |
+| ESC 控制／ESC control | PA1／TIM2 CH2 → ESC 訊號線 | PWM |
+| ToF 時脈／SCL | PB8 | 開漏軟體 I²C／open-drain software I²C |
+| ToF 資料／SDA | PB9 | 開漏軟體 I²C／open-drain software I²C |
+| 前／後／左／右 XSHUT | PG10／PG11／PG12／PG13 | 個別啟用與位址配置／individual enable and addressing |
+| 共地／Common ground | Jetson、M4、ESC 控制端、感測器 GND | 訊號參考地／signal reference |
+
+ToF 使用一組共用 I²C 匯流排與四條獨立 XSHUT。上電初始化時先將感測器全部關閉，再逐顆啟用並分配位址。程式位於 [`main.c`](../firmware/stm32f4/Core/Src/main.c)。
+
+| 方向／Direction | 七位元位址／7-bit address | ST API 左移後表示／Shifted API address |
+| --- | --- | --- |
+| 預設／Default | `0x29` | `0x52` |
+| 前／Front | `0x30` | `0x60` |
+| 後／Rear | `0x31` | `0x62` |
+| 左／Left | `0x32` | `0x64` |
+| 右／Right | `0x33` | `0x66` |
+
+## 車體尺寸與感測座標／Geometry and sensor coordinates
+
+| 設定／Setting | 數值／Value |
 | --- | --- |
-| Jetson Orin Nano | 視覺推論、傳輸、感測整合與上層控制。Vision, networking, sensor integration, and high-level control. |
-| STM32F412ZGT6 | M4 即時控制、PWM、UART 與四向測距保護；型號由 `.ioc` 與 Keil 工程確認。MCU control and protection; part identified in project files. |
-| RPLIDAR C1 | 雷達掃描，經原轉接板連 Jetson USB。Lidar connected through the original USB adapter. |
-| VL53L0X × 4 | 前、後、左、右距離量測。Front, rear, left, and right ranging. |
-| USB 相機／USB camera | 車載影像擷取。Onboard image capture. |
-| 4S LiPo、ESC、無刷馬達、舵機 | 動力與轉向。Battery, propulsion, and steering. |
-| 車載 MiFi | 5G 行動網路分享。Onboard 5G connectivity. |
+| 車長／Length | 47.4 cm |
+| 車寬／Width | 32.8 cm |
+| 軸距／Wheelbase | 27.5 cm |
+| 車尾至後軸中心／Rear overhang | 14 cm |
+| 左／右轉彎半徑／Left and right turning radius | 各 48 cm／48 cm each |
+| 雷達縱向位置／Lidar longitudinal position | 從車尾向前 30 cm／30 cm forward of the tail |
+| 雷達橫向位置／Lidar lateral position | 車身中心線／centerline |
+| 雷達角度／Lidar angles | 原始 0° 朝車頭，遞增方向順時針／raw 0° forward, clockwise positive |
 
-## 確認的電源路徑／Confirmed power topology
+固定參數位於 [`vehicle_config.py`](../jetson/minitesla_sensors/vehicle_config.py)，程式啟動時直接載入。停車幾何與倒車入庫仍屬[測試版擴充](experimental.md)。
 
-- 4S 電池 → ESC → 無刷馬達。
-- ESC 內建穩壓輸出（BEC）→ 轉向舵機。
-- 電池分接 → 藍色 LTC3780 類模組 → Jetson。
-- Jetson USB → 相機與雷達轉接板。
-- 電池分接 → D-SUN 電源模組 → M4 板的 ST-LINK 供電輸入位置。
+## English: electrical integration
 
-The battery feeds the ESC/motor, an LTC3780-type module for Jetson, and a D-SUN module for the M4 board. The servo uses the ESC BEC; the camera and lidar adapter use Jetson USB. The M4 supply enters through the board's ST-LINK power-input location. This records the project wiring, not a universal connector-voltage specification.
+The GNB battery is a **6000 mAh, 130C, 4S LiHV pack rated at 15.2 V nominal**. Its label specifies 4.35 V per cell at the charge limit. The ESC connects directly to this battery bus and supplies commutated three-phase power to the motor. Its BEC powers the Hyper GO servo, whose label states **6.0 V, 35 kg·cm, and 0.13 s / 60°**.
 
-## M4 程式接線／Firmware pin assignment
+The Jetson branch uses the **19 V design rail** documented in the original project plan. The reference carrier-board specification v1.2 lists a 9–20 V DC-jack input range. The Jetson provides **5 V** to its USB peripherals and original fan. Each dual-stacked USB Type-A connector has a shared **3 A** VBUS limit.
 
-| 介面／Interface | 接線／Assignment |
-| --- | --- |
-| Jetson → M4 UART | Jetson TX → M4 PA3；M4 PA2 → Jetson RX；共地，板端 3.3 V 邏輯。Common ground and 3.3 V UART logic. |
-| 舵機 PWM／Servo PWM | PA8 |
-| ESC PWM | PA1 |
-| ToF 時脈／SCL | PB8 |
-| ToF 資料／SDA | PB9 |
-| 前／後／左／右 XSHUT | PG10／PG11／PG12／PG13 |
-| 前／後／左／右 7 位元 I²C 位址 | `0x30`／`0x31`／`0x32`／`0x33` |
+The original USB adapter supplies the C1 lidar at **5 V**. C1 permits **4.8–5.2 V** and specifies **230 mA typical / 260 mA maximum running current at 5 V and 10 Hz**, with **800 mA typical startup current**. Adapter overhead is separate.
 
-ToF 使用開漏軟體 I²C 與分別控制的 XSHUT；既有驅動內嵌於 `main.c`。UART、PWM、感測器與電源輸入是不同用途的介面，部署時須以實際板卡接頭定義對照。
+The independent M4 branch uses the **D-SUN converter marked MP1584EN, 5 V / 3 A**, connected to the controller's ST-LINK USB power input. MCU/UART logic is **3.3 V**. The four ToF sensors use the M4 board supply. The VL53L0X IC specification is **2.6–3.5 V**, with **19 mA typical ranging current per sensor and peaks up to 40 mA**. The 76 mA typical and 160 mA peak totals are arithmetic sums for four sensor ICs, excluding carrier overhead; current specifications use the manufacturer's 2.8 V, 23°C, 33 ms conditions.
 
-The ToF driver uses open-drain software I²C and separate XSHUT lines. It is embedded in `main.c`. UART logic, PWM signals, sensor supply, and board power input are distinct interfaces and must match the actual board connectors.
+The specification table distinguishes design values, labels, and manufacturer typical/maximum values. Items marked `未登錄` have no value recorded: the installed LTC3780 module current rating; ESC/motor identities and ratings; BEC output setting/current; servo operating/stall currents and full voltage range; camera current; lidar-adapter overhead; sensor-carrier VIN; original fan current ratings; and MiFi power details. The board's own power-path limits are separate from the upstream converter's 3 A label.
 
-## 已寫入的車體設定／Stored geometry
+The M4 generates control signals only; propulsion and servo power remain on the ESC branch. All control interfaces share ground. The connection and address tables above give the complete firmware pin mapping and distinguish seven-bit I²C addresses from the left-shifted form used by the ST API.
 
-車長 47.4 cm、車寬 32.8 cm、軸距 27.5 cm、後懸 14 cm、左右轉彎半徑各 48 cm；雷達從車尾向前 30 cm、橫向置中、原始 0° 朝前且角度順時針。設定來源為 [`vehicle_config.py`](../jetson/minitesla_sensors/vehicle_config.py)。
+## 規格來源／References
 
-Stored dimensions are 47.4 cm length, 32.8 cm width, 27.5 cm wheelbase, 14 cm rear overhang, and 48 cm left/right turning radii. The lidar is centered laterally, 30 cm forward of the rear, with raw 0° forward and clockwise angles. These are retained project settings, not measurements newly taken during publication.
+1. [GNB／GAONENG 4S LiHV 6000 mAh、15.2 V、130C 原廠規格](https://www.gaoneng.shop/products/gaoneng-gnb-lihv-4s-15.2v-6000mah-130c-lcg-cabled-hard-case-lipo-battery-xt90)。
+2. [NVIDIA Jetson Orin Nano 載板規格](https://developer.nvidia.com/downloads/assets/embedded/secure/jetson/orin_nano/docs/jetson_orin_nano_devkit_carrier_board_specification_sp.pdf)：直流輸入、板端電源與 J13 風扇接頭。
+3. [NVIDIA 硬體配置指南](https://docs.nvidia.com/jetson/orin-nano-devkit/user-guide/hardware_layout.html)：USB Type-A 每組雙層接頭的 3 A 限流。
+4. [MPS MP1584 原廠資料](https://www.monolithicpower.com/en/mp1584.html)：晶片輸入範圍與輸出能力；實裝模組包裝見 [104661_0.jpg](../archive/photos/104661_0.jpg)。
+5. [SLAMTEC C1 資料表](https://bucket-download.slamtec.com/6801eb5f9d98927b8397ef40b64ce94049a32a49/SLAMTEC_rplidar_datasheet_C1_v1.0_en.pdf)：第 13 頁供電電壓與啟動／運轉電流。
+6. [SLAMTEC C1 開發套件手冊](https://bucket-download.slamtec.com/54b4c03d64a293b2721639f0cd21edee209b886b/SLAMTEC_rplidarkit_usermanual_C1_v1.0_en.pdf)：原廠 USB 轉接板與供電介面。
+7. [ST VL53L0X 資料表](https://www.st.com/resource/en/datasheet/vl53l0x.pdf)：供電範圍、量測電流與測試條件。
+8. [Analog Devices LTC3780 原廠資料](https://www.analog.com/en/products/ltc3780.html)：升降壓控制器架構與運作原理。
+9. [原始硬體照片](../archive/photos/)與[原始設計文件](../archive/documents/)：電池、相機、舵機、D-SUN、電源模組與實車組裝紀錄。
+

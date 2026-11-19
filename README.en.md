@@ -10,9 +10,7 @@
 
 [繁體中文](README.md) · [Hardware and wiring](docs/hardware.md) · [System architecture](docs/architecture.md) · [Model training](docs/model-training.md) · [Deployment](docs/operation.md) · [Original build logs](logs/README.md)
 
-**Smart Car is a smart RC car project I built independently from the ground up. I selected the chassis and electronic components, planned the power circuits, mounted and wired the modules, set up the Jetson environment, trained and deployed the model, developed the STM32 firmware and desktop interface, and configured 5G remote access. I then integrated vision, lidar, and four-direction ranging and carried out vehicle testing and deployment.**
-
-The work spans hardware, Linux-based onboard computing, microcontroller firmware, and a desktop operator interface. The Jetson Orin Nano handles vision inference, network transport, and higher-level decisions; the STM32F412 handles PWM, UART frame parsing, and independent distance-based protection. Development progressed from individual device checks to complete vehicle integration. Early source code, build logs, and staged change notes are retained alongside the current implementation so readers can trace how the system took shape.
+The system combines hardware, Linux-based onboard computing, microcontroller firmware, and a desktop operator interface. The Jetson Orin Nano handles vision inference, network transport, and higher-level decisions; the STM32F412 handles PWM, UART frame parsing, and independent distance-based protection. Development progressed from individual device checks to complete vehicle integration. Early source code, build logs, and staged change notes are retained alongside the current implementation so readers can trace how the system took shape.
 
 ## Complete Vehicle Engineering — Independently Completed
 
@@ -27,13 +25,13 @@ The work spans hardware, Linux-based onboard computing, microcontroller firmware
 | Concurrency and control ownership | Separated inference/transmission processes and UART/lidar threads; added queues, locks, exclusive access, freshness checks, and mode handoffs | Prevented vision work from blocking control and multiple tasks from competing for the motor UART |
 | Deployment and operator tools | Consolidated the desktop dashboard, service installation and management, boot startup, status monitoring, and recording export | Turned separately launched development programs into a deployable, operable, and diagnosable system |
 
-I selected the off-the-shelf chassis, development boards, and power/sensor modules, then independently completed the system design, power distribution, installation and wiring, firmware and application development, and whole-vehicle integration testing. The vendor HAL, CMSIS, sensor APIs, and lidar SDK used in the project are documented in [Third-party sources and licensing](THIRD_PARTY_NOTICES.md).
+The hardware integrates an off-the-shelf chassis, development boards, and power/sensor modules. The vendor HAL, CMSIS, sensor APIs, and lidar SDK are documented in [Third-party sources and licensing](THIRD_PARTY_NOTICES.md).
 
 ## Development: From Individual Components to a Complete Vehicle
 
-The stages below follow engineering dependencies. Early and current versions are both preserved for comparison.
+Development began with hardware and power planning, followed by platform setup, control firmware, model training, and vehicle integration.
 
-| Stage | Work performed | Engineering outputs and evidence |
+| Stage | Work performed | Source code and technical documents |
 | --- | --- | --- |
 | 1. Plan the vehicle electronics | Define the Jetson/M4 division of work; install the battery, ESC, servo, camera, lidar, and boards; arrange power branches, common ground, and signal connections | [Hardware photographs](archive/photos/), [Power and wiring notes](docs/hardware.md) |
 | 2. Bring up the Jetson environment | Establish the board's runtime environment, check GPU-package/Python compatibility, prepare CUDA build settings, and compile torchvision | [Build command notes](notes/compile_torchvision.txt), [Full build output](logs/torchvision_build.log) |
@@ -51,38 +49,59 @@ The stages below follow engineering dependencies. Early and current versions are
 
 *The assembled vehicle: battery, chassis, and multiple electronics platforms mounted on standoffs. [More original hardware photographs](archive/photos/)*
 
-### Components and Their Integration
+### Components, Supply Voltages, and Loads
 
-| Component | Role and integration work |
-| --- | --- |
-| NVIDIA Jetson Orin Nano | Onboard Linux computing platform for the camera, lidar, inference, and network transport |
-| ST STM32F412ZGT6 / M4 controller board | Real-time vehicle control; the complete Keil project and `.ioc` configuration are retained in `firmware/stm32f4/` |
-| 4S battery | Main vehicle supply; the [original battery photograph](archive/photos/104652_0.jpg) shows GNB/GAONENG, 4S 15.2 V, and HV 4.35 V markings |
-| Blue LTC3780-type power module | Supplies the Jetson from a battery branch; the Jetson then supplies its USB peripherals |
-| D-SUN power module | Supplies the M4 from a separate battery branch, using the board's ST-LINK power-input location |
-| ESC, brushless motor, and steering servo | The ESC drives the motor and its built-in battery eliminator circuit (BEC) powers the servo; the M4 provides separate PWM control signals |
-| USB camera | Provides camera input to the Jetson; the [camera-board photograph](archive/photos/104650_0.jpg) shows the board marking `BL-1080P-S10` |
-| RPLIDAR C1 and its original adapter board | Connects lidar scans to the Jetson over USB and integrates with the SDK and forwarding application |
-| Four VL53L0X sensors | Mounted front, rear, left, and right; connected to the M4 through a shared I²C bus and four independent XSHUT lines |
-| Onboard MiFi and dedicated 5G network SIM | Provides the vehicle's mobile-network connection through the deployment's existing NAT-traversal arrangement |
+The main battery feeds **three branches: propulsion, Jetson computing, and M4 control**. I designed and wired the power distribution, converters, board supplies, and signal connections. The camera, lidar, and ranging sensors use their host boards' power, while the steering servo uses the ESC's built-in battery eliminator circuit (BEC).
+
+| Component | Supply source and voltage | Specification and integration |
+| --- | --- | --- |
+| GNB / GAONENG 4S LiHV battery | Main supply, **15.2 V nominal** | **6000 mAh, 130C**; label specifies a 4.35 V charging limit per cell, or 17.4 V for four cells |
+| Blue LTC3780 buck-boost module | 4S battery → **19 V design rail** | Supplies the Jetson and its onboard and USB loads |
+| NVIDIA Jetson Orin Nano Developer Kit | LTC3780 → **19 V DC input** (project design value) | Linux, vision inference, lidar integration, networking, and high-level control |
+| D-SUN buck converter | 4S battery → **5 V** | [Packaging marked MP1584EN, 5 V / 3 A](archive/photos/104661_0.jpg); separate M4 branch |
+| ST STM32F412ZGT6 / M4 board | D-SUN → ST-LINK USB power input at **5 V**; MCU / UART logic at **3.3 V** | Real-time PWM, UART, four-direction ranging, and independent control protection |
+| Electronic speed controller (ESC) | **Direct 4S battery bus**, varying with battery voltage | Drives the brushless motor; built-in BEC supplies the servo |
+| Brushless motor (BLDC) | **Three-phase commutated output** from the ESC | M4 PWM commands the ESC; the motor receives switched phase waveforms |
+| Hyper GO steering servo | ESC BEC; **6.0 V on the servo label** | [Label: 35 kg·cm, 0.13 s / 60°](archive/photos/104651_0.jpg); separate M4 control signal |
+| USB camera, board marked BL-1080p-S10 | Jetson USB **5 V** | Captures images for `best.pt` inference |
+| Original lidar USB adapter | Jetson USB **5 V** | USB power, UART conversion, and power delivery to the lidar |
+| SLAMTEC RPLIDAR C1 | Adapter **5 V**; operating range **4.8–5.2 V** | At 5 V / 10 Hz: **230 mA typical**, **260 mA maximum**; **800 mA typical startup** |
+| Four ST VL53L0X sensors | M4 board supply; **sensor IC range 2.6–3.5 V** | Front/rear/left/right; **19 mA typical** per sensor during ranging, peaks up to **40 mA**; carrier-input details in the [hardware document](docs/hardware.md) |
+| Original Jetson heatsink and fan | Carrier-board fan header, **5 V** | Original heatsink and active cooling powered by the board |
+| Original ESC / motor cooling assemblies | Original vehicle cooling harness; fan voltage not recorded | Retains the original cooling arrangement |
+| Onboard MiFi and dedicated 5G SIM | MiFi power specification not recorded | Mobile connectivity through the existing NAT-traversal deployment |
 
 ### Actual Power Distribution
 
+Main battery and controller branches:
+
 ```mermaid
 flowchart TD
-    BAT["4S main battery"] --> ESC["ESC"]
-    ESC --> MOTOR["Brushless motor"]
-    ESC -->|"Built-in BEC"| SERVO["Steering servo"]
-    BAT --> REGJ["LTC3780-type module"]
-    REGJ --> J["Jetson Orin Nano"]
-    J -->|"USB power"| USB["Camera and lidar adapter"]
-    BAT --> REGM["D-SUN module"]
-    REGM -->|"ST-LINK power-input location"| M["M4 controller board"]
+    BAT["GNB 4S LiHV | 15.2 V nominal"]
+    BAT -->|"4S battery bus"| ESC["ESC"]
+    ESC -->|"Three-phase commutation"| MOTOR["Brushless motor"]
+    ESC -->|"Built-in BEC"| SERVO["Hyper GO servo | Label: 6.0 V"]
+    BAT --> REGJ["LTC3780 buck-boost module"]
+    REGJ -->|"19 V design value"| J["Jetson Orin Nano"]
+    BAT --> REGM["D-SUN | Label: 5 V / 3 A"]
+    REGM -->|"5 V through ST-LINK USB input"| M["STM32F412 board | 3.3 V logic"]
+    M -->|"Board sensor supply"| TOF["Four VL53L0X | IC: 2.6–3.5 V"]
 ```
 
-This work includes **assigning loads to power branches**. The Jetson branch must account for its USB camera and lidar adapter. The ESC's BEC supplies the steering servo. The battery supplies the M4 independently through the D-SUN module, keeping that load outside the Jetson's USB power budget. Peripherals that can use an existing board supply do so, rather than adding a separate converter for every device.
+Jetson peripheral branch:
 
-This diagram records the power topology confirmed for the vehicle. Output settings and current capability depend on the actual modules; they cannot be inferred solely from the LTC3780 chip name or a module's appearance. Likewise, 3.3 V signal logic is distinct from a board's power-input specification.
+```mermaid
+flowchart TD
+    J["Jetson | 19 V design input"] -->|"Onboard conversion"| USB["USB 5 V | 3 A per dual stack"]
+    USB --> CAM["BL-1080p-S10 camera"]
+    USB --> AD["Original lidar adapter"]
+    AD -->|"5 V"| LIDAR["RPLIDAR C1 | Typical: 230 mA running / 800 mA startup"]
+    J -->|"5 V fan header"| FAN["Original Jetson fan"]
+```
+
+**Load allocation:** The Jetson branch supplies the compute board, camera, lidar adapter, lidar, and original fan. The M4 and four ToF sensors use the independent control branch. Motor and servo loads remain on the ESC branch. The boards share ground; UART and PWM carry control signals.
+
+**Current ratings:** Each dual-stacked Jetson USB Type-A connector has a shared **3 A** VBUS limit. The lidar's **800 mA typical startup current** is accounted for separately from its **230 mA typical running current**. The D-SUN's **3 A** is its labeled output capability; the M4 board power path and downstream sensors have their own allocation. See the [complete electrical specifications, sources, and wiring](docs/hardware.md).
 
 ### Key Signal Connections
 
@@ -94,37 +113,38 @@ This diagram records the power topology confirmed for the vehicle. Output settin
 | ESC control | PA1 → TIM2 CH2 → ESC signal wire | Converts speed and neutral commands into pulse widths |
 | Shared four-ToF bus | PB8 = SCL, PB9 = SDA | Open-drain software I²C; sensor reads are managed by the M4 |
 | Front / rear / left / right XSHUT | PG10 / PG11 / PG12 / PG13 | Enables the sensors individually to assign distinct addresses |
-| Front / rear / left / right I²C addresses | `0x30` / `0x31` / `0x32` / `0x33` | Resolves the shared-default-address conflict on the common bus |
+| Front / rear / left / right 7-bit I²C addresses | `0x30` / `0x31` / `0x32` / `0x33` | Resolves the shared-default-address conflict on the common bus |
 
-The connections can be traced to `pwm_init`, `uart_init`, and the ToF initialization in [`main.c`](firmware/stm32f4/Core/Src/main.c). The retained vehicle configuration specifies a **47.4 cm length, 32.8 cm width, and 27.5 cm wheelbase**. The lidar's raw 0° faces forward, it is centered laterally, and its angle increases clockwise; see the [vehicle configuration](jetson/minitesla_sensors/vehicle_config.py).
+The connections can be traced to `pwm_init`, `uart_init`, and the ToF initialization in [`main.c`](firmware/stm32f4/Core/Src/main.c). The vehicle configuration specifies a **47.4 cm length, 32.8 cm width, and 27.5 cm wheelbase**. The lidar's raw 0° faces forward, it is centered laterally, and its angle increases clockwise; see the [vehicle configuration](jetson/minitesla_sensors/vehicle_config.py).
 
 ## Model Retraining: Vacant-Space Images to best.pt
 
 For the vehicle's vacant-parking-space recognition task, **I added vacant-space images to the training data, retrained a YOLOv8 instance-segmentation model, produced `best.pt`, and deployed it on the Jetson Orin Nano**. This work covers custom-class model training and integrating the resulting weights into camera inference, segmentation visualization, and remote video return.
 
-The retained model contains **81 classes**: its class map retains the original 80 COCO class names and adds **`vacant` (class ID 80)**. Its saved training configuration references `yolov8s-seg.pt` and `fanuse.yaml`; the deployed weights are [`jetson/best.pt`](jetson/best.pt).
+The vehicle uses an **81-class YOLOv8s instance-segmentation model**: its class map retains the original 80 COCO class names and adds **`vacant` (class ID 80)**. The deployed weights are [`jetson/best.pt`](jetson/best.pt).
 
 The development sequence was **include vacant-space training images → retrain the custom-class model → produce best.pt → deploy to Jetson → integrate inference and visualization**. Training and model deployment were completed. With limited time for further development, parking-related functions reached a prototype stage and remain extensions. The retained parking planner primarily uses lidar and ToF; it does not yet feed `vacant` vision results directly into automatic-parking decisions.
 
-See [training steps and deployment evidence](docs/model-training.md) and [parking prototype scope](docs/experimental.md).
+See [model training and deployment steps](docs/model-training.md) and the [parking prototype](docs/experimental.md).
 
 ## Jetson: From Package Setup to Onboard Vision
 
-The initial platform task was to bring Linux, Python, GPU packages, and physical devices into one usable runtime. Development included PyTorch/torchvision compatibility work, with commands and output retained for building torchvision from official source.
+I established the Jetson Linux, Python, and GPU inference environment, resolved PyTorch/torchvision compatibility issues, and compiled torchvision ARM and CUDA extensions from official source.
 
-- The command notes include CUDA paths, `TORCH_CUDA_ARCH_LIST="8.7"`, `MAX_JOBS=1`, and installation without an isolated build environment.
-- The actual build log records **Linux AArch64, Python 3.8, `nvcc`, and `compute_87` / `sm_87`**, followed by successful build and installation messages.
-- The retained successful build identifies **`torchvision 0.16.1+fdea156`**. A separate command note downloads `v0.15.1`; these are distinct historical records, as explained in the [build-log notes](logs/README.md).
+- Platform: **Linux AArch64 and Python 3.8**.
+- CUDA build: `nvcc` with `TORCH_CUDA_ARCH_LIST="8.7"`, targeting `compute_87` / `sm_87`.
+- Build configuration: `MAX_JOBS=1`, with installation into the existing Python environment.
+- Successfully built and installed version: **`torchvision 0.16.1+fdea156`**. Full commands and output are available in the [build logs](logs/README.md).
 
-I deployed the segmentation model I trained to the vehicle. The vision pipeline captures USB-camera images, loads the trained [`best.pt`](jetson/best.pt) checkpoint, runs Ultralytics segmentation and ByteTrack tracking, draws results with OpenCV, encodes JPEG images, and returns them to the desktop. The project's engineering work connects the trained model to a complete onboard perception and operator workflow. The current demonstration uses `.pt` inference; building torchvision from source is a separately evidenced platform-integration result.
+The onboard vision pipeline captures USB-camera images, directly loads the [trained `.pt` model weights](jetson/best.pt), runs Ultralytics segmentation and ByteTrack tracking, draws results with OpenCV, encodes JPEG frames, and returns them to the desktop operator console.
 
-**Trace the implementation:** [Vehicle vision pipeline](jetson/minitesla.py) · [Build commands](notes/compile_torchvision.txt) · [Full build log](logs/torchvision_build.log)
+**Implementation:** [Vehicle vision pipeline](jetson/minitesla.py) · [Build commands](notes/compile_torchvision.txt) · [Full build log](logs/torchvision_build.log)
 
-## STM32: Turning Commands into Motor Control
+## STM32: Real-Time Actuation and Four-Direction Ranging Protection
 
 ### Hardware PWM and Bidirectional UART
 
-The firmware directly configures TIM1 and TIM2 for two PWM outputs. With the current 16 MHz time base, prescaler `PSC=159`, and auto-reload register `ARR=1013`, the frequency is approximately **98.6 Hz**. Each count represents **10 μs**, so neutral command `152` corresponds to a **1.52 ms** pulse. These firmware timing settings explicitly connect higher-level speed/steering values to actuator signals.
+The firmware directly configures TIM1 and TIM2 for two PWM outputs. With the current 16 MHz time base, prescaler `PSC=159`, and auto-reload register `ARR=1013`, the frequency is approximately **98.6 Hz**. Each count represents **10 μs**, so neutral command `152` corresponds to a **1.52 ms** pulse. These timer settings convert higher-level speed and steering commands into actuator pulse widths.
 
 | Control item | Current firmware setting |
 | --- | --- |
@@ -137,7 +157,7 @@ The M4 also returns ranges, validity, and protection state. The Jetson therefore
 
 ### Four-Direction Ranging and Independent Protection
 
-All four VL53L0X sensors start with the same default address. The firmware controls their XSHUT lines, enables and readdresses each device, and then services them in turn. This requires GPIO sequencing, an I²C platform interface, vendor-API integration, error handling, and measurement timestamps—not just connecting four modules to the same wires.
+All four VL53L0X sensors start with the same default address. The firmware controls their XSHUT lines, enables and readdresses each device, and then services them in turn. The implementation covers GPIO sequencing, an I²C platform interface, vendor-API integration, error handling, and measurement timestamps.
 
 At startup, the firmware outputs neutral values to the ESC and servo before initializing the sensors. Protection is evaluated on a **1 ms TIM5 control time base**, independently of camera inference and network transport. The control interrupt performs no I²C reads, delays, or printing, and has a higher priority than the UART interrupt. The foreground loop reads sensors and prepares telemetry packets; USART2 interrupts handle command reception and byte transfers. The independent watchdog (IWDG) is refreshed only when both the foreground loop and the control time base continue to advance.
 
@@ -148,7 +168,7 @@ At startup, the firmware outputs neutral values to the ESC and servo before init
 | UART command older than 300 ms | Latch throttle at neutral |
 | Obstacle cleared | Require all four directions to remain at least 400 mm clear for at least 500 ms, then confirm a neutral command and wait for a subsequent new throttle command before movement resumes |
 
-A valid, fresh steering command may remain available while throttle is latched. **ESC neutral is not a verified active-braking command.** The 1 ms interval is a policy-check period, and the 300/400 mm values are configured thresholds; they are not measured whole-vehicle response times or stopping distances.
+**Protection latches throttle at the ESC neutral value** while allowing valid, fresh steering commands to remain available. The control policy is checked every 1 ms; the distance thresholds for triggering and clearing protection are 300 mm and 400 mm, respectively.
 
 ## 5G Remote Operation and Separate Data Channels
 
@@ -162,7 +182,7 @@ flowchart TD
     M -->|"PWM"| DRIVE["ESC and steering servo"]
 ```
 
-The 5G connection uses **a dedicated-network SIM in an onboard MiFi, which shares its connection with the vehicle**. Remote access follows the deployment's existing NAT-traversal arrangement. At the application level, the Jetson initiates `HELLO` messages so the desktop can establish the control peer. `HELLO` is a pairing mechanism; it does not, by itself, replace mobile-network traversal configuration.
+The 5G connection uses **a dedicated-network SIM in an onboard MiFi, which shares its connection with the vehicle**. NAT traversal provides connectivity across networks. At the application level, the Jetson initiates `HELLO` messages so the desktop operator console can establish and pair with the control peer.
 
 | Channel | Purpose and integration details |
 | --- | --- |
@@ -190,13 +210,13 @@ One integration issue addressed explicitly was a race in which **one task had al
 
 Process locking, pySerial exclusive opening, and Linux terminal-device exclusivity also prevent a second instance of the updated application from taking the serial port. Monitoring tools read snapshots without opening UART. These mechanisms address duplicate processes, device contention, shared state, and stale data separately. A frame already in transmission cannot be recalled, so independent M4 protection remains part of the design.
 
-**Source evidence:** [Process and serial exclusivity](jetson/minitesla_sensors/runtime.py) · [Control authority](jetson/minitesla_sensors/control.py) · [UART/lidar workers](jetson/minitesla_sensors/io.py) · [Original concurrency correction notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)
+**Implementation:** [Process and serial exclusivity](jetson/minitesla_sensors/runtime.py) · [Control authority](jetson/minitesla_sensors/control.py) · [UART/lidar workers](jetson/minitesla_sensors/io.py) · [Original concurrency correction notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)
 
 ## From Separate Launch Commands to Managed Deployment
 
 The desktop entry point, [`pc_dashboard.py`](pc/pc_dashboard.py), combines driving controls, annotated video, lidar, four-direction ranges, and status. On the vehicle, [`minitesla_service.py`](jetson/minitesla_service.py) manages installation, boot startup, stopping, restarting, and log inspection for the main application, lidar reader, and recorder.
 
-[`sensor_status.py`](jetson/sensor_status.py) reads sensor snapshots. [`demo_recorder.py`](jetson/demo_recorder.py) can export `samples.csv`, `events.csv`, `records.jsonl`, and a summary for investigating mode changes, ranges, and fault reasons. Preserved build logs and runtime status recordings serve different purposes.
+[`sensor_status.py`](jetson/sensor_status.py) reads sensor snapshots. [`demo_recorder.py`](jetson/demo_recorder.py) can export `samples.csv`, `events.csv`, `records.jsonl`, and a summary for investigating mode changes, ranges, and fault reasons.
 
 | Main demonstration scope | Engineering capability demonstrated |
 | --- | --- |
@@ -206,26 +226,24 @@ The desktop entry point, [`pc_dashboard.py`](pc/pc_dashboard.py), combines drivi
 | Stopping on communication loss and regaining control | Heartbeat supervision, video freshness, sensor validity, and two layers of control protection |
 | Startup services and recording export | Linux deployment, automatic startup, process management, and diagnostics |
 
-Person detection provides alerts, while distance sensors support obstacle handling. The current implementation does not associate individual image detections with lidar ranges. Patrol reacts to current ranges and does not include SLAM-based navigation. TensorRT, quantization, and custom CUDA work mentioned in historical planning material are not presented as completed project achievements.
+Person detection provides alerts, while lidar and four-direction ToF sensing provide distance information. Reactive patrol adjusts the driving direction using current ranges, with control-authority management and M4 protection supervising vehicle outputs.
 
 ### Vehicle Demonstration Video
 
 [![Smart Car vehicle demo: click the thumbnail to watch on YouTube](https://i.ytimg.com/vi/pAVebk_odPo/maxresdefault.jpg)](https://youtu.be/pAVebk_odPo)
 
-## Inspecting the Implementation
+## Source Code and Technical Documents
 
-| What to inspect | Entry point |
+| Content | Entry point |
 | --- | --- |
 | Complete vehicle execution flow | [`jetson/minitesla.py`](jetson/minitesla.py) and [`minitesla_sensors/`](jetson/minitesla_sensors/) |
 | MCU control and ranging | [`main.c`](firmware/stm32f4/Core/Src/main.c), [`wheelcontrol.uvprojx`](firmware/stm32f4/MDK-ARM/wheelcontrol.uvprojx) |
 | Desktop operation | [`pc/`](pc/) |
-| Original environment-build evidence | [`logs/`](logs/), [`notes/`](notes/) |
+| Environment build logs | [`logs/`](logs/), [`notes/`](notes/) |
 | Development history | [`archive/early_sources/`](archive/early_sources/), [`archive/release_notes/`](archive/release_notes/) |
 | Hardware and original documents | [`archive/photos/`](archive/photos/), [`archive/documents/`](archive/documents/) |
 | Deployment and validation scope | [Operation guide](docs/operation.md), [Validation notes](docs/validation.md) |
 
-Publication checks covered Python syntax, relative project paths, documentation links, and source-file contents. Historical M4 build logs remain development records rather than proof of a fresh build of the current firmware. Configured values are not presented as unprovided performance measurements. The complete source and records let readers follow the homepage's claims down to the implementation and original evidence.
+### Parking Prototype and Future Extension
 
-### Experimental Code Retained
-
-Vacant-space images were included in model retraining to produce `best.pt`. With limited time for further development, parking-space search, alignment, and reverse parking reached a prototype stage and remain extensions outside the main demonstration claims. Model inference and parking planning are retained separately; `vacant` vision results are not yet fed directly into parking control. See [Experimental extension](docs/experimental.md).
+Parking-space search, alignment, and reverse parking remain prototypes. Future development will connect the model’s `vacant` detections with parking planning; see [Experimental extension](docs/experimental.md).
