@@ -19,6 +19,7 @@ The system combines hardware, Linux-based onboard computing, microcontroller fir
 | Hardware and power integration | Selected computing and control boards, sensors, and actuators; arranged battery branches, regulated supplies, USB peripheral power, BEC-powered steering, board mounting, and signal wiring | Connected the propulsion, computing, and control loads into a working vehicle system |
 | Jetson platform setup | Established the Python/GPU inference environment, addressed PyTorch/torchvision compatibility, and built torchvision's ARM and CUDA extensions from source | Connected camera input and the trained model to the actual onboard runtime |
 | STM32 real-time control | Wrote firmware in C; configured clocks, GPIO, hardware timers, and PWM; implemented UART parsing, CRC8, four-ToF management, a protective state machine, and watchdog supervision | Converted network commands into throttle and steering signals while retaining protection independent of the Jetson |
+| Motor EMI and communication reliability | Addressed motor-generated electromagnetic interference under material and schedule constraints using UART with CRC-8, corrupted-frame rejection, resynchronization, and command-timeout protection | Integrated the Jetson–M4 control link and achieved normal vehicle operation |
 | Custom data and model retraining | Added vacant-space images to the training data, retrained a YOLOv8 segmentation model with the custom `vacant` class, and produced and deployed `best.pt` | Retained 81-class weights and integrated onboard inference, segmentation visualization, and remote video return; [Training and deployment steps](docs/model-training.md) |
 | Perception and data transport | Integrated a USB camera, the `best.pt` segmentation model, ByteTrack, RPLIDAR C1, and four VL53L0X sensors; transported images, scans, ranges, and status | Gave the operator a combined view of the camera image, recognition results, and surrounding distances |
 | Networking and remote operation | Used a dedicated 5G network SIM, an onboard MiFi, and the deployment's NAT-traversal configuration; separated video, control, and lidar channels | Connected the vehicle to a remote desktop console and handled pairing, disconnection, and control recovery |
@@ -40,7 +41,7 @@ Development began with hardware and power planning, followed by platform setup, 
 | 5. Connect perception and remote data paths individually | Develop image inference, desktop keyboard control, UART forwarding, and lidar reception separately before integrating their data flows | [Early standalone programs](archive/early_sources/), [Lidar SDK](jetson/rplidar_sdk-master/) |
 | 6. Integrate the programs into a concurrent system | Assign camera/inference, video transport, and sensor reception to appropriate processes or threads within the vehicle application | [Early integrated version](archive/early_sources/minitesla(2).py), [Current vehicle application](jetson/minitesla.py) |
 | 7. Add four-direction ranging and protection | Add independent XSHUT control, address assignment, validity checks, and telemetry for four ToF sensors; place throttle protection on the M4 | [Four-ToF integration notes](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md), [M4 firmware](firmware/stm32f4/Core/Src/main.c) |
-| 8. Address disconnection and concurrency problems | Add displayed-frame acknowledgements, command deadlines, control handoffs, a single UART writer, and process/serial exclusivity | [Concurrency correction notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md), [Control authority](jetson/minitesla_sensors/control.py) |
+| 8. Handle motor EMI, disconnection, and races | Address motor interference through UART/CRC-8, frame-error handling, and command-timeout protection; add display acknowledgements, control handoff, and a single UART writer | [Communication reliability](docs/architecture.md), [Concurrency fix notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md), [Control authority](jetson/minitesla_sensors/control.py) |
 | 9. Consolidate operation and deployment | Integrate person alerts, reactive obstacle-avoidance patrol, the desktop dashboard, startup services, and status-recording tools | [Dashboard](pc/pc_dashboard.py), [Reactive autonomy](jetson/minitesla_sensors/autonomy.py), [Service management](jetson/minitesla_service.py), [Recorder](jetson/demo_recorder.py) |
 
 ## Hardware Engineering: Power, Installation, and Wiring
@@ -154,6 +155,14 @@ The firmware directly configures TIM1 and TIM2 for two PWM outputs. With the cur
 | Command acceptance | Updates the command and reception timestamp only after a complete frame passes validation; malformed or incomplete data is not treated as a fresh control input |
 
 The M4 also returns ranges, validity, and protection state. The Jetson therefore supervises the controller as well as sending speed commands. Telemetry packets are 79 bytes long. Every 50 ms, the foreground loop attempts transmission through TXE interrupts; if transmission is still busy, it skips that update to avoid accumulating outdated status packets.
+
+### Motor EMI: Communication Design Under Material and Schedule Constraints
+
+During vehicle integration, **electromagnetic interference (EMI) from the running motor affected onboard communication**. With limited materials and development time remaining, I focused on protocol-level error detection and fault handling: **a Universal Asynchronous Receiver/Transmitter (UART) link between the Jetson and M4, with an 8-bit cyclic redundancy check (CRC-8)**.
+
+The receiver updates the control command only after a complete frame passes header and CRC checks. It rejects corrupted frames and searches for the next frame boundary. Rejected data does not refresh the accepted-command timestamp; if no CRC-validated command arrives for more than **300 ms**, the M4 latches the ESC at neutral throttle.
+
+**This approach enabled normal vehicle operation.** This development stage integrated UART communication, data validation, and timeout protection; further hardware EMI suppression remains a future revision. See the [system architecture](docs/architecture.md) for the frame format and error-handling flow.
 
 ### Four-Direction Ranging and Independent Protection
 

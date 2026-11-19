@@ -76,6 +76,16 @@ C1 的運轉典型功率約 **1.15 W**（5 V × 0.23 A），啟動典型功率�
 
 D-SUN 標示的 **3 A** 對應上游降壓模組輸出能力。控制板入口、板內穩壓器及周邊各有自己的電流限制，規格表分別列示。
 
+## 馬達電磁干擾與工程取捨／Motor EMI and engineering trade-off
+
+整車整合過程中，馬達運轉造成的電磁干擾（EMI）影響車端通訊。當時可用材料與剩餘開發時間有限，因此先以 UART 建立 Jetson 與 M4 的控制通道，搭配 CRC-8 校驗、錯誤封包捨棄、封包重新同步與命令逾時保護。
+
+這項處理已使實車能正常運行。現階段完成的是通訊資料驗證與故障處理；進一步的硬體干擾抑制留待後續改版。電源分路與共地接線如前述，通訊封包與錯誤處理詳見[系統架構](architecture.md)。
+
+Motor-generated EMI affected onboard communication during vehicle integration. With limited materials and development time remaining, I used UART for the Jetson–M4 control link, together with CRC-8, corrupted-frame rejection, frame resynchronization, and command-timeout protection.
+
+This approach enabled normal vehicle operation. The implemented response focuses on communication integrity and fault handling; further hardware EMI suppression remains a future revision. Power branches and common-ground wiring are described above; the [system architecture](architecture.md) documents the protocol and error handling.
+
 ## M4 接線／M4 pin assignments
 
 | 介面／Interface | 接線／Connection | 電氣用途／Purpose |
@@ -140,4 +150,3 @@ The M4 generates control signals only; propulsion and servo power remain on the 
 7. [ST VL53L0X 資料表](https://www.st.com/resource/en/datasheet/vl53l0x.pdf)：供電範圍、量測電流與測試條件。
 8. [Analog Devices LTC3780 原廠資料](https://www.analog.com/en/products/ltc3780.html)：升降壓控制器架構與運作原理。
 9. [原始硬體照片](../archive/photos/)與[原始設計文件](../archive/documents/)：電池、相機、舵機、D-SUN、電源模組與實車組裝紀錄。
-

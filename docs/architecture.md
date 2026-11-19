@@ -42,6 +42,28 @@ M4 遙測包含四向距離、量測狀態與年齡、保護原因、命令與�
 
 M4 telemetry reports ranges, validity/age, guard reasons, commands/outputs, and communication counters. The parser handles partial/concatenated frames and resynchronizes after corruption.
 
+### 馬達干擾下的 UART 通訊／UART communication under motor EMI
+
+實車整合時遇到馬達運轉造成的電磁干擾（EMI）。在材料與開發時程有限的條件下，我採用 UART 作為 Jetson 與 M4 的控制通道，並將 CRC-8 校驗、錯誤資料捨棄、串流重新同步與逾時保護整合進收發流程。這個方案已讓實車能正常運行，進一步硬體抑制留待後續改版。
+
+CRC-8 用於偵測傳輸資料錯誤；接收端的封包解析與 M4 保護策略共同決定哪些命令可以進入控制流程，以及通訊中斷後的輸出狀態。
+
+Motor-generated EMI was encountered during vehicle integration. Under material and schedule constraints, I used UART for the Jetson–M4 control channel and integrated CRC-8, corrupted-data rejection, stream resynchronization, and timeout protection. This enabled normal vehicle operation; further hardware suppression remains a future revision.
+
+CRC-8 detects transmission errors. The receiver's parser and the M4 protection policy determine which commands enter the control flow and the output state following loss of valid communication.
+
+| 層次／Layer | 實作行為／Implementation |
+| --- | --- |
+| 控制封包／Command frame | `55 AA 02 SEQ speed turn CRC8`，共 7 位元組／7 bytes |
+| CRC-8 | 初值 `0x00`、多項式 `0x07`，涵蓋前 6 位元組／initial value 0x00, polynomial 0x07, covers the first six bytes |
+| CRC 錯誤／CRC failure | 累計錯誤並以滑動視窗重新尋找封包；不更新控制命令或有效接收時間／count the error and resynchronize with a sliding window; leave the command and accepted-command timestamp unchanged |
+| 不完整封包／Partial frame | 位元組間隔超過 20 ms 時清除未完成封包／discard an incomplete frame after an inter-byte gap over 20 ms |
+| UART 硬體錯誤／UART hardware error | 檢查溢位、雜訊、框架與同位元錯誤旗標；記錄錯誤、清除解析狀態並捨棄該位元組／check overrun, noise, framing, and parity error flags; count the error, reset parsing, and discard the byte |
+| 命令逾時／Command timeout | 距最後接受命令超過 300 ms，鎖定 ESC 中立值 `152`／latch ESC neutral at 152 after more than 300 ms without an accepted command |
+| 遙測／Telemetry | 回報有效封包數、CRC 錯誤數及 UART 硬體錯誤數；遙測封包亦附 CRC-8／report accepted-frame, CRC-error, and UART-error counters; protect telemetry frames with CRC-8 |
+
+程式入口／Implementation: Jetson [`build_command()`](../jetson/minitesla_sensors/io.py) 與 M4 [`crc8()`、`parser_feed()`、`publish_command()`、`USART2_IRQHandler()`、`policy_step()`](../firmware/stm32f4/Core/Src/main.c)。
+
 ## 停止與恢復／Stopping and recovery
 
 M4 任一方向距離小於等於 300 mm、量測無效、量測資料超過 120 ms，或控制命令超過 300 ms，會鎖定中立輸出。解除需四向至少 400 mm 穩定 500 ms、收到中立，再有新油門命令。這些是程式設定，不是已量測的整車煞停距離或端到端最壞延遲。

@@ -19,6 +19,7 @@
 | 硬體與供電整合 | 選配運算板、控制板、感測器與致動器；安排電池分接、穩壓供電、USB 周邊供電、BEC 舵機供電，以及板卡安裝與訊號接線 | 將車用動力、運算與控制負載接成可共同運作的整車系統 |
 | Jetson 平台建置 | 建立 Python／GPU 推論環境、處理 PyTorch／torchvision 相容性、自行編譯 torchvision 的 ARM 與 CUDA 擴充 | 讓相機影像與訓練模型能接上實際車端執行環境 |
 | STM32 即時控制 | 以 C 實作韌體，配置時脈、GPIO、硬體計時器與 PWM；實作 UART 解析、CRC8、四向 ToF 管理、保護狀態機與看門狗 | 將網路操作命令轉成實際油門／轉向訊號，保留獨立於 Jetson 的控制保護 |
+| 馬達電磁干擾與通訊可靠度 | 面對馬達運轉造成的電磁干擾（EMI），在材料與開發時程限制下採用 UART 搭配 CRC-8，加入錯誤封包捨棄、重新同步與命令逾時保護 | 完成 Jetson 與 M4 控制通訊整合，使實車能正常運行 |
 | 自訂資料與模型重新訓練 | 將空車位圖片加入訓練資料，重新訓練含自訂 `vacant` 類別的 YOLOv8 分割模型，產出並部署 `best.pt` | 保存 81 類模型權重，接入車端推論、分割顯示與遠端回傳；[訓練與部署步驟](docs/model-training.md) |
 | 感知與資料傳輸 | 整合 USB 相機、`best.pt` 分割模型、ByteTrack、RPLIDAR C1、四顆 VL53L0X；傳送影像、掃描、距離與狀態 | 操作者能同時看見車前影像、辨識結果與周邊距離 |
 | 網路與遠端操作 | 使用專用 5G 網路 SIM、車載 MiFi 與既有 NAT 穿透配置；分開處理影像、控制與雷達資料通道 | 把車端裝置接到遠端電腦操作台，處理配對、失聯與恢復接管 |
@@ -40,7 +41,7 @@
 | 5．逐項接通感知與遠端資料 | 分別處理影像推論、電腦鍵盤控制、UART 轉送及雷達接收，再整合資料流 | [早期獨立程式](archive/early_sources/)、[雷達 SDK](jetson/rplidar_sdk-master/) |
 | 6．把獨立程式整合成並行系統 | 將相機／推論、影像傳送與感測接收拆成適合的程序或執行緒，整合到車端主程式 | [早期整合版本](archive/early_sources/minitesla(2).py)、[目前車端主程式](jetson/minitesla.py) |
 | 7．加入四向測距與控制保護 | 增加四顆 ToF 的獨立 XSHUT、位址分配、有效性檢查與距離回傳，將油門保護放進 M4 | [四向測距整合紀錄](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md)、[M4 韌體](firmware/stm32f4/Core/Src/main.c) |
-| 8．處理整合後的失聯與競態 | 補上影像顯示確認、命令期限、控制權交接、單一 UART 寫入者及程序／串口排他 | [多工同步修正紀錄](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)、[控制管理](jetson/minitesla_sensors/control.py) |
+| 8．處理馬達干擾、失聯與競態 | 以 UART／CRC-8、錯誤封包處理與命令逾時保護應對馬達干擾；補上影像顯示確認、控制權交接及單一 UART 寫入者 | [通訊可靠度設計](docs/architecture.md)、[多工同步修正紀錄](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)、[控制管理](jetson/minitesla_sensors/control.py) |
 | 9．收斂成整車操作與部署 | 整合人物警示、反應式避障巡邏、電腦操作台、開機服務與狀態紀錄工具 | [操作台](pc/pc_dashboard.py)、[自主控制](jetson/minitesla_sensors/autonomy.py)、[服務管理](jetson/minitesla_service.py)、[紀錄器](jetson/demo_recorder.py) |
 
 ## 硬體實作：電源電路安排、模組安裝與接線
@@ -154,6 +155,14 @@ flowchart TD
 | 命令接收 | 完整封包通過校驗後才更新命令與接收時間；錯誤／不完整資料不視為新控制輸入 |
 
 M4 同時回傳四向距離、有效性與保護狀態，Jetson 不只有「送速度」單向控制，也能監督控制端是否正常。遙測封包為 79 位元組，主迴圈每 50 ms 嘗試透過 TXE 中斷傳送；忙碌時跳過，避免排隊累積過時的狀態。
+
+### 馬達電磁干擾：材料與時程限制下的通訊處理
+
+整車整合時，**馬達運轉造成的電磁干擾（EMI）影響了車端通訊**。受限於當時可用材料與剩餘開發時間，我先以通訊協定的錯誤偵測與故障處理改善控制可靠度：**Jetson 與 M4 之間採用通用非同步收發介面（UART），搭配八位元循環冗餘校驗（CRC-8）**。
+
+接收端確認完整封包的標頭與 CRC 後才更新控制命令；校驗失敗時捨棄該封包並重新尋找封包起點。錯誤資料不會刷新有效命令的接收時間，超過 **300 ms** 未收到通過校驗的命令時，M4 會鎖定 ESC 中立油門。
+
+**這項方案已讓實車能正常運行。** 此階段完成 UART 通訊、資料校驗與逾時保護的整合，進一步的硬體電磁干擾抑制保留為後續改版工作。完整封包與錯誤處理流程見[系統架構](docs/architecture.md)。
 
 ### 四向測距與獨立保護
 
