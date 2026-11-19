@@ -1,6 +1,8 @@
 # Smart Car | Jetson Orin Nano × STM32 Embedded AI Patrol and Obstacle Avoidance System: Edge Inference, Heterogeneous Computing, and Real-Time Control
 
-**An independently built personal project — I completed hardware assembly and power wiring, multisensor integration, model training and deployment, parallel processing with multiple processes, and 5G remote operation.**
+> **I independently completed this project from the ground up within one year.**
+>
+> I began with **vehicle hardware planning and component selection**, followed by **power distribution, regulated supply configuration, and physical wiring**. I then developed the **STM32 control firmware and Jetson onboard software**, integrating multiple sensors, AI inference, remote operation, and vehicle control.
 
 [![Smart Car cover photograph: click to watch the vehicle demo](docs/images/smart-car-cover.jpg)](https://youtu.be/pAVebk_odPo)
 
