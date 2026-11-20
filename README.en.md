@@ -18,6 +18,7 @@ The system combines hardware, Linux-based onboard computing, microcontroller fir
 | --- | --- | --- |
 | Hardware and power integration | Selected computing and control boards, sensors, and actuators; arranged battery branches, regulated supplies, USB peripheral power, BEC-powered steering, board mounting, and signal wiring | Connected the propulsion, computing, and control loads into a working vehicle system |
 | Jetson platform setup | Established the Python/GPU inference environment, addressed PyTorch/torchvision compatibility, and built torchvision's ARM and CUDA extensions from source | Connected camera input and the trained model to the actual onboard runtime |
+| Lidar code modification and compilation | Modified the vendor C++ lidar application, added scan-data conversion and local UDP transmission, compiled an ARM64 executable for Jetson, and implemented reception and sensor integration in the Python application | Connected device acquisition, C++ builds, main-application reception, remote forwarding, and boot services |
 | STM32 real-time control | Wrote firmware in C; configured clocks, GPIO, hardware timers, and PWM; implemented UART parsing, CRC8, four-ToF management, a protective state machine, and watchdog supervision | Converted network commands into throttle and steering signals while retaining protection independent of the Jetson |
 | Motor EMI and communication reliability | Addressed motor-generated electromagnetic interference under material and schedule constraints using UART with CRC-8, corrupted-frame rejection, resynchronization, and command-timeout protection | Integrated the Jetson–M4 control link and achieved normal vehicle operation |
 | Custom data and model retraining | Added vacant-space images to the training data, retrained a YOLOv8 segmentation model with the custom `vacant` class, and produced and deployed `best.pt` | Retained 81-class weights and integrated onboard inference, segmentation visualization, and remote video return; [Training and deployment steps](docs/model-training.md) |
@@ -38,7 +39,7 @@ Development began with hardware and power planning, followed by platform setup, 
 | 2. Bring up the Jetson environment | Establish the board's runtime environment, check GPU-package/Python compatibility, prepare CUDA build settings, and compile torchvision | [Build command notes](notes/compile_torchvision.txt), [Full build output](logs/torchvision_build.log) |
 | 3. Establish motor and steering control | Implement STM32 PWM outputs and a UART command channel, connect the Jetson serial port, and establish neutral values and command ranges | [Early UART bridge](archive/early_sources/jetson_motor_uart_verbose.py), [Early M4 source](archive/early_sources/main(1).c), [Current complete firmware project](firmware/stm32f4/) |
 | 4. Add vacant-space data and retrain the model | Include vacant-space images, retrain the custom-class segmentation model, and produce `best.pt` for onboard deployment | [Model weights](jetson/best.pt), [Training steps and classes](docs/model-training.md) |
-| 5. Connect perception and remote data paths individually | Develop image inference, desktop keyboard control, UART forwarding, and lidar reception separately before integrating their data flows | [Early standalone programs](archive/early_sources/), [Lidar SDK](jetson/rplidar_sdk-master/) |
+| 5. Connect sensing and remote data | Modify the C++ lidar application, compile an ARM64 executable, and connect it to the Jetson application over local UDP; integrate vision, keyboard control, and return data | [C++ lidar modifications](jetson/rplidar_sdk-master/app/ultra_simple/main.cpp), [Python reception and forwarding](jetson/minitesla_sensors/io.py), [Build and deployment](docs/operation.md) |
 | 6. Integrate the programs into a concurrent system | Assign camera/inference, video transport, and sensor reception to appropriate processes or threads within the vehicle application | [Early integrated version](archive/early_sources/minitesla(2).py), [Current vehicle application](jetson/minitesla.py) |
 | 7. Add four-direction ranging and protection | Add independent XSHUT control, address assignment, validity checks, and telemetry for four ToF sensors; place throttle protection on the M4 | [Four-ToF integration notes](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md), [M4 firmware](firmware/stm32f4/Core/Src/main.c) |
 | 8. Handle motor EMI, disconnection, and races | Address motor interference through UART/CRC-8, frame-error handling, and command-timeout protection; add display acknowledgements, control handoff, and a single UART writer | [Communication reliability](docs/architecture.md), [Concurrency fix notes](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md), [Control authority](jetson/minitesla_sensors/control.py) |
@@ -69,8 +70,8 @@ The main battery feeds **three branches: propulsion, Jetson computing, and M4 co
 | SLAMTEC RPLIDAR C1 | Adapter **5 V**; operating range **4.8–5.2 V** | At 5 V / 10 Hz: **230 mA typical**, **260 mA maximum**; **800 mA typical startup** |
 | Four ST VL53L0X sensors | M4 board supply; **sensor IC range 2.6–3.5 V** | Front/rear/left/right; **19 mA typical** per sensor during ranging, peaks up to **40 mA**; carrier-input details in the [hardware document](docs/hardware.md) |
 | Original Jetson heatsink and fan | Carrier-board fan header, **5 V** | Original heatsink and active cooling powered by the board |
-| Original ESC / motor cooling assemblies | Original vehicle cooling harness; fan voltage not recorded | Retains the original cooling arrangement |
-| Onboard MiFi and dedicated 5G SIM | MiFi power specification not recorded | Mobile connectivity through the existing NAT-traversal deployment |
+| Original ESC / motor cooling assemblies | Original vehicle cooling harness; fan voltage: - | Retains the original cooling arrangement |
+| Onboard MiFi and dedicated 5G SIM | - | Mobile connectivity through the existing NAT-traversal deployment |
 
 ### Actual Power Distribution
 
@@ -141,6 +142,45 @@ The onboard vision pipeline captures USB-camera images, directly loads the [trai
 
 **Implementation:** [Vehicle vision pipeline](jetson/minitesla.py) · [Build commands](notes/compile_torchvision.txt) · [Full build log](logs/torchvision_build.log)
 
+## Lidar Code Modification and Compilation: Connecting Scans to the Jetson Application
+
+I modified the **C++ `ultra_simple` application** in the SLAMTEC lidar software development kit (SDK), adding angle, distance, and quality conversion together with local UDP transmission. I built the modified source using the Makefile and GNU C++ compiler (g++), producing an **ARM64/AArch64 executable** for Jetson, then integrated its data into the Python vehicle application.
+
+| Development stage | Work completed |
+| --- | --- |
+| Modify lidar acquisition | Integrated scan acquisition and sorting in `app/ultra_simple/main.cpp`, adding socket creation, data formatting, `sendto()`, and resource cleanup |
+| Convert scan data | Converted SDK nodes into angle in degrees, distance in millimeters, and quality, formatted as `angle,distance,quality`; sent one UDP datagram per scan point |
+| Compile the source | Ran `make` at the SDK root to produce `output/Linux/Release/ultra_simple`; the repository retains the AArch64 executable |
+| Connect to the Jetson application | `minitesla.py` starts the `LidarReceiver` thread, receives on `127.0.0.1:6000`, validates fields and values, and updates `SensorStore` with receive timestamps |
+| Integrate and forward data | Builds scan data and sector-distance summaries for unified snapshots and status monitoring, and forwards scan points to the desktop lidar view |
+| Deploy at boot | Runs the C++ acquisition application as a separate system service managed alongside the Python vehicle application |
+
+```mermaid
+flowchart TD
+    L["RPLIDAR C1 / original USB adapter"] -->|"/dev/ttyUSB0 at 460800"| C["Modified and compiled C++ ultra_simple"]
+    C -->|"Local UDP 127.0.0.1:6000"| R["Jetson application: LidarReceiver"]
+    R -->|"Parse scan data and record receive time"| S["SensorStore integration"]
+    S --> V["Unified snapshots and status monitoring"]
+    R -->|"Remote UDP forwarding"| PC["Desktop lidar view"]
+```
+
+Key scan-conversion and transmission code:
+
+```cpp
+float angle = (nodes[pos].angle_z_q14 * 90.f) / 16384.f;
+float distance = nodes[pos].dist_mm_q2 / 4.0f;
+int quality = nodes[pos].quality >> SL_LIDAR_RESP_MEASUREMENT_QUALITY_SHIFT;
+
+char msg[64];
+snprintf(msg, sizeof(msg), "%.2f,%.2f,%d", angle, distance, quality);
+sendto(udp_socket, msg, strlen(msg), 0,
+       (sockaddr*)&udp_target, sizeof(udp_target));
+```
+
+The lidar connects to the C++ acquisition application through USB/serial. The C++ application then communicates with the Python application over local UDP. Local sensor updates and remote forwarding are handled separately, so a forwarding failure does not stop local reception.
+
+**Implementation:** [C++ lidar application](jetson/rplidar_sdk-master/app/ultra_simple/main.cpp) · [Build configuration](jetson/rplidar_sdk-master/Makefile) · [Python receiver and forwarding](jetson/minitesla_sensors/io.py) · [Sensor integration](jetson/minitesla_sensors/core.py) · [Build and deployment](docs/operation.md)
+
 ## STM32: Real-Time Actuation and Four-Direction Ranging Protection
 
 ### Hardware PWM and Bidirectional UART
@@ -200,7 +240,7 @@ The 5G connection uses **a dedicated-network SIM in an onboard MiFi, which share
 | UDP 6000: lidar | Connects the vendor SDK, onboard receiver, and desktop lidar view; lidar serial device `/dev/ttyUSB0` at 460800 baud |
 | UART 115200: Jetson ↔ M4 | Validated speed/steering commands and four-direction ranging telemetry |
 
-Lidar integration also includes modifying the vendor's C++ `ultra_simple` example: scan angle, distance, and quality are formatted as `angle,distance,quality` and sent over local UDP, then processed and forwarded by the onboard application. See the [modified SDK example](jetson/rplidar_sdk-master/app/ultra_simple/main.cpp).
+The dedicated lidar section above describes the C++ modifications, compilation, and local UDP integration. The desktop receives scan data forwarded by the Jetson application.
 
 After a connection recovers, operation resumes through standby and an explicit control handoff, rather than replaying the previous throttle command. Connection recovery and permission to move are handled separately.
 

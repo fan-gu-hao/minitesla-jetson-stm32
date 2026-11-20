@@ -42,6 +42,24 @@ M4 遙測包含四向距離、量測狀態與年齡、保護原因、命令與�
 
 M4 telemetry reports ranges, validity/age, guard reasons, commands/outputs, and communication counters. The parser handles partial/concatenated frames and resynchronizes after corruption.
 
+### 雷達 C++ 讀取器與 Python 主程式／C++ lidar acquisition and Python application
+
+雷達資料經過兩段介面：C1 先透過原廠 USB／UART 轉接板，由 C++ `ultra_simple` 以 `/dev/ttyUSB0`、460800 鮑率讀取；修改後的 C++ 程式再將掃描點送至本機 UDP `127.0.0.1:6000`。Python 主程式的 `LidarReceiver` 執行緒負責接收。
+
+The C1 reaches the C++ `ultra_simple` application through its original USB/UART adapter, using `/dev/ttyUSB0` at 460800 baud. The modified C++ application then sends scan points to local UDP `127.0.0.1:6000`, where the Python application's `LidarReceiver` thread receives them.
+
+| 處理階段／Stage | 程式行為／Behavior |
+| --- | --- |
+| 擷取與排序／Acquire and sort | `grabScanDataHq()`、`ascendScanData()` |
+| 數值轉換／Conversion | 角度 `angle_z_q14 × 90 / 16384` 度、距離 `dist_mm_q2 / 4` 毫米，以及品質值／angle in degrees, distance in millimeters, and quality |
+| 資料傳送／Transmission | `snprintf()` 組成 `angle,distance,quality`，`sendto()` 每點傳送一個 UDP 封包／one UDP datagram per point |
+| 主程式接收／Reception | `minitesla.py` 建立並啟動 `LidarReceiver`；`parse_lidar_csv()` 檢查欄位、有限值與範圍／starts a receiver thread and validates fields, finite values, and ranges |
+| 感測整合／Integration | `SensorStore.update_lidar()` 保存掃描資料與接收時間，建立區域摘要／stores scan samples and reception times and builds sector summaries |
+| 遠端顯示／Remote display | 接收執行緒另送往 `pc_host:lidar_remote_port`；轉送錯誤與本機接收分開處理／forwards to the desktop independently of local reception |
+| 編譯與部署／Build and deployment | SDK 根目錄 `make` → AArch64 `ultra_simple`；獨立雷達服務與主程式共同部署／build an AArch64 executable and deploy it as a separate service |
+
+實作入口／Implementation: [C++ 修改](../jetson/rplidar_sdk-master/app/ultra_simple/main.cpp) · [Python 接收](../jetson/minitesla_sensors/io.py) · [感測資料整合](../jetson/minitesla_sensors/core.py) · [編譯與部署](operation.md)。
+
 ### 馬達干擾下的 UART 通訊／UART communication under motor EMI
 
 實車整合時遇到馬達運轉造成的電磁干擾（EMI）。在材料與開發時程有限的條件下，我採用 UART 作為 Jetson 與 M4 的控制通道，並將 CRC-8 校驗、錯誤資料捨棄、串流重新同步與逾時保護整合進收發流程。這個方案已讓實車能正常運行，進一步硬體抑制留待後續改版。

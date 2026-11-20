@@ -41,25 +41,25 @@ The Jetson's **19 V** is the original project design rail, **5 V / 3 A** comes f
 | 元件 | 供電與電壓 | 電流、容量或輸出規格 | 來源 |
 | --- | --- | --- | --- |
 | GNB／GAONENG 4S LiHV 電池 | 標稱 15.2 V；單節充電上限 4.35 V，四串合計 17.4 V | 6000 mAh、130C 銘牌標示；標稱能量 91.2 Wh（15.2 V × 6 Ah） | [電池照片](../archive/photos/104652_0.jpg)、[GNB 規格](#規格來源references) |
-| 藍色 LTC3780 升降壓模組 | 4S 電池輸入；Jetson 設計輸出 19 V | 實裝模組額定電流未登錄 | [模組照片](../archive/photos/104654_0.jpg)、原始專案設計文件 |
+| 藍色 LTC3780 升降壓模組 | 4S 電池輸入；Jetson 設計輸出 19 V | - | [模組照片](../archive/photos/104654_0.jpg)、原始專案設計文件 |
 | NVIDIA Jetson Orin Nano 開發套件 | 設計電源軌 19 V，經直流電源插座輸入；原廠載板規格 v1.2 的插座範圍為 9–20 V | 主機、USB 周邊及散熱風扇共用此支路；主機工作電流隨運算負載變化 | NVIDIA 載板規格 |
 | Jetson USB Type-A 電源 | 5 V，供應相機及雷達轉接板 | 每組雙層接頭共用 3 A 輸出限流 | NVIDIA 硬體配置指南 |
 | D-SUN 降壓模組 | 4S 電池輸入；包裝標示 MP1584EN、輸出 5 V | 包裝標示輸出 3 A；MP1584 晶片資料表輸入範圍 4.5–28 V | [包裝照片](../archive/photos/104661_0.jpg)、MPS MP1584 |
-| STM32F412ZGT6 控制板 | D-SUN 的 5 V 接到 ST-LINK USB 供電入口；板上 MCU／UART 邏輯 3.3 V | 板卡整體工作電流、入口限流值未登錄 | [實車入口照片](../archive/photos/104658.jpg)、[韌體工程](../firmware/stm32f4/) |
-| 電子變速器（ESC） | 直接接 4S 主電池母線 | 實裝型號與額定電流未登錄 | 原車電子組件與實車配線 |
-| 無刷馬達（BLDC） | ESC 三相換相輸出 | 實裝型號與額定電流未登錄；運轉由 ESC 控制 | 原車動力組件 |
-| ESC 內建穩壓輸出（BEC） | 供應轉向舵機；輸出設定未登錄 | 額定輸出電流未登錄 | 實車配線 |
-| Hyper GO 轉向舵機 | 銘牌 6.0 V；供電來自 ESC BEC | 銘牌扭矩 35 kg·cm、速度 0.13 秒／60°；工作／堵轉電流及完整允許電壓範圍未登錄 | [舵機照片](../archive/photos/104651_0.jpg) |
-| USB 相機 BL-1080p-S10 | Jetson USB 5 V | 此板號的工作／最大電流未登錄 | [相機板照片](../archive/photos/104650_0.jpg) |
-| 雷達原廠 USB 轉接板 | Jetson USB 5 V；向雷達輸出 5 V | 轉接板本體電流未單列 | [轉接板照片](../archive/photos/104653_0.jpg)、SLAMTEC 開發套件手冊 |
+| STM32F412ZGT6 控制板 | D-SUN 的 5 V 接到 ST-LINK USB 供電入口；板上 MCU／UART 邏輯 3.3 V | - | [實車入口照片](../archive/photos/104658.jpg)、[韌體工程](../firmware/stm32f4/) |
+| 電子變速器（ESC） | 直接接 4S 主電池母線 | - | 原車電子組件與實車配線 |
+| 無刷馬達（BLDC） | ESC 三相換相輸出 | - | 原車動力組件 |
+| ESC 內建穩壓輸出（BEC） | 供應轉向舵機；輸出設定：- | - | 實車配線 |
+| Hyper GO 轉向舵機 | 銘牌 6.0 V；供電來自 ESC BEC | 銘牌扭矩 35 kg·cm、速度 0.13 秒／60°；工作／堵轉電流、完整允許電壓範圍：- | [舵機照片](../archive/photos/104651_0.jpg) |
+| USB 相機 BL-1080p-S10 | Jetson USB 5 V | - | [相機板照片](../archive/photos/104650_0.jpg) |
+| 雷達原廠 USB 轉接板 | Jetson USB 5 V；向雷達輸出 5 V | - | [轉接板照片](../archive/photos/104653_0.jpg)、SLAMTEC 開發套件手冊 |
 | SLAMTEC RPLIDAR C1 | 5 V；允許範圍 4.8–5.2 V | 5 V、10 Hz 時：運轉典型 230 mA、最大 260 mA；啟動典型 800 mA | SLAMTEC C1 資料表，圖表 2-7 |
 | VL53L0X 感測器晶片 × 4 | 晶片供電 2.6–3.5 V；原廠電流測試條件為 2.8 V | 單顆量測典型 19 mA、峰值可達 40 mA；四顆算術合計典型 76 mA、峰值 160 mA | ST VL53L0X 資料表 |
-| VL53L0X 感測器載板 | 使用 M4 板端電源；載板型號、VIN 接腳電壓未登錄 | 載板穩壓器、指示燈等額外負載未單列 | 四向 ToF 整合配置 |
-| Jetson 原廠散熱器與風扇 | J13 風扇接頭 5 V；散熱器本體為被動元件 | 原裝風扇額定電流未登錄 | NVIDIA 載板規格，風扇接頭表 |
-| ESC／馬達原廠散熱組件 | 沿用原廠線組；風扇電壓未登錄 | 風扇型號與額定電流未登錄 | 原車散熱配置 |
-| 車載行動熱點（MiFi） | 電源來源、輸入電壓與機型未登錄 | 額定電流未登錄 | 5G 網路部署配置 |
+| VL53L0X 感測器載板 | 使用 M4 板端電源；載板型號、VIN 接腳電壓：- | - | 四向 ToF 整合配置 |
+| Jetson 原廠散熱器與風扇 | J13 風扇接頭 5 V；散熱器本體為被動元件 | - | NVIDIA 載板規格，風扇接頭表 |
+| ESC／馬達原廠散熱組件 | 沿用原廠線組；風扇電壓：- | - | 原車散熱配置 |
+| 車載行動熱點（MiFi） | - | - | 5G 網路部署配置 |
 
-`未登錄` 表示本專案規格表尚無該項數值；各欄的「設計值」「銘牌」「典型」「最大」分別標示數值用途。
+各欄以「設計值」「銘牌」「典型」「最大」區分規格用途。
 
 ### 各路負載歸屬
 
@@ -135,7 +135,7 @@ The original USB adapter supplies the C1 lidar at **5 V**. C1 permits **4.8–5.
 
 The independent M4 branch uses the **D-SUN converter marked MP1584EN, 5 V / 3 A**, connected to the controller's ST-LINK USB power input. MCU/UART logic is **3.3 V**. The four ToF sensors use the M4 board supply. The VL53L0X IC specification is **2.6–3.5 V**, with **19 mA typical ranging current per sensor and peaks up to 40 mA**. The 76 mA typical and 160 mA peak totals are arithmetic sums for four sensor ICs, excluding carrier overhead; current specifications use the manufacturer's 2.8 V, 23°C, 33 ms conditions.
 
-The specification table distinguishes design values, labels, and manufacturer typical/maximum values. Items marked `未登錄` have no value recorded: the installed LTC3780 module current rating; ESC/motor identities and ratings; BEC output setting/current; servo operating/stall currents and full voltage range; camera current; lidar-adapter overhead; sensor-carrier VIN; original fan current ratings; and MiFi power details. The board's own power-path limits are separate from the upstream converter's 3 A label.
+The specification table distinguishes design values, labels, and manufacturer typical/maximum values. The board's own power-path limits are separate from the upstream converter's 3 A label.
 
 The M4 generates control signals only; propulsion and servo power remain on the ESC branch. All control interfaces share ground. The connection and address tables above give the complete firmware pin mapping and distinguish seven-bit I²C addresses from the left-shifted form used by the ST API.
 

@@ -53,6 +53,33 @@ python pc_dashboard.py
 
 Focus loss, minimization, and video failure invoke the existing stop rules. Autonomous behavior still requires remote supervision.
 
+## 雷達程式編譯與資料串接／Lidar build and application integration
+
+雷達讀取器使用修改後的 C++ 原始碼 [`app/ultra_simple/main.cpp`](../jetson/rplidar_sdk-master/app/ultra_simple/main.cpp)。在 Jetson 的既有開發環境準備好 `make` 與 `g++` 後，於 SDK 根目錄編譯：
+
+The lidar reader uses the modified C++ source. With `make` and `g++` available in the Jetson development environment, build from the SDK root:
+
+```bash
+cd "$HOME/Desktop/jetson orin nano/rplidar_sdk-master"
+make
+```
+
+輸出為 `output/Linux/Release/ultra_simple`。它透過 `/dev/ttyUSB0`、460800 鮑率讀取 C1，將每個掃描點轉成 `angle,distance,quality`，送往 Jetson 本機 `127.0.0.1:6000`。角度單位為度，距離單位為毫米。
+
+The build produces `output/Linux/Release/ultra_simple`. It reads the C1 through `/dev/ttyUSB0` at 460800 baud and sends each point as `angle,distance,quality` to `127.0.0.1:6000`. Angles are in degrees and distances in millimeters.
+
+單獨啟動讀取器的命令如下，需在雷達服務停止時使用：
+
+For standalone acquisition, use the following command while the lidar service is stopped:
+
+```bash
+./output/Linux/Release/ultra_simple --channel --serial /dev/ttyUSB0 460800
+```
+
+Jetson 主程式 `minitesla.py` 的 `LidarReceiver` 執行緒負責接收、資料檢查、更新感測資料與時間戳，並轉送至電腦。正常部署採下節的服務管理方式，同時管理主程式與雷達讀取器；原始碼修改後先重新編譯，再重新啟動服務。
+
+The Python application's `LidarReceiver` thread receives and validates the data, updates sensor values and timestamps, and forwards points to the desktop. Normal deployment uses the service manager below for both applications. Rebuild modified C++ source before restarting the services.
+
 ## Jetson 服務／Vehicle services
 
 將檔案部署完成，啟用原本的 Python 環境後，以一般使用者執行：

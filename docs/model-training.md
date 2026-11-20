@@ -79,11 +79,7 @@ Completed work includes retraining with vacant-space images, retaining the weigh
 
 The current planner input contains timing, M4, ToF, and lidar data, excluding camera detections. `parking_auto.py` identifies its range source as `lidar_tof`, and `parking_geometry.py` builds parking candidates from lidar geometry. The `vacant` vision output therefore does not yet directly drive automatic-parking decisions; connecting these parts is future integration work.
 
-## 公開資料與重建範圍／Published material and reproducibility
-
-儲存庫已保存訓練完成的模型與車端部署程式。原始訓練影像、標註、`fanuse.yaml` 實體檔、完整訓練腳本及評估報告尚未收錄，不能僅靠目前檔案完整重跑原訓練。影像張數、標註工具、實際訓練硬體、完整訓練輪數及辨識準確率不在此補寫為已核實數據。
-
-The repository includes trained weights and deployment code. Original training images, annotations, the actual `fanuse.yaml` file, full training scripts, and evaluation reports are not included, so the original training run cannot be fully reproduced from the published files alone. This page does not invent image counts, annotation tools, training hardware, completed epochs, or accuracy metrics.
+## 使用訓練完成的模型／Using the trained model
 
 執行目前車端版本可直接使用既有 `best.pt`，無須先重新訓練；操作方式見[部署與操作](operation.md)。[`archive/documents/yolov8 command`](../archive/documents/yolov8%20command) 保存的是預測命令，並非訓練指令。
 

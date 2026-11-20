@@ -18,6 +18,7 @@
 | --- | --- | --- |
 | 硬體與供電整合 | 選配運算板、控制板、感測器與致動器；安排電池分接、穩壓供電、USB 周邊供電、BEC 舵機供電，以及板卡安裝與訊號接線 | 將車用動力、運算與控制負載接成可共同運作的整車系統 |
 | Jetson 平台建置 | 建立 Python／GPU 推論環境、處理 PyTorch／torchvision 相容性、自行編譯 torchvision 的 ARM 與 CUDA 擴充 | 讓相機影像與訓練模型能接上實際車端執行環境 |
+| 雷達程式修改與編譯 | 修改原廠 C++ 雷達程式，新增掃描資料轉換與本機 UDP 傳送，編譯為 Jetson 可執行的 ARM64 程式；在 Python 主程式實作接收與感測資料整合 | 完成雷達讀取、C++ 建置、主程式接收、遠端回傳與開機服務的完整串接 |
 | STM32 即時控制 | 以 C 實作韌體，配置時脈、GPIO、硬體計時器與 PWM；實作 UART 解析、CRC8、四向 ToF 管理、保護狀態機與看門狗 | 將網路操作命令轉成實際油門／轉向訊號，保留獨立於 Jetson 的控制保護 |
 | 馬達電磁干擾與通訊可靠度 | 面對馬達運轉造成的電磁干擾（EMI），在材料與開發時程限制下採用 UART 搭配 CRC-8，加入錯誤封包捨棄、重新同步與命令逾時保護 | 完成 Jetson 與 M4 控制通訊整合，使實車能正常運行 |
 | 自訂資料與模型重新訓練 | 將空車位圖片加入訓練資料，重新訓練含自訂 `vacant` 類別的 YOLOv8 分割模型，產出並部署 `best.pt` | 保存 81 類模型權重，接入車端推論、分割顯示與遠端回傳；[訓練與部署步驟](docs/model-training.md) |
@@ -38,7 +39,7 @@
 | 2．Jetson 到貨後的環境建置 | 建立板端執行環境，檢查 GPU 套件與 Python 相容性，準備 CUDA 編譯環境並自行建置 torchvision | [編譯指令筆記](notes/compile_torchvision.txt)、[完整建置輸出](logs/torchvision_build.log) |
 | 3．先讓馬達與轉向受控 | 在 STM32 建立 PWM 輸出與 UART 命令通道，對接 Jetson 串口，確認中立值與控制範圍 | [早期 UART 橋接](archive/early_sources/jetson_motor_uart_verbose.py)、[早期 M4 程式](archive/early_sources/main(1).c)、[目前完整工程](firmware/stm32f4/) |
 | 4．加入空車位資料並重新訓練模型 | 納入空車位圖片，重新訓練自訂類別分割模型並產出 `best.pt`，準備車端部署 | [模型權重](jetson/best.pt)、[訓練步驟與模型類別](docs/model-training.md) |
-| 5．逐項接通感知與遠端資料 | 分別處理影像推論、電腦鍵盤控制、UART 轉送及雷達接收，再整合資料流 | [早期獨立程式](archive/early_sources/)、[雷達 SDK](jetson/rplidar_sdk-master/) |
+| 5．逐項接通感知與遠端資料 | 修改 C++ 雷達掃描程式、編譯 ARM64 執行檔，經本機 UDP 接入 Jetson 主程式；同時整合影像推論、鍵盤控制與資料回傳 | [雷達 C++ 修改](jetson/rplidar_sdk-master/app/ultra_simple/main.cpp)、[Python 接收與轉送](jetson/minitesla_sensors/io.py)、[編譯與部署](docs/operation.md) |
 | 6．把獨立程式整合成並行系統 | 將相機／推論、影像傳送與感測接收拆成適合的程序或執行緒，整合到車端主程式 | [早期整合版本](archive/early_sources/minitesla(2).py)、[目前車端主程式](jetson/minitesla.py) |
 | 7．加入四向測距與控制保護 | 增加四顆 ToF 的獨立 XSHUT、位址分配、有效性檢查與距離回傳，將油門保護放進 M4 | [四向測距整合紀錄](archive/release_notes/01_MiniTesla_Phase1_2_Replace_v1.md)、[M4 韌體](firmware/stm32f4/Core/Src/main.c) |
 | 8．處理馬達干擾、失聯與競態 | 以 UART／CRC-8、錯誤封包處理與命令逾時保護應對馬達干擾；補上影像顯示確認、控制權交接及單一 UART 寫入者 | [通訊可靠度設計](docs/architecture.md)、[多工同步修正紀錄](archive/release_notes/04_MiniTesla_Phase4_ConcurrencyFix_v1.md)、[控制管理](jetson/minitesla_sensors/control.py) |
@@ -69,8 +70,8 @@
 | 思嵐（SLAMTEC）RPLIDAR C1 | 轉接板 **5 V**；允許 **4.8–5.2 V** | 5 V、10 Hz 時運轉典型 **230 mA**、最大 **260 mA**；啟動典型 **800 mA** |
 | 意法半導體（ST）VL53L0X × 4 | M4 板端供電；**感測器晶片規格 2.6–3.5 V** | 前後左右四向；單顆量測典型 **19 mA**、峰值可達 **40 mA**，載板資料見[硬體文件](docs/hardware.md) |
 | Jetson 原廠散熱器與風扇 | 載板風扇接頭 **5 V** | 原廠散熱器與主動風冷，使用板端供電 |
-| ESC／馬達原廠散熱組件 | 沿用原車散熱線組；風扇額定電壓未登錄 | 保留原廠散熱配置 |
-| 車載行動熱點（MiFi）與專用 5G 網路 SIM | MiFi 供電規格未登錄 | 提供行動網路與既有 NAT 穿透連線 |
+| ESC／馬達原廠散熱組件 | 沿用原車散熱線組；風扇額定電壓：- | 保留原廠散熱配置 |
+| 車載行動熱點（MiFi）與專用 5G 網路 SIM | - | 提供行動網路與既有 NAT 穿透連線 |
 
 ### 實際電源分路
 
@@ -141,6 +142,45 @@ flowchart TD
 
 **實作入口：** [車端影像處理](jetson/minitesla.py) · [編譯指令](notes/compile_torchvision.txt) · [完整編譯紀錄](logs/torchvision_build.log)
 
+## 雷達程式修改與編譯：將掃描資料接入 Jetson 主程式
+
+我修改思嵐（SLAMTEC）雷達軟體開發套件（SDK）的 **C++ `ultra_simple` 程式**，在掃描讀取流程加入角度、距離與品質值轉換，以及本機使用者資料包協定（UDP）傳送。修改後透過 Makefile 與 GNU C++ 編譯器（g++）建置，產出 Jetson 可執行的 **ARM64／AArch64 程式**，再將資料接入 Python 車端主程式。
+
+| 開發環節 | 我完成的實作 |
+| --- | --- |
+| 雷達讀取程式修改 | 在 `app/ultra_simple/main.cpp` 整合掃描讀取與排序，加入網路通訊端（socket）建立、資料格式化、`sendto()` 傳送及結束時的資源釋放 |
+| 資料格式轉換 | 將 SDK 掃描點轉為角度（度）、距離（毫米）與品質值，格式為 `angle,distance,quality`，每個掃描點送出一個 UDP 封包 |
+| 原始碼編譯 | 在 SDK 根目錄執行 `make`，產出 `output/Linux/Release/ultra_simple`；儲存庫保留 AArch64 執行檔 |
+| 接入 Jetson 主程式 | `minitesla.py` 啟動 `LidarReceiver` 執行緒，接收 `127.0.0.1:6000`，檢查資料欄位與數值，更新 `SensorStore` 及接收時間戳 |
+| 感測整合與回傳 | 建立雷達掃描資料及區域距離摘要，供統一感測快照與狀態監看使用，並將掃描點轉送至電腦雷達畫面 |
+| 開機部署 | 將 C++ 雷達讀取器納入獨立系統服務，與 Python 主程式一起由服務管理工具啟動及管理 |
+
+```mermaid
+flowchart TD
+    L["RPLIDAR C1／原廠 USB 轉接板"] -->|"/dev/ttyUSB0，460800"| C["修改並編譯的 C++ ultra_simple"]
+    C -->|"本機 UDP 127.0.0.1:6000"| R["Jetson 主程式：LidarReceiver"]
+    R -->|"解析資料並記錄接收時間"| S["SensorStore 感測資料整合"]
+    S --> V["統一快照與狀態監看"]
+    R -->|"UDP 遠端轉送"| PC["電腦操作台：雷達畫面"]
+```
+
+掃描資料轉換與傳送的關鍵程式摘錄：
+
+```cpp
+float angle = (nodes[pos].angle_z_q14 * 90.f) / 16384.f;
+float distance = nodes[pos].dist_mm_q2 / 4.0f;
+int quality = nodes[pos].quality >> SL_LIDAR_RESP_MEASUREMENT_QUALITY_SHIFT;
+
+char msg[64];
+snprintf(msg, sizeof(msg), "%.2f,%.2f,%d", angle, distance, quality);
+sendto(udp_socket, msg, strlen(msg), 0,
+       (sockaddr*)&udp_target, sizeof(udp_target));
+```
+
+雷達硬體透過 USB／串列埠連到 C++ 讀取程式；C++ 程式與 Python 主程式之間則使用本機 UDP。接收執行緒將車端資料更新與遠端轉送分開處理，遠端轉送失敗時仍保留車端接收。
+
+**實作入口：** [C++ 雷達程式](jetson/rplidar_sdk-master/app/ultra_simple/main.cpp) · [編譯設定](jetson/rplidar_sdk-master/Makefile) · [Python 接收與轉送](jetson/minitesla_sensors/io.py) · [感測資料整合](jetson/minitesla_sensors/core.py) · [編譯與部署操作](docs/operation.md)
+
 ## STM32：即時致動控制與四向測距保護
 
 ### 硬體 PWM 與雙向 UART
@@ -200,7 +240,7 @@ flowchart TD
 | UDP 6000：雷達 | 銜接原廠 SDK、車端接收與電腦雷達畫面；雷達串口為 `/dev/ttyUSB0`、460800 |
 | UART 115200：Jetson ↔ M4 | 封包校驗、速度／轉向命令與四向測距遙測 |
 
-雷達整合也包含修改原廠 C++ `ultra_simple` 範例：將掃描角度、距離與品質轉成 `angle,distance,quality`，送到本機 UDP，再由車端程式整理與轉送，見 [SDK 範例修改](jetson/rplidar_sdk-master/app/ultra_simple/main.cpp)。
+雷達讀取、C++ 編譯與本機 UDP 接收流程詳見前述「雷達程式修改與編譯」段落；遠端電腦接收的是 Jetson 整理並轉送的掃描資料。
 
 網路恢復後，系統經待命與重新接管流程恢復操作，不直接重送先前油門。這把「連線重新建立」與「允許車輛重新移動」分開處理。
 
